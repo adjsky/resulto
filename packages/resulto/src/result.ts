@@ -144,27 +144,104 @@ export interface Result<T, E> {
 
 //
 // We have to duplicate declarations to due to the TypeScript limitations.
-// The only thing we do here is wrapping `Result` return type in a `Promisify`
-// helper type to make sure autocompletion works as intended.
+// The only thing we do here is wrapping return types in `Promise`
+// to allow chaining and make autocompletion happy.
 // Reference: https://github.com/sindresorhus/type-fest/issues/178
 //
-export type AsyncResult<T, E> = {
-  map<U>(f: Fn<T, U>): Promisify<Result<U, E>>
+interface AsyncResultDeclarations<T, E> {
+  /**
+   * Async version of {@link Result.map}.
+   */
+  map<U>(f: Fn<T, U>): AsyncResult<U, E>
 
+  /**
+   * Async version of {@link Result.asyncMap}.
+   */
   asyncMap<U>(f: Fn<T, Promise<U>>): AsyncResult<U, E>
 
-  mapErr<F>(f: Fn<E, F>): Promisify<Result<T, F>>
+  /**
+   * Async version of {@link Result.mapErr}.
+   */
+  mapErr<F>(f: Fn<E, F>): AsyncResult<T, F>
 
-  inspect(f: Fn<T, void>): Promisify<Result<T, E>>
+  /**
+   * Async version of {@link Result.mapOr}.
+   */
+  mapOr<U>(value: U, f: Fn<T, U>): Promise<U>
 
-  inspectErr(f: Fn<E, void>): Promisify<Result<T, E>>
+  /**
+   * Async version of {@link Result.mapOrElse}.
+   */
+  mapOrElse<U>(fallbackFn: Fn<E, U>, f: Fn<T, U>): Promise<U>
 
-  andThen<U>(f: Fn<T, Result<U, E>>): Promisify<Result<U, E>>
+  /**
+   * Async version of {@link Result.inspect}.
+   */
+  inspect(f: Fn<T, void>): AsyncResult<T, E>
 
-  match<U>(okFn: Fn<T, U>, errFn: Fn<E, U>): Promisify<U>
-} & Promise<Result<T, E>>
+  /**
+   * Async version of {@link Result.inspectErr}.
+   */
+  inspectErr(f: Fn<E, void>): AsyncResult<T, E>
 
-type Promisify<T> = T & Promise<T>
+  /**
+   * Async version of {@link Result.expect}.
+   */
+  expect(msg: string): Promise<T>
+
+  /**
+   * Async version of {@link Result.unwrap}.
+   */
+  unwrap(): Promise<T>
+
+  /**
+   * Async version of {@link Result.expectErr}.
+   */
+  expectErr(msg: string): Promise<E>
+
+  /**
+   * Async version of {@link Result.unwrapErr}.
+   */
+  unwrapErr(): Promise<E>
+
+  /**
+   * Async version of {@link Result.and}.
+   */
+  and<U>(res: Result<U, E>): AsyncResult<U, E>
+
+  /**
+   * Async version of {@link Result.andThen}.
+   */
+  andThen<U>(f: Fn<T, Result<U, E>>): AsyncResult<U, E>
+
+  /**
+   * Async version of {@link Result.or}.
+   */
+  or<F>(res: Result<T, F>): AsyncResult<T, F>
+
+  /**
+   * Async version of {@link Result.orElse}.
+   */
+  orElse<F>(f: Fn<E, Result<T, F>>): AsyncResult<T, F>
+
+  /**
+   * Async version of {@link Result.unwrapOr}.
+   */
+  unwrapOr(value: T): Promise<T>
+
+  /**
+   * Async version of {@link Result.unwrapOrElse}.
+   */
+  unwrapOrElse(f: Fn<E, T>): Promise<T>
+
+  /**
+   * Async version of {@link Result.match}.
+   */
+  match<U>(okFn: Fn<T, U>, errFn: Fn<E, U>): Promise<U>
+}
+
+export type AsyncResult<T, E> = AsyncResultDeclarations<T, E> &
+  Promise<Result<T, E>>
 
 export class Ok<T, E> implements Result<T, E> {
   constructor(readonly value: T) {}
@@ -360,4 +437,13 @@ export function ok<T = unknown, E = never>(value: T) {
 
 export function err<T = never, E = unknown>(error: E) {
   return new Err<T, E>(error)
+}
+
+export function fromPromise<T, E>(
+  promise: Promise<T>,
+  errorFn?: (error: unknown) => E
+): AsyncResult<T, E> {
+  return chain(
+    promise.then(ok).catch((error) => err(errorFn ? errorFn(error) : error))
+  )
 }

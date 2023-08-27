@@ -1,3 +1,1 @@
-export default function test() {
-  return 4
-}
+export * from "./result"
