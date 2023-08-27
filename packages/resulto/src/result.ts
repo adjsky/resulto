@@ -1,3 +1,4 @@
+import { chain } from "./chain"
 import { type Fn, type Predicate, ResultError } from "./utility"
 
 export interface Result<T, E> {
@@ -30,12 +31,12 @@ export interface Result<T, E> {
   map<U>(f: Fn<T, U>): Result<U, E>
 
   /**
-   * Maps a `Result<T, E>` to `Promise<Result<U, E>>` by applying a function
+   * Maps a `Result<T, E>` to `AsyncResult<U, E>>` by applying an async function
    * to a contained `Ok` value, leaving an `Err` value untouched.
    *
    * This function can be used to compose the results of two functions.
    */
-  asyncMap<U>(f: Fn<T, Promise<U>>): Promise<Result<U, E>>
+  asyncMap<U>(f: Fn<T, Promise<U>>): AsyncResult<U, E>
 
   /**
    * Returns the provided `value` (if `Err`), or applies a function to the
@@ -141,6 +142,30 @@ export interface Result<T, E> {
   match<U>(okFn: Fn<T, U>, errFn: Fn<E, U>): U
 }
 
+//
+// We have to duplicate declarations to due to the TypeScript limitations.
+// The only thing we do here is wrapping `Result` return type in a `Promisify`
+// helper type to make sure autocompletion works as intended.
+// Reference: https://github.com/sindresorhus/type-fest/issues/178
+//
+export type AsyncResult<T, E> = {
+  map<U>(f: Fn<T, U>): Promisify<Result<U, E>>
+
+  asyncMap<U>(f: Fn<T, Promise<U>>): AsyncResult<U, E>
+
+  mapErr<F>(f: Fn<E, F>): Promisify<Result<T, F>>
+
+  inspect(f: Fn<T, void>): Promisify<Result<T, E>>
+
+  inspectErr(f: Fn<E, void>): Promisify<Result<T, E>>
+
+  andThen<U>(f: Fn<T, Result<U, E>>): Promisify<Result<U, E>>
+
+  match<U>(okFn: Fn<T, U>, errFn: Fn<E, U>): Promisify<U>
+} & Promise<Result<T, E>>
+
+type Promisify<T> = T & Promise<T>
+
 export class Ok<T, E> implements Result<T, E> {
   constructor(readonly value: T) {}
 
@@ -164,8 +189,8 @@ export class Ok<T, E> implements Result<T, E> {
     return ok(f(this.value))
   }
 
-  async asyncMap<U>(f: Fn<T, Promise<U>>): Promise<Result<U, E>> {
-    return ok(await f(this.value))
+  asyncMap<U>(f: Fn<T, Promise<U>>): AsyncResult<U, E> {
+    return chain(f(this.value).then(ok))
   }
 
   mapOr<U>(_: U, f: Fn<T, U>): U {
@@ -258,8 +283,8 @@ export class Err<T, E> implements Result<T, E> {
     return err(this.error)
   }
 
-  async asyncMap<U>(): Promise<Result<U, E>> {
-    return err(this.error)
+  asyncMap<U>(): AsyncResult<U, E> {
+    return chain(err(this.error))
   }
 
   mapOr<U>(value: U): U {

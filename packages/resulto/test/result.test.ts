@@ -6,9 +6,13 @@ it("works", async () => {
   const okResult = ok(4)
 
   const res = await okResult
-    .map((value) => value + 2)
     .asyncMap(async (value) => value * 2)
-    .then((result) => result.map((value) => value + 1))
+    .map((value) => value + 1)
+    .map((value) => value + 1)
+    .asyncMap(async (value) => value + 1)
+    .asyncMap(async (value) => value + 1)
+    .map((value) => value + 3)
+    .asyncMap(async (value) => value + 1)
 
-  expect(res.unwrap()).toBe(13)
+  expect(res.unwrap()).toBe(16)
 })
