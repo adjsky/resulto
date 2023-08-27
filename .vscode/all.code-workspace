@@ -12,5 +12,8 @@
       "path": "../packages/resulto",
       "name": "resulto"
     }
-  ]
+  ],
+  "settings": {
+    "typescript.tsdk": "root/node_modules/typescript/lib"
+  }
 }

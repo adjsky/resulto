@@ -4,6 +4,8 @@
     "target": "ES2015",
     "strict": true,
     "skipLibCheck": true,
+    "allowJs": true,
+    "checkJs": false,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "noUncheckedIndexedAccess": true,
