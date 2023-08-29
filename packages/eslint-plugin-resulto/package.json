@@ -16,12 +16,14 @@
   },
   "scripts": {
     "ts-check": "tsc --noEmit",
+    "test:watch": "vitest watch",
     "build": "pkgroll"
   },
   "peerDependencies": {
     "eslint": ">=5.16.0"
   },
   "devDependencies": {
+    "@types/eslint": "^8.44.2",
     "pkgroll": "^1.11.0"
   }
 }

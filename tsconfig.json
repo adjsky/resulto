@@ -9,6 +9,7 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "noUncheckedIndexedAccess": true,
-    "moduleResolution": "node"
+    "moduleResolution": "bundler",
+    "noEmit": true
   }
 }

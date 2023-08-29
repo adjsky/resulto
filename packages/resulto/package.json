@@ -16,6 +16,7 @@
   },
   "scripts": {
     "ts-check": "tsc --noEmit",
+    "test:watch": "vitest watch",
     "build": "pkgroll"
   },
   "devDependencies": {
