@@ -2,6 +2,7 @@
   "name": "root",
   "private": true,
   "scripts": {
+    "ts-check": "turbo ts-check",
     "test:watch": "vitest watch",
     "test:ci": "vitest --coverage"
   },
@@ -13,6 +14,7 @@
     "eslint": "^8.47.0",
     "eslint-plugin-prettier": "^5.0.0",
     "prettier": "^3.0.2",
+    "turbo": "^1.10.13",
     "typescript": "^5.2.2",
     "vitest": "^0.34.2"
   },
