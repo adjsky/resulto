@@ -210,12 +210,12 @@ export interface Result<T, E> {
   ): Promise<U>
 }
 
-// We have to duplicate declarations to due to the TypeScript limitations.
-// The only thing we do here is changing `Result` return type to `AsyncResult`
-// and wrapping other types in `Promise` to allow chaining and make
-// autocompletion happy.
+// We have to duplicate declarations due to the TypeScript limitations.
+// The only thing we do here is using `AsyncResult` instead of `Result` and
+// wrapping other types in `Promise` to allow chaining and make autocompletion
+// happy.
 // Reference: https://github.com/sindresorhus/type-fest/issues/178
-interface AsyncResultDeclarations<T, E> {
+export type AsyncResult<T, E> = {
   /**
    * Works similar to the {@link Result.map} method, except that this method
    * returns `AsyncResult` instead of `Result`.
@@ -240,6 +240,13 @@ interface AsyncResultDeclarations<T, E> {
   mapErr<F>(f: Fn<E, F>): AsyncResult<T, F>
 
   /**
+   * Works the same as the {@link Result.asyncMapErr}.
+   *
+   * @see {@link Result.asyncMapErr} for details.
+   */
+  asyncMapErr<F>(f: Fn<E, Promise<F>>): AsyncResult<T, F>
+
+  /**
    * Works similar to the {@link Result.mapOr} method, except that this method
    * returns `Promise`.
    *
@@ -248,12 +255,30 @@ interface AsyncResultDeclarations<T, E> {
   mapOr<U>(value: U, f: Fn<T, U>): Promise<U>
 
   /**
+   * Works the same as the {@link Result.asyncMapOr}.
+   *
+   * @see {@link Result.asyncMapOr} for details.
+   */
+  asyncMapOr<U>(value: U, f: Fn<T, Promise<U>>): Promise<U>
+
+  /**
    * Works similar to the {@link Result.mapOrElse} method, except that this
    * method returns `Promise`.
    *
    * @see {@link Result.mapOrElse} for details.
    */
   mapOrElse<U>(fallbackFn: Fn<E, U>, f: Fn<T, U>): Promise<U>
+
+  /**
+   * Works similar to the {@link Result.asyncMapOrElse} method, except that this
+   * method returns `Promise`.
+   *
+   * @see {@link Result.asyncMapOrElse} for details.
+   */
+  asyncMapOrElse<U>(
+    fallbackFn: Fn<E, U | Promise<U>>,
+    f: Fn<T, U | Promise<U>>
+  ): Promise<U>
 
   /**
    * Works similar to the {@link Result.inspect} method, except that this
@@ -320,6 +345,13 @@ interface AsyncResultDeclarations<T, E> {
   andThen<U>(f: Fn<T, Result<U, E>>): AsyncResult<U, E>
 
   /**
+   * Works the same as the {@link Result.asyncAndThen}.
+   *
+   * @see {@link Result.asyncAndThen} for details.
+   */
+  asyncAndThen<U>(f: Fn<T, Promise<Result<U, E>>>): AsyncResult<U, E>
+
+  /**
    * Works similar to the {@link Result.or} method, except that this method
    * returns `AsyncResult` instead of `Result`.
    *
@@ -334,6 +366,13 @@ interface AsyncResultDeclarations<T, E> {
    * @see {@link Result.orElse} for details.
    */
   orElse<F>(f: Fn<E, Result<T, F>>): AsyncResult<T, F>
+
+  /**
+   * Works the same as the {@link Result.asyncOrElse}.
+   *
+   * @see {@link Result.asyncOrElse} for details.
+   */
+  asyncOrElse<F>(f: Fn<E, Promise<Result<T, F>>>): AsyncResult<T, F>
 
   /**
    * Works similar to the {@link Result.unwrapOr} method, except that this
@@ -352,16 +391,30 @@ interface AsyncResultDeclarations<T, E> {
   unwrapOrElse(f: Fn<E, T>): Promise<T>
 
   /**
+   * Works the same as the {@link Result.asyncUnwrapOrElse}.
+   *
+   * @see {@link Result.asyncUnwrapOrElse} for details.
+   */
+  asyncUnwrapOrElse(f: Fn<E, Promise<T>>): Promise<T>
+
+  /**
    * Works similar to the {@link Result.match} method, except that this method
    * returns `Promise`.
    *
    * @see {@link Result.match} for details.
    */
   match<U>(okFn: Fn<T, U>, errFn: Fn<E, U>): Promise<U>
-}
 
-export type AsyncResult<T, E> = AsyncResultDeclarations<T, E> &
-  Promise<Result<T, E>>
+  /**
+   * Works the same as the {@link Result.asyncMatch}.
+   *
+   * @see {@link Result.asyncMatch} for details.
+   */
+  asyncMatch<U>(
+    okFn: Fn<T, U | Promise<U>>,
+    errFn: Fn<E, U | Promise<U>>
+  ): Promise<U>
+} & Promise<Result<T, E>>
 
 export class Ok<T, E> implements Result<T, E> {
   constructor(readonly value: T) {}
@@ -394,12 +447,27 @@ export class Ok<T, E> implements Result<T, E> {
     return f(this.value)
   }
 
+  asyncMapOr<U>(_: U, f: Fn<T, Promise<U>>): Promise<U> {
+    return chain(f(this.value).then(ok))
+  }
+
   mapOrElse<U>(_: Fn<E, U>, f: Fn<T, U>): U {
     return f(this.value)
   }
 
+  asyncMapOrElse<U>(
+    _: Fn<E, U | Promise<U>>,
+    f: Fn<T, U | Promise<U>>
+  ): Promise<U> {
+    return Promise.resolve(f(this.value))
+  }
+
   mapErr<F>(): Result<T, F> {
     return ok(this.value)
+  }
+
+  asyncMapErr<F>(): AsyncResult<T, F> {
+    return chain(ok(this.value))
   }
 
   inspect(f: Fn<T, void>): Result<T, E> {
@@ -436,12 +504,20 @@ export class Ok<T, E> implements Result<T, E> {
     return f(this.value)
   }
 
+  asyncAndThen<U>(f: Fn<T, Promise<Result<U, E>>>): AsyncResult<U, E> {
+    return chain(f(this.value))
+  }
+
   or<F>(): Result<T, F> {
     return ok(this.value)
   }
 
   orElse<F>(): Result<T, F> {
     return ok(this.value)
+  }
+
+  asyncOrElse<F>(): AsyncResult<T, F> {
+    return chain(ok(this.value))
   }
 
   unwrapOr(): T {
@@ -452,8 +528,16 @@ export class Ok<T, E> implements Result<T, E> {
     return this.value
   }
 
+  asyncUnwrapOrElse(): Promise<T> {
+    return Promise.resolve(this.value)
+  }
+
   match<U>(okFn: Fn<T, U>): U {
     return okFn(this.value)
+  }
+
+  asyncMatch<U>(okFn: Fn<T, U | Promise<U>>): Promise<U> {
+    return Promise.resolve(okFn(this.value))
   }
 }
 
@@ -488,12 +572,24 @@ export class Err<T, E> implements Result<T, E> {
     return value
   }
 
+  asyncMapOr<U>(value: U): Promise<U> {
+    return Promise.resolve(value)
+  }
+
   mapOrElse<U>(fallback: Fn<E, U>): U {
     return fallback(this.error)
   }
 
+  asyncMapOrElse<U>(fallbackFn: Fn<E, U | Promise<U>>): Promise<U> {
+    return Promise.resolve(fallbackFn(this.error))
+  }
+
   mapErr<F>(f: Fn<E, F>): Result<T, F> {
     return err(f(this.error))
+  }
+
+  asyncMapErr<F>(f: Fn<E, Promise<F>>): AsyncResult<T, F> {
+    return chain(f(this.error).then(ok))
   }
 
   inspect(): Result<T, E> {
@@ -530,12 +626,20 @@ export class Err<T, E> implements Result<T, E> {
     return err(this.error)
   }
 
+  asyncAndThen<U>(): AsyncResult<U, E> {
+    return chain(err(this.error))
+  }
+
   or<F>(res: Result<T, F>): Result<T, F> {
     return res
   }
 
   orElse<F>(f: Fn<E, Result<T, F>>): Result<T, F> {
     return f(this.error)
+  }
+
+  asyncOrElse<F>(f: Fn<E, Promise<Result<T, F>>>): AsyncResult<T, F> {
+    return chain(f(this.error).then(ok))
   }
 
   unwrapOr(value: T): T {
@@ -546,24 +650,78 @@ export class Err<T, E> implements Result<T, E> {
     return f(this.error)
   }
 
-  match<U>(_okFn: Fn<T, U>, errFn: Fn<E, U>): U {
+  asyncUnwrapOrElse(f: Fn<E, Promise<T>>): Promise<T> {
+    return f(this.error)
+  }
+
+  match<U>(_: Fn<T, U>, errFn: Fn<E, U>): U {
     return errFn(this.error)
+  }
+
+  asyncMatch<U>(
+    _: Fn<T, U | Promise<U>>,
+    errFn: Fn<E, U | Promise<U>>
+  ): Promise<U> {
+    return Promise.resolve(errFn(this.error))
   }
 }
 
+/**
+ * Creates an `Ok` version of `Result`.
+ */
 export function ok<T = unknown, E = never>(value: T) {
   return new Ok<T, E>(value)
 }
 
+/**
+ * Creates an `Ok` version of `AsyncResult`.
+ */
+export function okAsync<T = unknown, E = never>(value: T | Promise<T>) {
+  return chain(Promise.resolve(value).then(ok<T, E>))
+}
+
+/**
+ * Creates an `Err` version of `Result`.
+ */
 export function err<T = never, E = unknown>(error: E) {
   return new Err<T, E>(error)
 }
 
+/**
+ * Creates an `Err` version of `AsyncResult`.
+ */
+export function errAsync<T = unknown, E = never>(error: E | Promise<E>) {
+  return chain(Promise.resolve(error).then(err<T, E>))
+}
+
+/**
+ * Accepts a promise and returns an `AsyncResult` containing either `Ok` with
+ * the resolved value or `Err` with the rejected error.
+ *
+ * You can optionally pass `errorFn` as the second argument to map rejected
+ * error from `unknown` to `E`.
+ */
 export function fromPromise<T, E>(
   promise: Promise<T>,
-  errorFn?: (error: unknown) => E
+  errorFn?: Fn<unknown, E>
 ): AsyncResult<T, E> {
-  return chain(
-    promise.then(ok).catch((error) => err(errorFn ? errorFn(error) : error))
-  )
+  return chain(promise.then(ok).catch((e) => err(errorFn ? errorFn(e) : e)))
+}
+
+/**
+ * Accepts a function `f` that may throw, and returns `Result` containing
+ * either `Ok` with the value returned from `f` or `Err` with the thrown error.
+ *
+ * You can optionally pass `errorFn` as the second argument to map the thrown
+ * error from `unknown` to `E`.
+ */
+export function fromThrowable<T, E>(
+  f: Fn<void, T>,
+  errorFn?: Fn<unknown, E>
+): Result<T, E> {
+  try {
+    return ok(f())
+  } catch (e) {
+    return err(errorFn ? errorFn(e) : (e as E))
+  }
 }

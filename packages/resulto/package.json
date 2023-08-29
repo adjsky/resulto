@@ -19,7 +19,6 @@
     "build": "pkgroll"
   },
   "devDependencies": {
-    "pkgroll": "^1.11.0",
-    "type-fest": "^4.3.0"
+    "pkgroll": "^1.11.0"
   }
 }
