@@ -351,7 +351,6 @@ type AsyncResult<T, E> = {
 } & Promise<Result<T, E>>;
 declare class Ok<T, E> implements Result<T, E> {
     readonly value: T;
-    private __internal_resulto;
     constructor(value: T);
     isOk(): this is Ok<T, E>;
     isOkAnd(f: Predicate<T>): boolean;
@@ -385,7 +384,6 @@ declare class Ok<T, E> implements Result<T, E> {
 }
 declare class Err<T, E> implements Result<T, E> {
     readonly error: E;
-    private __internal_resulto;
     constructor(error: E);
     isOk(): this is Ok<T, E>;
     isOkAnd(): boolean;
@@ -420,19 +418,19 @@ declare class Err<T, E> implements Result<T, E> {
 /**
  * Creates an `Ok` version of `Result`.
  */
-declare function ok<T = unknown, E = never>(value: T): Ok<T, E>;
+declare function ok<T = unknown, E = never>(value: T): Result<T, E>;
 /**
  * Creates an `Ok` version of `AsyncResult`.
  */
-declare function okAsync<T = unknown, E = never>(value: T | Promise<T>): any;
+declare function okAsync<T = unknown, E = never>(value: T | Promise<T>): AsyncResult<T, E>;
 /**
  * Creates an `Err` version of `Result`.
  */
-declare function err<T = never, E = unknown>(error: E): Err<T, E>;
+declare function err<T = never, E = unknown>(error: E): Result<T, E>;
 /**
  * Creates an `Err` version of `AsyncResult`.
  */
-declare function errAsync<T = unknown, E = never>(error: E | Promise<E>): any;
+declare function errAsync<T = unknown, E = never>(error: E | Promise<E>): AsyncResult<T, E>;
 /**
  * Accepts a promise and returns an `AsyncResult` containing either `Ok` with
  * the resolved value or `Err` with the rejected error.

@@ -9,24 +9,35 @@ var recommended = {
   }
 };
 
-const rule = utils.ESLintUtils.RuleCreator.withoutDocs({
+const ruleCreator = utils.ESLintUtils.RuleCreator(
+  (name) => `https://github.com/adjsky/resulto/tree/master/packages/eslint-plugin-resulto/docs/rules/${name}`
+);
+const rule = ruleCreator({
+  name: "must-use-result",
   meta: {
     docs: {
       description: "Result must be used to make sure errors are handled."
     },
     type: "problem",
     messages: {
-      mustUse: "Result must be used, handle it with either unwrap, expect or match"
+      mustUse: "`Result` may be an `Err` variant, which should be handled."
     },
     schema: []
   },
   defaultOptions: [],
   create(context) {
     const parserServices = utils.ESLintUtils.getParserServices(context);
+    const typeChecker = parserServices.program.getTypeChecker();
     return {
-      "NewExpression,CallExpression"(node) {
-        const internalSymbol = parserServices.getTypeAtLocation(node).getProperty("__internal_resulto");
-        if (!internalSymbol) {
+      CallExpression(node) {
+        const tsNodeMap = parserServices.esTreeNodeToTSNodeMap.get(node);
+        const type = typeChecker.getTypeAtLocation(tsNodeMap);
+        const name = typeChecker.getFullyQualifiedName(type.symbol);
+        if (name != "Result" && name != "AsyncResult") {
+          return;
+        }
+        const { parent } = node;
+        if ((parent == null ? void 0 : parent.type) === "VariableDeclarator" && parent.init === node || (parent == null ? void 0 : parent.type) === "ReturnStatement" && parent.argument === node) {
           return;
         }
         context.report({

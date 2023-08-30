@@ -417,8 +417,6 @@ export type AsyncResult<T, E> = {
 } & Promise<Result<T, E>>
 
 export class Ok<T, E> implements Result<T, E> {
-  private __internal_resulto = true
-
   constructor(readonly value: T) {}
 
   isOk(): this is Ok<T, E> {
@@ -544,8 +542,6 @@ export class Ok<T, E> implements Result<T, E> {
 }
 
 export class Err<T, E> implements Result<T, E> {
-  private __internal_resulto = true
-
   constructor(readonly error: E) {}
 
   isOk(): this is Ok<T, E> {
@@ -673,28 +669,32 @@ export class Err<T, E> implements Result<T, E> {
 /**
  * Creates an `Ok` version of `Result`.
  */
-export function ok<T = unknown, E = never>(value: T) {
+export function ok<T = unknown, E = never>(value: T): Result<T, E> {
   return new Ok<T, E>(value)
 }
 
 /**
  * Creates an `Ok` version of `AsyncResult`.
  */
-export function okAsync<T = unknown, E = never>(value: T | Promise<T>) {
+export function okAsync<T = unknown, E = never>(
+  value: T | Promise<T>
+): AsyncResult<T, E> {
   return chain(Promise.resolve(value).then(ok<T, E>))
 }
 
 /**
  * Creates an `Err` version of `Result`.
  */
-export function err<T = never, E = unknown>(error: E) {
+export function err<T = never, E = unknown>(error: E): Result<T, E> {
   return new Err<T, E>(error)
 }
 
 /**
  * Creates an `Err` version of `AsyncResult`.
  */
-export function errAsync<T = unknown, E = never>(error: E | Promise<E>) {
+export function errAsync<T = unknown, E = never>(
+  error: E | Promise<E>
+): AsyncResult<T, E> {
   return chain(Promise.resolve(error).then(err<T, E>))
 }
 

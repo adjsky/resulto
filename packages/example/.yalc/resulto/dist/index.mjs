@@ -41,7 +41,6 @@ class ResultError extends Error {
 class Ok {
   constructor(value) {
     this.value = value;
-    this.__internal_resulto = true;
   }
   isOk() {
     return true;
@@ -135,7 +134,6 @@ class Ok {
 class Err {
   constructor(error) {
     this.error = error;
-    this.__internal_resulto = true;
   }
   isOk() {
     return false;

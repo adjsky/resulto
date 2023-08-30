@@ -1,13 +1,15 @@
 export function injectCode(code: string) {
   return `
-    class Ok {
-      private __internal_resulto = true
-    }
+declare module resulto {
+  interface Result<T, E> {}
+  
+  declare function ok<T = unknown, E = never>(value: T): Result<T, E> 
+  
+  declare function err<T = never, E = unknown>(error: E): Result<T, E> 
+}
 
-    class Err {
-      private __internal_resulto = true
-    }
+import { ok, err } from "resulto"
 
-    ${code}
-  `
+${code}
+`
 }

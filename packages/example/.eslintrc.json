@@ -8,6 +8,8 @@
     "es2021": true,
     "node": true
   },
-  "extends": ["plugin:resulto/recommended"],
-  "plugins": ["@typescript-eslint"]
+  "plugins": ["@typescript-eslint", "resulto"],
+  "rules": {
+    "resulto/must-use-result": "error"
+  }
 }

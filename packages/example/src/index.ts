@@ -1,3 +1,13 @@
-import { ok } from "resulto"
+import { err, ok } from "resulto"
 
-const okResult = ok(4)
+ok(4)
+
+let result = err(4)
+
+function get() {
+  return ok(1)
+}
+
+get()
+
+const resultFromFn = get()

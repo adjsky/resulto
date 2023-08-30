@@ -1,7 +1,5 @@
 import { ESLintUtils } from "@typescript-eslint/utils"
 
-import type { TSESTree } from "@typescript-eslint/utils"
-
 const ruleCreator = ESLintUtils.RuleCreator(
   (name) =>
     `https://github.com/adjsky/resulto/tree/master/packages/eslint-plugin-resulto/docs/rules/${name}`
@@ -22,14 +20,25 @@ const rule = ruleCreator({
   defaultOptions: [],
   create(context) {
     const parserServices = ESLintUtils.getParserServices(context)
+    const typeChecker = parserServices.program.getTypeChecker()
 
     return {
-      "NewExpression,CallExpression"(node: TSESTree.Node) {
-        const internalSymbol = parserServices
-          .getTypeAtLocation(node)
-          .getProperty("__internal_resulto")
+      CallExpression(node) {
+        const tsNodeMap = parserServices.esTreeNodeToTSNodeMap.get(node)
+        const type = typeChecker.getTypeAtLocation(tsNodeMap)
 
-        if (!internalSymbol) {
+        const name = typeChecker.getFullyQualifiedName(type.symbol)
+
+        if (name != "Result" && name != "AsyncResult") {
+          return
+        }
+
+        const { parent } = node
+
+        if (
+          (parent?.type === "VariableDeclarator" && parent.init === node) ||
+          (parent?.type === "ReturnStatement" && parent.argument === node)
+        ) {
           return
         }
 

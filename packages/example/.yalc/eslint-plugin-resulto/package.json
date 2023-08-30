@@ -15,13 +15,15 @@
   "scripts": {
     "ts-check": "tsc --noEmit",
     "test:watch": "vitest watch",
-    "build": "pkgroll"
+    "build": "pkgroll",
+    "update:eslint-docs": "eslint-doc-generator"
   },
   "peerDependencies": {
-    "@typescript-eslint/parser": "*"
+    "@typescript-eslint/parser": "*",
+    "typescript": "*"
   },
   "dependencies": {
     "@typescript-eslint/utils": "^6.5.0"
   },
-  "yalcSig": "563c754a735628b44251595b57457594"
+  "yalcSig": "0a3e896855bb2757a1b859c9e2c93c0c"
 }

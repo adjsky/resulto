@@ -44,6 +44,9 @@ importers:
       '@typescript-eslint/utils':
         specifier: ^6.5.0
         version: 6.5.0(eslint@8.47.0)(typescript@5.2.2)
+      typescript:
+        specifier: '*'
+        version: 5.2.2
     devDependencies:
       '@typescript-eslint/parser':
         specifier: ^6.4.0
@@ -2756,13 +2759,14 @@ packages:
     version: 0.0.1
     peerDependencies:
       '@typescript-eslint/parser': '*'
+      typescript: '*'
     dependencies:
       '@typescript-eslint/parser': 6.4.0(eslint@8.47.0)(typescript@5.2.2)
       '@typescript-eslint/utils': 6.5.0(eslint@8.47.0)(typescript@5.2.2)
+      typescript: 5.2.2
     transitivePeerDependencies:
       - eslint
       - supports-color
-      - typescript
     dev: false
 
   file:packages/example/.yalc/resulto:

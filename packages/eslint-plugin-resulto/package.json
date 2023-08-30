@@ -20,7 +20,8 @@
     "update:eslint-docs": "eslint-doc-generator"
   },
   "peerDependencies": {
-    "@typescript-eslint/parser": "*"
+    "@typescript-eslint/parser": "*",
+    "typescript": "*"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^6.4.0",

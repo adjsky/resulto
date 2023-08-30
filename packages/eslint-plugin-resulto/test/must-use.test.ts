@@ -12,10 +12,24 @@ const tester = new RuleTester({
 })
 
 tester.run("must-use-result", rule, {
-  valid: [{ code: injectCode("") }],
+  valid: [{ code: "" }],
   invalid: [
     {
-      code: injectCode("new Ok()"),
+      code: injectCode(`ok(5)`),
+      errors: [
+        {
+          messageId: "mustUse"
+        }
+      ]
+    },
+    {
+      code: injectCode(`
+function get() {
+  return ok(4)
+}
+
+get()
+`),
       errors: [
         {
           messageId: "mustUse"
