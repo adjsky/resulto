@@ -2,15 +2,20 @@ import { ESLintUtils } from "@typescript-eslint/utils"
 
 import type { TSESTree } from "@typescript-eslint/utils"
 
-const rule = ESLintUtils.RuleCreator.withoutDocs({
+const ruleCreator = ESLintUtils.RuleCreator(
+  (name) =>
+    `https://github.com/adjsky/resulto/tree/master/packages/eslint-plugin-resulto/docs/rules/${name}`
+)
+
+const rule = ruleCreator({
+  name: "must-use-result",
   meta: {
     docs: {
       description: "Result must be used to make sure errors are handled."
     },
     type: "problem",
     messages: {
-      mustUse:
-        "Result must be used, handle it with either unwrap, expect or match"
+      mustUse: "`Result` may be an `Err` variant, which should be handled."
     },
     schema: []
   },

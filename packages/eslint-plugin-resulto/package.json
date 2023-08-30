@@ -16,7 +16,8 @@
     "ts-check": "tsc --noEmit",
     "test:watch": "vitest watch",
     "build": "pkgroll",
-    "prepare": "pnpm build"
+    "prepare": "pnpm build",
+    "update:eslint-docs": "eslint-doc-generator"
   },
   "peerDependencies": {
     "@typescript-eslint/parser": "*"
@@ -24,6 +25,7 @@
   "devDependencies": {
     "@typescript-eslint/parser": "^6.4.0",
     "@typescript-eslint/rule-tester": "^6.5.0",
+    "eslint-doc-generator": "^1.4.3",
     "pkgroll": "^1.11.0"
   },
   "dependencies": {
