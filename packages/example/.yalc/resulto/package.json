@@ -18,10 +18,7 @@
   "scripts": {
     "ts-check": "tsc --noEmit",
     "test:watch": "vitest watch",
-    "build": "pkgroll",
-    "prepare": "pnpm build"
+    "build": "pkgroll"
   },
-  "devDependencies": {
-    "pkgroll": "^1.11.0"
-  }
+  "yalcSig": "9ff519428f0ce17d706bfdc0acef59e9"
 }

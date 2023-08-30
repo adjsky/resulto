@@ -1,0 +1,13 @@
+{
+  "version": "v1",
+  "packages": {
+    "eslint-plugin-resulto": {
+      "signature": "563c754a735628b44251595b57457594",
+      "file": true
+    },
+    "resulto": {
+      "signature": "9ff519428f0ce17d706bfdc0acef59e9",
+      "file": true
+    }
+  }
+}
