@@ -1,4 +1,7 @@
 import { ESLintUtils } from "@typescript-eslint/utils"
+import { TSESTree } from "@typescript-eslint/utils"
+
+import type { TypeReference } from "typescript"
 
 const ruleCreator = ESLintUtils.RuleCreator(
   (name) =>
@@ -27,17 +30,33 @@ const rule = ruleCreator({
         const tsNodeMap = parserServices.esTreeNodeToTSNodeMap.get(node)
         const type = typeChecker.getTypeAtLocation(tsNodeMap)
 
-        const name = typeChecker.getFullyQualifiedName(type.symbol)
+        const symbol = type.getSymbol()
 
-        if (name != "Result" && name != "AsyncResult") {
+        if (!symbol) {
           return
         }
 
-        const { parent } = node
+        let symbolToCheck = typeChecker.symbolToString(symbol)
+
+        if (symbolToCheck == "Promise") {
+          const resolvedSymbol = (type as TypeReference)?.typeArguments?.[0]
+            ?.symbol
+
+          if (!resolvedSymbol) {
+            return
+          }
+
+          symbolToCheck = typeChecker.symbolToString(resolvedSymbol)
+        }
+
+        if (symbolToCheck != "Result" && symbolToCheck != "AsyncResult") {
+          return
+        }
 
         if (
-          (parent?.type === "VariableDeclarator" && parent.init === node) ||
-          (parent?.type === "ReturnStatement" && parent.argument === node)
+          isReturnedOrAssigned(node, node.parent) ||
+          (node.parent.type == "AwaitExpression" &&
+            isReturnedOrAssigned(node.parent, node.parent.parent))
         ) {
           return
         }
@@ -50,5 +69,15 @@ const rule = ruleCreator({
     }
   }
 })
+
+function isReturnedOrAssigned(
+  node: TSESTree.CallExpression | TSESTree.AwaitExpression,
+  parent: TSESTree.Node
+) {
+  return (
+    (parent.type == "VariableDeclarator" && parent.init == node) ||
+    (parent.type == "ReturnStatement" && parent.argument == node)
+  )
+}
 
 export default rule
