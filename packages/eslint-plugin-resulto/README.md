@@ -1,4 +1,4 @@
-# eslint-plugin-resulto
+# `eslint-plugin-resulto`
 
 ## Installation
 
