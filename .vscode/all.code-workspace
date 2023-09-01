@@ -11,10 +11,6 @@
     {
       "path": "../packages/resulto",
       "name": "resulto"
-    },
-    {
-      "path": "../packages/example",
-      "name": "example"
     }
   ],
   "settings": {

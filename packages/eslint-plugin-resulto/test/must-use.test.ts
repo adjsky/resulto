@@ -13,376 +13,172 @@ const tester = new RuleTester({
 
 tester.run("must-use-result", rule, {
   valid: [
-    // constructors
-    { code: injectCode("const okResult = ok(5)") },
-    { code: injectCode("const errResult = err(5)") },
-
-    // async constructors
-    { code: injectCode("const okAsyncResult = okAsync(5)") },
-    { code: injectCode("const errAsyncResult = errAsync(5)") },
-    // async constructors with await
-    { code: injectCode("const okAsyncResult = await okAsync(5)") },
-    { code: injectCode("const errAsyncResult = await errAsync(5)") },
-
-    // function with constructor + call
     {
       code: injectCode(`
-        function get() {
-          return ok()
-        }
+        const okResult = ok(5)
+        const errResult = err(5)
     
-        const res = get()
-      `)
-    },
-    {
-      code: injectCode(`
-        function get() {
-          return err()
-        }
+        ok(5).match(noop, noop)
+        ok(5).asyncMatch(noop, noop)
     
-        const res = get()
+        err(5).match(noop, noop)
+        err(5).asyncMatch(noop, noop)
       `)
     },
 
-    // function with async constructor + call
     {
       code: injectCode(`
-        function get() {
-          return okAsync()
-        }
+        const okAsyncResult = okAsync(5)
+        const errAsyncResult = errAsync(5)
     
-        const res = get()
-      `)
-    },
-    {
-      code: injectCode(`
-        function get() {
-          return errAsync()
-        }
+        okAsync(5).match(noop, noop)
+        okAsync(5).asyncMatch(noop, noop)
     
-        const res = get()
+        errAsync(5).match(noop, noop)
+        errAsync(5).asyncMatch(noop, noop)
       `)
     },
 
-    // async function with constructor + call
     {
       code: injectCode(`
-        async function get() {
-          return ok()
-        }
+        const okAsyncResult = await okAsync(5)
+        const errAsyncResult = await errAsync(5)
     
-        const res = get()
-      `)
-    },
-    {
-      code: injectCode(`
-        async function get() {
-          return err()
-        }
+        (await okAsync(5)).match(noop, noop)
+        (await okAsync(5)).asyncMatch(noop, noop)
     
-        const res = get()
+        (await errAsync(5)).match(noop, noop)
+        (await errAsync(5)).asyncMatch(noop, noop)
       `)
     },
 
-    // async function with async constructor + call
     {
       code: injectCode(`
-        async function get() {
-          return okAsync()
-        }
-    
-        const res = get()
-      `)
-    },
-    {
-      code: injectCode(`
-        async function get() {
-          return errAsync()
-        }
-    
-        const res = get()
+        const okResult = getOk()
+        const errResult = getErr()
       `)
     },
 
-    // async function with constructor + await call
     {
       code: injectCode(`
-        async function get() {
-          return ok()
-        }
-    
-        const res = await get()
-      `)
-    },
-    {
-      code: injectCode(`
-        async function get() {
-          return err()
-        }
-    
-        const res = await get()
+        const okAsyncResult = getOkAsync()
+        const errAsyncResult = getErrAsync()
       `)
     },
 
-    // async function with async constructor + await call
     {
       code: injectCode(`
-        async function get() {
-          return okAsync()
-        }
-    
-        const res = await get()
-      `)
-    },
-    {
-      code: injectCode(`
-        async function get() {
-          return errAsync()
-        }
-    
-        const res = await get()
+        const okResultPromise = asyncGetOk()
+        const errResultPromise = asyncGetErr()
       `)
     },
 
-    // async function with awaited constructor + await call
     {
       code: injectCode(`
-        async function get() {
-          return await ok()
-        }
-    
-        const res = await get()
-      `)
-    },
-    {
-      code: injectCode(`
-        async function get() {
-          return await err()
-        }
-    
-        const res = await get()
+        const okAsyncResultPromise = asyncGetOkAsync()
+        const errAsyncResultPromise = asyncGetOkAsync()
       `)
     },
 
-    // async function with awaited async constructor + await call
     {
       code: injectCode(`
-        async function get() {
-          return await okAsync()
-        }
-    
-        const res = await get()
+        const okResult = await asyncGetOk()
+        const errResult = await asyncGetErr()
       `)
     },
+
     {
       code: injectCode(`
-        async function get() {
-          return await errAsync()
-        }
-    
-        const res = await get()
+        const okAsyncResult = await asyncGetOkAsync()
+        const errAsyncResult = await asyncGetErrAsync()
+      `)
+    },
+
+    {
+      code: injectCode(`
+        const okResult = await asyncGetAwaitedOk()
+        const errResult = await asyncGetAwaitedOk()
+      `)
+    },
+
+    {
+      code: injectCode(`
+        const okAsyncResult = await asyncGetAwaitedOkAsync()
+        const errAsyncResult = await asyncGetAwaitedOkAsync()
       `)
     }
   ],
   invalid: [
-    // constructors
-    { code: injectCode("ok(5)"), errors: [{ messageId: "mustUse" }] },
-    { code: injectCode("err(5)"), errors: [{ messageId: "mustUse" }] },
-
-    // async constructors
     {
-      code: injectCode("okAsync(5)"),
-      errors: [{ messageId: "mustUse" }]
-    },
-    {
-      code: injectCode("errAsync(5)"),
-      errors: [{ messageId: "mustUse" }]
+      code: injectCode(`
+        ok(5)
+        err(5)
+      `),
+      errors: [{ messageId: "mustUse" }, { messageId: "mustUse" }]
     },
 
-    // async constructors with await
     {
-      code: injectCode("await okAsync(5)"),
-      errors: [{ messageId: "mustUse" }]
-    },
-    {
-      code: injectCode("await errAsync(5)"),
-      errors: [{ messageId: "mustUse" }]
+      code: injectCode(`
+        okAsync(5)
+        errAsync(5)
+      `),
+      errors: [{ messageId: "mustUse" }, { messageId: "mustUse" }]
     },
 
-    // function with constructor + call
     {
       code: injectCode(`
-        function get() {
-          return ok()
-        }
-    
-        get()
+        await okAsync(5)
+        await errAsync(5)
       `),
-      errors: [{ messageId: "mustUse" }]
-    },
-    {
-      code: injectCode(`
-        function get() {
-          return err()
-        }
-    
-        get()
-      `),
-      errors: [{ messageId: "mustUse" }]
+      errors: [{ messageId: "mustUse" }, { messageId: "mustUse" }]
     },
 
-    // function with async constructor + call
     {
       code: injectCode(`
-        function get() {
-          return okAsync()
-        }
-    
-        get()
+        getOk()
+        getErr()
       `),
-      errors: [{ messageId: "mustUse" }]
-    },
-    {
-      code: injectCode(`
-        function get() {
-          return errAsync()
-        }
-    
-        get()
-      `),
-      errors: [{ messageId: "mustUse" }]
+      errors: [{ messageId: "mustUse" }, { messageId: "mustUse" }]
     },
 
-    // async function with constructor + call
     {
       code: injectCode(`
-        async function get() {
-          return ok()
-        }
-    
-        get()
+        getAsyncOk()
+        getAsyncErr()
       `),
-      errors: [{ messageId: "mustUse" }]
-    },
-    {
-      code: injectCode(`
-        async function get() {
-          return err()
-        }
-    
-        get()
-      `),
-      errors: [{ messageId: "mustUse" }]
+      errors: [{ messageId: "mustUse" }, { messageId: "mustUse" }]
     },
 
-    // async function with async constructor + call
     {
       code: injectCode(`
-        async function get() {
-          return okAsync()
-        }
-    
-        get()
+        asyncGetOk()
+        asyncGetErr()
       `),
-      errors: [{ messageId: "mustUse" }]
-    },
-    {
-      code: injectCode(`
-        async function get() {
-          return errAsync()
-        }
-    
-        get()
-      `),
-      errors: [{ messageId: "mustUse" }]
+      errors: [{ messageId: "mustUse" }, { messageId: "mustUse" }]
     },
 
-    // async function with constructor + await call
     {
       code: injectCode(`
-        async function get() {
-          return ok()
-        }
-    
-        await get()
+        asyncGetAsyncOk()
+        asyncGetAsyncOk()
       `),
-      errors: [{ messageId: "mustUse" }]
-    },
-    {
-      code: injectCode(`
-        async function get() {
-          return err()
-        }
-    
-        await get()
-      `),
-      errors: [{ messageId: "mustUse" }]
+      errors: [{ messageId: "mustUse" }, { messageId: "mustUse" }]
     },
 
-    // async function with async constructor + await call
     {
       code: injectCode(`
-        async function get() {
-          return okAsync()
-        }
-    
-        await get()
+        await asyncGetOk()
+        await asyncGetErr()
       `),
-      errors: [{ messageId: "mustUse" }]
-    },
-    {
-      code: injectCode(`
-        async function get() {
-          return errAsync()
-        }
-    
-        await get()
-      `),
-      errors: [{ messageId: "mustUse" }]
+      errors: [{ messageId: "mustUse" }, { messageId: "mustUse" }]
     },
 
-    // async function with awaited constructor + await call
     {
       code: injectCode(`
-        async function get() {
-          return await ok()
-        }
-    
-        await get()
+        await asyncGetAsyncOk()
+        await asyncGetAsyncErr()
       `),
-      errors: [{ messageId: "mustUse" }]
-    },
-    {
-      code: injectCode(`
-        async function get() {
-          return await err()
-        }
-    
-        await get()
-      `),
-      errors: [{ messageId: "mustUse" }]
-    },
-
-    // async function with awaited async constructor + await call
-    {
-      code: injectCode(`
-        async function get() {
-          return await okAsync()
-        }
-    
-        await get()
-      `),
-      errors: [{ messageId: "mustUse" }]
-    },
-    {
-      code: injectCode(`
-        async function get() {
-          return await errAsync()
-        }
-    
-        await get()
-      `),
-      errors: [{ messageId: "mustUse" }]
+      errors: [{ messageId: "mustUse" }, { messageId: "mustUse" }]
     }
   ]
 })

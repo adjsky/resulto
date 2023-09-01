@@ -61,24 +61,6 @@ importers:
         specifier: ^1.11.0
         version: 1.11.0(typescript@5.2.2)
 
-  packages/example:
-    dependencies:
-      '@typescript-eslint/eslint-plugin':
-        specifier: ^6.4.0
-        version: 6.4.0(@typescript-eslint/parser@6.4.0)(eslint@8.47.0)(typescript@5.2.2)
-      '@typescript-eslint/parser':
-        specifier: ^6.4.0
-        version: 6.4.0(eslint@8.47.0)(typescript@5.2.2)
-      eslint:
-        specifier: ^8.47.0
-        version: 8.47.0
-      eslint-plugin-resulto:
-        specifier: file:.yalc/eslint-plugin-resulto
-        version: file:packages/example/.yalc/eslint-plugin-resulto(@typescript-eslint/parser@6.4.0)(eslint@8.47.0)(typescript@5.2.2)
-      resulto:
-        specifier: file:.yalc/resulto
-        version: file:packages/example/.yalc/resulto
-
   packages/resulto:
     devDependencies:
       pkgroll:
@@ -734,6 +716,7 @@ packages:
       typescript: 5.2.2
     transitivePeerDependencies:
       - supports-color
+    dev: true
 
   /@typescript-eslint/parser@6.4.0(eslint@8.47.0)(typescript@5.2.2):
     resolution: {integrity: sha512-I1Ah1irl033uxjxO9Xql7+biL3YD7w9IU8zF+xlzD/YxY6a4b7DYA08PXUUCbm2sEljwJF6ERFy2kTGAGcNilg==}
@@ -754,6 +737,7 @@ packages:
       typescript: 5.2.2
     transitivePeerDependencies:
       - supports-color
+    dev: true
 
   /@typescript-eslint/rule-tester@6.5.0(@eslint/eslintrc@2.1.2)(eslint@8.47.0)(typescript@5.2.2):
     resolution: {integrity: sha512-r36IFt+3Ji0GOASQjm0VaS9piIGvn2G8fDTsqm8W3QHjXdldMua6Z6BS4TJ6gJ6e60AcYVe7Flvi8Ss29xOARw==}
@@ -788,6 +772,7 @@ packages:
     dependencies:
       '@typescript-eslint/types': 6.4.0
       '@typescript-eslint/visitor-keys': 6.4.0
+    dev: true
 
   /@typescript-eslint/scope-manager@6.5.0:
     resolution: {integrity: sha512-A8hZ7OlxURricpycp5kdPTH3XnjG85UpJS6Fn4VzeoH4T388gQJ/PGP4ole5NfKt4WDVhmLaQ/dBLNDC4Xl/Kw==}
@@ -814,6 +799,7 @@ packages:
       typescript: 5.2.2
     transitivePeerDependencies:
       - supports-color
+    dev: true
 
   /@typescript-eslint/types@5.62.0:
     resolution: {integrity: sha512-87NVngcbVXUahrRTqIK27gD2t5Cu1yuCXxbLcFtCzZGlfyVWWh8mLHkoxzjsB6DDNnvdL+fW8MiwPEJyGJQDgQ==}
@@ -823,6 +809,7 @@ packages:
   /@typescript-eslint/types@6.4.0:
     resolution: {integrity: sha512-+FV9kVFrS7w78YtzkIsNSoYsnOtrYVnKWSTVXoL1761CsCRv5wpDOINgsXpxD67YCLZtVQekDDyaxfjVWUJmmg==}
     engines: {node: ^16.0.0 || >=18.0.0}
+    dev: true
 
   /@typescript-eslint/types@6.5.0:
     resolution: {integrity: sha512-eqLLOEF5/lU8jW3Bw+8auf4lZSbbljHR2saKnYqON12G/WsJrGeeDHWuQePoEf9ro22+JkbPfWQwKEC5WwLQ3w==}
@@ -868,6 +855,7 @@ packages:
       typescript: 5.2.2
     transitivePeerDependencies:
       - supports-color
+    dev: true
 
   /@typescript-eslint/typescript-estree@6.5.0(typescript@5.2.2):
     resolution: {integrity: sha512-q0rGwSe9e5Kk/XzliB9h2LBc9tmXX25G0833r7kffbl5437FPWb2tbpIV9wAATebC/018pGa9fwPDuvGN+LxWQ==}
@@ -926,6 +914,7 @@ packages:
     transitivePeerDependencies:
       - supports-color
       - typescript
+    dev: true
 
   /@typescript-eslint/utils@6.5.0(eslint@8.47.0)(typescript@5.2.2):
     resolution: {integrity: sha512-9nqtjkNykFzeVtt9Pj6lyR9WEdd8npPhhIPM992FWVkZuS6tmxHfGVnlUcjpUP2hv8r4w35nT33mlxd+Be1ACQ==}
@@ -959,6 +948,7 @@ packages:
     dependencies:
       '@typescript-eslint/types': 6.4.0
       eslint-visitor-keys: 3.4.3
+    dev: true
 
   /@typescript-eslint/visitor-keys@6.5.0:
     resolution: {integrity: sha512-yCB/2wkbv3hPsh02ZS8dFQnij9VVQXJMN/gbQsaaY+zxALkZnxa/wagvLEFsAWMPv7d7lxQmNsIzGU1w/T/WyA==}
@@ -2751,26 +2741,3 @@ packages:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
     dev: true
-
-  file:packages/example/.yalc/eslint-plugin-resulto(@typescript-eslint/parser@6.4.0)(eslint@8.47.0)(typescript@5.2.2):
-    resolution: {directory: packages/example/.yalc/eslint-plugin-resulto, type: directory}
-    id: file:packages/example/.yalc/eslint-plugin-resulto
-    name: eslint-plugin-resulto
-    version: 0.0.1
-    peerDependencies:
-      '@typescript-eslint/parser': '*'
-      typescript: '*'
-    dependencies:
-      '@typescript-eslint/parser': 6.4.0(eslint@8.47.0)(typescript@5.2.2)
-      '@typescript-eslint/utils': 6.5.0(eslint@8.47.0)(typescript@5.2.2)
-      typescript: 5.2.2
-    transitivePeerDependencies:
-      - eslint
-      - supports-color
-    dev: false
-
-  file:packages/example/.yalc/resulto:
-    resolution: {directory: packages/example/.yalc/resulto, type: directory}
-    name: resulto
-    version: 0.0.1
-    dev: false

@@ -1,7 +1,8 @@
 import { ESLintUtils } from "@typescript-eslint/utils"
 import { TSESTree } from "@typescript-eslint/utils"
 
-import type { TypeReference } from "typescript"
+import type { ParserServicesWithTypeInformation } from "@typescript-eslint/utils"
+import type { TypeChecker, TypeReference } from "typescript"
 
 const ruleCreator = ESLintUtils.RuleCreator(
   (name) =>
@@ -27,37 +28,19 @@ const rule = ruleCreator({
 
     return {
       CallExpression(node) {
-        const tsNodeMap = parserServices.esTreeNodeToTSNodeMap.get(node)
-        const type = typeChecker.getTypeAtLocation(tsNodeMap)
-
-        const symbol = type.getSymbol()
-
-        if (!symbol) {
-          return
-        }
-
-        let symbolToCheck = typeChecker.symbolToString(symbol)
-
-        if (symbolToCheck == "Promise") {
-          const resolvedSymbol = (type as TypeReference)?.typeArguments?.[0]
-            ?.symbol
-
-          if (!resolvedSymbol) {
-            return
-          }
-
-          symbolToCheck = typeChecker.symbolToString(resolvedSymbol)
-        }
-
-        if (symbolToCheck != "Result" && symbolToCheck != "AsyncResult") {
+        if (!isResult(node, parserServices, typeChecker)) {
           return
         }
 
         if (
-          isReturnedOrAssigned(node, node.parent) ||
+          isReturnedOrAssigned(node) ||
           (node.parent.type == "AwaitExpression" &&
-            isReturnedOrAssigned(node.parent, node.parent.parent))
+            isReturnedOrAssigned(node.parent))
         ) {
+          return
+        }
+
+        if (isMatched(node)) {
           return
         }
 
@@ -70,14 +53,64 @@ const rule = ruleCreator({
   }
 })
 
-function isReturnedOrAssigned(
-  node: TSESTree.CallExpression | TSESTree.AwaitExpression,
-  parent: TSESTree.Node
+function isResult(
+  node: TSESTree.Node,
+  parserServices: ParserServicesWithTypeInformation,
+  typeChecker: TypeChecker
 ) {
+  const tsNodeMap = parserServices.esTreeNodeToTSNodeMap.get(node)
+  const type = typeChecker.getTypeAtLocation(tsNodeMap)
+
+  const symbol = type.getSymbol() ?? type.aliasSymbol
+
+  if (!symbol) {
+    return false
+  }
+
+  let symbolToCheck = typeChecker.symbolToString(symbol)
+
+  if (symbolToCheck == "Promise") {
+    const typeArgument = (type as TypeReference).typeArguments?.[0]
+
+    if (!typeArgument) {
+      return false
+    }
+
+    const resolvedSymbol = typeArgument.getSymbol() ?? typeArgument.aliasSymbol
+
+    if (!resolvedSymbol) {
+      return false
+    }
+
+    symbolToCheck = typeChecker.symbolToString(resolvedSymbol)
+  }
+
+  return symbolToCheck == "Result" || symbolToCheck == "AsyncResult"
+}
+
+function isReturnedOrAssigned(node: TSESTree.Node) {
+  const { parent } = node
+
   return (
-    (parent.type == "VariableDeclarator" && parent.init == node) ||
-    (parent.type == "ReturnStatement" && parent.argument == node)
+    (parent?.type == "VariableDeclarator" && parent.init == node) ||
+    (parent?.type == "ReturnStatement" && parent.argument == node)
   )
+}
+
+function isMatched({ parent }: TSESTree.Node) {
+  if (
+    parent?.type == "MemberExpression" &&
+    parent.property.type == "Identifier" &&
+    (parent.property.name == "match" || parent.property.name == "asyncMatch")
+  ) {
+    return true
+  }
+
+  if (!parent) {
+    return false
+  }
+
+  return isMatched(parent)
 }
 
 export default rule
