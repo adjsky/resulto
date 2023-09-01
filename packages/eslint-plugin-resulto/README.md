@@ -24,9 +24,9 @@ Create/modify your `ESLint` configuration file, i.e. `.eslintrc.json`.
 
 > See [typescript-eslint docs](https://typescript-eslint.io/getting-started/) for more info.
 
-## Configs
+## Available configs
 
-- `resulto/recommended` to enable the recommended rules.
+- `resulto/recommended` - recommended rules.
 
 ## Rules
 
