@@ -1,6 +1,13 @@
 {
   "name": "resulto",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "description": "TypeScript implementation of the Result type from Rust with async support",
+  "scripts": {
+    "ts-check": "tsc --noEmit",
+    "test:watch": "vitest watch",
+    "build": "pkgroll",
+    "prepare": "pnpm build"
+  },
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -15,12 +22,18 @@
       "default": "./dist/index.mjs"
     }
   },
-  "scripts": {
-    "ts-check": "tsc --noEmit",
-    "test:watch": "vitest watch",
-    "build": "pkgroll",
-    "prepare": "pnpm build"
+  "author": "adjsky",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adjsky/resulto.git"
   },
+  "keywords": [
+    "result",
+    "rust"
+  ],
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "pkgroll": "^1.11.0"
   }
