@@ -2,7 +2,9 @@
 
 ## Installation
 
+```bash
 npm install --save-dev eslint typescript @typescript-eslint/parser eslint-plugin-resulto @typescript-eslint/eslint-plugin
+```
 
 ## Configuration
 
