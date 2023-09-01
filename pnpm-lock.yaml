@@ -44,9 +44,6 @@ importers:
       '@typescript-eslint/utils':
         specifier: ^6.5.0
         version: 6.5.0(eslint@8.47.0)(typescript@5.2.2)
-      typescript:
-        specifier: '*'
-        version: 5.2.2
     devDependencies:
       '@typescript-eslint/parser':
         specifier: ^6.4.0

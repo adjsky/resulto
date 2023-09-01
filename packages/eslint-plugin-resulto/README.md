@@ -1,5 +1,31 @@
 # eslint-plugin-resulto
 
+## Installation
+
+npm install --save-dev eslint typescript @typescript-eslint/parser eslint-plugin-resulto @typescript-eslint/eslint-plugin
+
+## Configuration
+
+Create/modify your `ESLint` configuration file, i.e. `.eslintrc.json`.
+
+```json
+{
+  "root": true,
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "resulto"],
+  "rules": {
+    "resulto/must-use-result": "error"
+  }
+}
+```
+
+> See [typescript-eslint docs](https://typescript-eslint.io/getting-started/) for more info.
+
+## Configs
+
+- `resulto/recommended` to enable the recommended rules.
+
 ## Rules
 
 <!-- begin auto-generated rules list -->
@@ -7,8 +33,8 @@
 💼 Configurations enabled in.\
 ✅ Set in the `recommended` configuration.
 
-| Name                                             | Description                                          | 💼 |
-| :----------------------------------------------- | :--------------------------------------------------- | :- |
+| Name                                             | Description                                          | 💼  |
+| :----------------------------------------------- | :--------------------------------------------------- | :-- |
 | [must-use-result](docs/rules/must-use-result.md) | Result must be used to make sure errors are handled. | ✅  |
 
 <!-- end auto-generated rules list -->

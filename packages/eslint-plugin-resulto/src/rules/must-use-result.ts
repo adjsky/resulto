@@ -1,7 +1,9 @@
 import { ESLintUtils } from "@typescript-eslint/utils"
-import { TSESTree } from "@typescript-eslint/utils"
 
-import type { ParserServicesWithTypeInformation } from "@typescript-eslint/utils"
+import type {
+  ParserServicesWithTypeInformation,
+  TSESTree
+} from "@typescript-eslint/utils"
 import type { TypeChecker, TypeReference } from "typescript"
 
 const ruleCreator = ESLintUtils.RuleCreator(
