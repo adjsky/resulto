@@ -1,5 +1,11 @@
 import { chain } from "./chain"
-import { type Fn, type Predicate, ResultError } from "./utility"
+import {
+  type ErrFn,
+  type ErrPredicate,
+  type Fn,
+  type Predicate,
+  ResultError
+} from "./utility"
 
 export interface Result<T, E> {
   /**
@@ -20,7 +26,7 @@ export interface Result<T, E> {
   /**
    * Checks if `Result` is `Err` and the value inside of it matches a predicate.
    */
-  isErrAnd(f: Predicate<E>): boolean
+  isErrAnd(f: ErrPredicate<E>): boolean
 
   /**
    * Maps a `Result<T, E>` to `Result<U, E>` by applying a function `f` to a
@@ -60,7 +66,7 @@ export interface Result<T, E> {
    * This function can be used to unpack a successful result while handling an
    * error.
    */
-  mapOrElse<U>(fallbackFn: Fn<E, U>, f: Fn<T, U>): U
+  mapOrElse<U>(fallbackFn: ErrFn<E, U>, f: Fn<T, U>): U
 
   /**
    * Works similar to the {@link Result.mapOrElse} method, except that this
@@ -70,7 +76,7 @@ export interface Result<T, E> {
    * @see {@link Result.mapOrElse} for details.
    */
   asyncMapOrElse<U>(
-    fallbackFn: Fn<E, U | Promise<U>>,
+    fallbackFn: ErrFn<E, U | Promise<U>>,
     f: Fn<T, U | Promise<U>>
   ): Promise<U>
 
@@ -81,7 +87,7 @@ export interface Result<T, E> {
    * This function can be used to pass through a successful result while
    * handling an error.
    */
-  mapErr<F>(f: Fn<E, F>): Result<T, F>
+  mapErr<F>(f: ErrFn<E, F>): Result<T, F>
 
   /**
    * Works similar to the {@link Result.mapErr} method, except that this method
@@ -90,7 +96,7 @@ export interface Result<T, E> {
    *
    * @see {@link Result.mapErr} for details.
    */
-  asyncMapErr<F>(f: Fn<E, Promise<F>>): AsyncResult<T, F>
+  asyncMapErr<F>(f: ErrFn<E, Promise<F>>): AsyncResult<T, F>
 
   /**
    * Calls the provided function `f` with the contained value (if `Ok`).
@@ -100,7 +106,7 @@ export interface Result<T, E> {
   /**
    * Calls the provided function `f` with the contained error (if `Err`).
    */
-  inspectErr(f: Fn<E, void>): Result<T, E>
+  inspectErr(f: ErrFn<E, void>): Result<T, E>
 
   /**
    * Returns the contained `Ok` value.
@@ -161,7 +167,7 @@ export interface Result<T, E> {
    *
    * This function can be used for control flow based on result values.
    */
-  orElse<F>(f: Fn<E, Result<T, F>>): Result<T, F>
+  orElse<F>(f: ErrFn<E, Result<T, F>>): Result<T, F>
 
   /**
    * Works similar to the {@link Result.orElse} method, except that this
@@ -170,7 +176,7 @@ export interface Result<T, E> {
    *
    * @see {@link Result.orElse} for details.
    */
-  asyncOrElse<F>(f: Fn<E, Promise<Result<T, F>>>): AsyncResult<T, F>
+  asyncOrElse<F>(f: ErrFn<E, Promise<Result<T, F>>>): AsyncResult<T, F>
 
   /**
    * Returns the contained `Ok` value or a provided `value`.
@@ -180,7 +186,7 @@ export interface Result<T, E> {
   /**
    * Returns the contained `Ok `value or computes it from a `f`.
    */
-  unwrapOrElse(f: Fn<E, T>): T
+  unwrapOrElse(f: ErrFn<E, T>): T
 
   /**
    * Works similar to the {@link Result.unwrapOrElse} method, except that this
@@ -188,14 +194,14 @@ export interface Result<T, E> {
    *
    * @see {@link Result.unwrapOrElse} for details.
    */
-  asyncUnwrapOrElse(f: Fn<E, Promise<T>>): Promise<T>
+  asyncUnwrapOrElse(f: ErrFn<E, Promise<T>>): Promise<T>
 
   /**
    * Calls `okFn` if the result is `Ok`, otherwise calls `errFn`.
    *
    * Both `okFn` and `errFn` must have the same return type.
    */
-  match<U>(okFn: Fn<T, U>, errFn: Fn<E, U>): U
+  match<U>(okFn: Fn<T, U>, errFn: ErrFn<E, U>): U
 
   /**
    * Works similar to the {@link Result.match} method, except that this
@@ -206,7 +212,7 @@ export interface Result<T, E> {
    */
   asyncMatch<U>(
     okFn: Fn<T, U | Promise<U>>,
-    errFn: Fn<E, U | Promise<U>>
+    errFn: ErrFn<E, U | Promise<U>>
   ): Promise<U>
 }
 
@@ -237,14 +243,14 @@ export type AsyncResult<T, E> = {
    *
    * @see {@link Result.mapErr} for details.
    */
-  mapErr<F>(f: Fn<E, F>): AsyncResult<T, F>
+  mapErr<F>(f: ErrFn<E, F>): AsyncResult<T, F>
 
   /**
    * Works the same as the {@link Result.asyncMapErr}.
    *
    * @see {@link Result.asyncMapErr} for details.
    */
-  asyncMapErr<F>(f: Fn<E, Promise<F>>): AsyncResult<T, F>
+  asyncMapErr<F>(f: ErrFn<E, Promise<F>>): AsyncResult<T, F>
 
   /**
    * Works similar to the {@link Result.mapOr} method, except that this method
@@ -267,7 +273,7 @@ export type AsyncResult<T, E> = {
    *
    * @see {@link Result.mapOrElse} for details.
    */
-  mapOrElse<U>(fallbackFn: Fn<E, U>, f: Fn<T, U>): Promise<U>
+  mapOrElse<U>(fallbackFn: ErrFn<E, U>, f: Fn<T, U>): Promise<U>
 
   /**
    * Works similar to the {@link Result.asyncMapOrElse} method, except that this
@@ -276,7 +282,7 @@ export type AsyncResult<T, E> = {
    * @see {@link Result.asyncMapOrElse} for details.
    */
   asyncMapOrElse<U>(
-    fallbackFn: Fn<E, U | Promise<U>>,
+    fallbackFn: ErrFn<E, U | Promise<U>>,
     f: Fn<T, U | Promise<U>>
   ): Promise<U>
 
@@ -294,7 +300,7 @@ export type AsyncResult<T, E> = {
    *
    * @see {@link Result.inspectErr} for details.
    */
-  inspectErr(f: Fn<E, void>): AsyncResult<T, E>
+  inspectErr(f: ErrFn<E, void>): AsyncResult<T, E>
 
   /**
    * Works similar to the {@link Result.expect} method, except that this method
@@ -365,14 +371,14 @@ export type AsyncResult<T, E> = {
    *
    * @see {@link Result.orElse} for details.
    */
-  orElse<F>(f: Fn<E, Result<T, F>>): AsyncResult<T, F>
+  orElse<F>(f: ErrFn<E, Result<T, F>>): AsyncResult<T, F>
 
   /**
    * Works the same as the {@link Result.asyncOrElse}.
    *
    * @see {@link Result.asyncOrElse} for details.
    */
-  asyncOrElse<F>(f: Fn<E, Promise<Result<T, F>>>): AsyncResult<T, F>
+  asyncOrElse<F>(f: ErrFn<E, Promise<Result<T, F>>>): AsyncResult<T, F>
 
   /**
    * Works similar to the {@link Result.unwrapOr} method, except that this
@@ -388,14 +394,14 @@ export type AsyncResult<T, E> = {
    *
    * @see {@link Result.unwrapOrElse} for details.
    */
-  unwrapOrElse(f: Fn<E, T>): Promise<T>
+  unwrapOrElse(f: ErrFn<E, T>): Promise<T>
 
   /**
    * Works the same as the {@link Result.asyncUnwrapOrElse}.
    *
    * @see {@link Result.asyncUnwrapOrElse} for details.
    */
-  asyncUnwrapOrElse(f: Fn<E, Promise<T>>): Promise<T>
+  asyncUnwrapOrElse(f: ErrFn<E, Promise<T>>): Promise<T>
 
   /**
    * Works similar to the {@link Result.match} method, except that this method
@@ -403,7 +409,7 @@ export type AsyncResult<T, E> = {
    *
    * @see {@link Result.match} for details.
    */
-  match<U>(okFn: Fn<T, U>, errFn: Fn<E, U>): Promise<U>
+  match<U>(okFn: Fn<T, U>, errFn: ErrFn<E, U>): Promise<U>
 
   /**
    * Works the same as the {@link Result.asyncMatch}.
@@ -412,11 +418,11 @@ export type AsyncResult<T, E> = {
    */
   asyncMatch<U>(
     okFn: Fn<T, U | Promise<U>>,
-    errFn: Fn<E, U | Promise<U>>
+    errFn: ErrFn<E, U | Promise<U>>
   ): Promise<U>
 } & Promise<Result<T, E>>
 
-export class Ok<T, E> implements Result<T, E> {
+class Ok<T, E> implements Result<T, E> {
   constructor(readonly value: T) {}
 
   isOk(): this is Ok<T, E> {
@@ -451,12 +457,12 @@ export class Ok<T, E> implements Result<T, E> {
     return chain(f(this.value).then(ok))
   }
 
-  mapOrElse<U>(_: Fn<E, U>, f: Fn<T, U>): U {
+  mapOrElse<U>(_: ErrFn<E, U>, f: Fn<T, U>): U {
     return f(this.value)
   }
 
   asyncMapOrElse<U>(
-    _: Fn<E, U | Promise<U>>,
+    _: ErrFn<E, U | Promise<U>>,
     f: Fn<T, U | Promise<U>>
   ): Promise<U> {
     return Promise.resolve(f(this.value))
@@ -541,7 +547,7 @@ export class Ok<T, E> implements Result<T, E> {
   }
 }
 
-export class Err<T, E> implements Result<T, E> {
+class Err<T, E> implements Result<T, E> {
   constructor(readonly error: E) {}
 
   isOk(): this is Ok<T, E> {
@@ -576,19 +582,19 @@ export class Err<T, E> implements Result<T, E> {
     return Promise.resolve(value)
   }
 
-  mapOrElse<U>(fallback: Fn<E, U>): U {
+  mapOrElse<U>(fallback: ErrFn<E, U>): U {
     return fallback(this.error)
   }
 
-  asyncMapOrElse<U>(fallbackFn: Fn<E, U | Promise<U>>): Promise<U> {
+  asyncMapOrElse<U>(fallbackFn: ErrFn<E, U | Promise<U>>): Promise<U> {
     return Promise.resolve(fallbackFn(this.error))
   }
 
-  mapErr<F>(f: Fn<E, F>): Result<T, F> {
+  mapErr<F>(f: ErrFn<E, F>): Result<T, F> {
     return err(f(this.error))
   }
 
-  asyncMapErr<F>(f: Fn<E, Promise<F>>): AsyncResult<T, F> {
+  asyncMapErr<F>(f: ErrFn<E, Promise<F>>): AsyncResult<T, F> {
     return chain(f(this.error).then(ok))
   }
 
@@ -596,7 +602,7 @@ export class Err<T, E> implements Result<T, E> {
     return err(this.error)
   }
 
-  inspectErr(f: Fn<E, void>): Result<T, E> {
+  inspectErr(f: ErrFn<E, void>): Result<T, E> {
     f(this.error)
 
     return err(this.error)
@@ -634,11 +640,11 @@ export class Err<T, E> implements Result<T, E> {
     return res
   }
 
-  orElse<F>(f: Fn<E, Result<T, F>>): Result<T, F> {
+  orElse<F>(f: ErrFn<E, Result<T, F>>): Result<T, F> {
     return f(this.error)
   }
 
-  asyncOrElse<F>(f: Fn<E, Promise<Result<T, F>>>): AsyncResult<T, F> {
+  asyncOrElse<F>(f: ErrFn<E, Promise<Result<T, F>>>): AsyncResult<T, F> {
     return chain(f(this.error).then(ok))
   }
 
@@ -646,21 +652,21 @@ export class Err<T, E> implements Result<T, E> {
     return value
   }
 
-  unwrapOrElse(f: Fn<E, T>): T {
+  unwrapOrElse(f: ErrFn<E, T>): T {
     return f(this.error)
   }
 
-  asyncUnwrapOrElse(f: Fn<E, Promise<T>>): Promise<T> {
+  asyncUnwrapOrElse(f: ErrFn<E, Promise<T>>): Promise<T> {
     return f(this.error)
   }
 
-  match<U>(_: Fn<T, U>, errFn: Fn<E, U>): U {
+  match<U>(_: Fn<T, U>, errFn: ErrFn<E, U>): U {
     return errFn(this.error)
   }
 
   asyncMatch<U>(
     _: Fn<T, U | Promise<U>>,
-    errFn: Fn<E, U | Promise<U>>
+    errFn: ErrFn<E, U | Promise<U>>
   ): Promise<U> {
     return Promise.resolve(errFn(this.error))
   }
@@ -707,7 +713,7 @@ export function errAsync<T = unknown, E = never>(
  */
 export function fromPromise<T, E>(
   promise: Promise<T>,
-  errorFn?: Fn<unknown, E>
+  errorFn?: ErrFn<unknown, E>
 ): AsyncResult<T, E> {
   return chain(promise.then(ok).catch((e) => err(errorFn ? errorFn(e) : e)))
 }
@@ -721,7 +727,7 @@ export function fromPromise<T, E>(
  */
 export function fromThrowable<T, E>(
   f: Fn<void, T>,
-  errorFn?: Fn<unknown, E>
+  errorFn?: ErrFn<unknown, E>
 ): Result<T, E> {
   try {
     return ok(f())
