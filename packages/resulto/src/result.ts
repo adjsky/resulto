@@ -216,12 +216,19 @@ export interface Result<T, E> {
   ): Promise<U>
 }
 
-// We have to duplicate declarations due to the TypeScript limitations.
-// The only thing we do here is using `AsyncResult` instead of `Result` and
-// wrapping other types in `Promise` to allow chaining and make autocompletion
-// happy.
-// Reference: https://github.com/sindresorhus/type-fest/issues/178
+/**
+ * Async version of `Result`.
+ *
+ * In fact this is just a regular `Result` wrapped in a proxy to allow chaining
+ * promises without using `await` on every call.
+ */
 export type AsyncResult<T, E> = {
+  // We have to duplicate declarations due to the TypeScript limitations.
+  // The only thing we do here is using `AsyncResult` instead of `Result` and
+  // wrapping other types in `Promise` to allow chaining and make autocompletion
+  // happy.
+  // Reference: https://github.com/sindresorhus/type-fest/issues/178
+
   /**
    * Works similar to the {@link Result.map} method, except that this method
    * returns `AsyncResult` instead of `Result`.
