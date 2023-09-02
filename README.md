@@ -8,6 +8,12 @@ interface to work with async primitives.
 > This `ESLint` plugin ensures that your `Results` are used to prevent leaving
 > `Err` variants unhandled.
 
+## Installation
+
+```bash
+npm install resulto
+```
+
 ## History
 
 Exceptions are dangerous. Most of the time you do not know some function you
@@ -20,12 +26,6 @@ block for regular control flow lead to convoluted and smelly code.
 There are many packages that implement `Result`, but there is no package that
 implements a full-fledged interface to work with async primitives and an
 `ESLint` package to make sure `Results` are handled.
-
-## Installation
-
-```bash
-npm install resulto
-```
 
 ## API documentation
 
