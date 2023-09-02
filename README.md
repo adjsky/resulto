@@ -29,4 +29,8 @@ npm install resulto
 
 ## API documentation
 
-- todo
+https://adjsky.github.io/resulto/
+
+## License
+
+[MIT](https://github.com/adjsky/resulto/blob/master/LICENSE)

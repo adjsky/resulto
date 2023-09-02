@@ -34,6 +34,7 @@
   "files": [
     "dist"
   ],
+  "license": "MIT",
   "peerDependencies": {
     "@typescript-eslint/parser": "6.x"
   },
