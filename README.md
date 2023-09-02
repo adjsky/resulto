@@ -27,6 +27,9 @@ There are many packages that implement `Result`, but there is no package that
 implements a full-fledged interface to work with async primitives and an
 `ESLint` package to make sure `Results` are handled.
 
+That is why I made this repository: to make my life and the lives of other
+developers easier.
+
 ## API documentation
 
 https://adjsky.github.io/resulto/
