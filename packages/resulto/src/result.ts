@@ -422,7 +422,7 @@ export type AsyncResult<T, E> = {
   ): Promise<U>
 } & Promise<Result<T, E>>
 
-class Ok<T, E> implements Result<T, E> {
+export class Ok<T, E> implements Result<T, E> {
   constructor(readonly value: T) {}
 
   isOk(): this is Ok<T, E> {
@@ -547,7 +547,7 @@ class Ok<T, E> implements Result<T, E> {
   }
 }
 
-class Err<T, E> implements Result<T, E> {
+export class Err<T, E> implements Result<T, E> {
   constructor(readonly error: E) {}
 
   isOk(): this is Ok<T, E> {

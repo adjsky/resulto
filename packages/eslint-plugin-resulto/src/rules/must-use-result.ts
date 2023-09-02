@@ -29,7 +29,9 @@ const rule = ruleCreator({
     const typeChecker = parserServices.program.getTypeChecker()
 
     return {
-      CallExpression(node) {
+      "CallExpression,NewExpression"(
+        node: TSESTree.CallExpression | TSESTree.NewExpression
+      ) {
         if (!isResult(node, parserServices, typeChecker)) {
           return
         }
@@ -87,7 +89,12 @@ function isResult(
     symbolToCheck = typeChecker.symbolToString(resolvedSymbol)
   }
 
-  return symbolToCheck == "Result" || symbolToCheck == "AsyncResult"
+  return (
+    symbolToCheck == "Result" ||
+    symbolToCheck == "AsyncResult" ||
+    symbolToCheck == "Ok" ||
+    symbolToCheck == "Err"
+  )
 }
 
 function isReturnedOrAssigned(node: TSESTree.Node) {

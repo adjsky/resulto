@@ -32,6 +32,10 @@ declare function err<T = never, E = unknown>(error: E): Result<T, E>
 
 declare function errAsync<T = never, E = unknown>(error: E): AsyncResult<T, E> 
 
+declare class Ok<T, E> implements Result<T, E> {}
+
+declare class Err<T, E> implements Result<T, E> {}
+
 import { ok, err } from "resulto"
 
 declare function noop(): void

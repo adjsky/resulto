@@ -1,6 +1,8 @@
 export {
   type AsyncResult,
   type Result,
+  Ok,
+  Err,
   fromPromise,
   fromThrowable,
   okAsync,
@@ -8,4 +10,10 @@ export {
   err,
   errAsync
 } from "./result"
-export { ResultError } from "./utility"
+export {
+  ResultError,
+  type ErrFn,
+  type ErrPredicate,
+  type Fn,
+  type Predicate
+} from "./utility"

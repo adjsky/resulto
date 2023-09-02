@@ -25,6 +25,12 @@ tester.run("must-use-result", rule, {
         err(5).asyncMatch(noop, noop)
       `)
     },
+    {
+      code: injectCode(`
+        const okResult = new Ok(5)
+        const errResult = new Err(5)
+      `)
+    },
 
     {
       code: injectCode(`
@@ -113,6 +119,13 @@ tester.run("must-use-result", rule, {
       code: injectCode(`
         ok(5)
         err(5)
+      `),
+      errors: [{ messageId: "mustUse" }, { messageId: "mustUse" }]
+    },
+    {
+      code: injectCode(`
+        new Ok(5)
+        new Err(5)
       `),
       errors: [{ messageId: "mustUse" }, { messageId: "mustUse" }]
     },
