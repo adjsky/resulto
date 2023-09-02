@@ -8,7 +8,17 @@ npm install --save-dev eslint typescript @typescript-eslint/parser eslint-plugin
 
 ## Configuration
 
-Create/modify your `ESLint` configuration file, i.e. `.eslintrc.json`.
+1. Create/modify your `tsconfig.json`.
+
+```json
+{
+  "compilerOptions": {
+    "strict": true
+  }
+}
+```
+
+2. Create/modify your `ESLint` configuration file, i.e. `.eslintrc.json`.
 
 ```json
 {
