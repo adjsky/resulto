@@ -4,7 +4,8 @@
   "scripts": {
     "ts-check": "turbo ts-check",
     "test:watch": "vitest watch",
-    "test:ci": "vitest --coverage"
+    "test:ci": "vitest --coverage",
+    "generate-docs": "typedoc --out docs packages/resulto/src/index.ts"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "4.1.0",
@@ -16,7 +17,6 @@
     "prettier": "^3.0.2",
     "turbo": "^1.10.13",
     "typedoc": "^0.25.0",
-    "typedoc-plugin-markdown": "^3.16.0",
     "typescript": "^5.2.2",
     "vitest": "^0.34.2"
   },
