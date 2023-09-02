@@ -246,9 +246,11 @@ describe("Result.andThen", () => {
   })
 
   test("Err", () => {
-    const res = err<number, number>(4)
-
-    expect(res.andThen(() => ok(0)).unwrapErr()).toBe(4)
+    expect(
+      err(4)
+        .andThen(() => ok(0))
+        .unwrapErr()
+    ).toBe(4)
   })
 })
 
@@ -314,7 +316,7 @@ describe("Result.unwrapOrElse", () => {
   })
 })
 
-describe("match", () => {
+describe("Result.match", () => {
   test("Ok", () => {
     const okFn = vi.fn()
     const errFn = vi.fn()
@@ -325,7 +327,7 @@ describe("match", () => {
     expect(errFn).not.toBeCalled()
   })
 
-  test("Ok", () => {
+  test("Err", () => {
     const okFn = vi.fn()
     const errFn = vi.fn()
 

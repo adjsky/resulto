@@ -454,7 +454,7 @@ class Ok<T, E> implements Result<T, E> {
   }
 
   asyncMapOr<U>(_: U, f: Fn<T, Promise<U>>): Promise<U> {
-    return chain(f(this.value).then(ok))
+    return f(this.value)
   }
 
   mapOrElse<U>(_: ErrFn<E, U>, f: Fn<T, U>): U {
@@ -595,7 +595,7 @@ class Err<T, E> implements Result<T, E> {
   }
 
   asyncMapErr<F>(f: ErrFn<E, Promise<F>>): AsyncResult<T, F> {
-    return chain(f(this.error).then(ok))
+    return chain(f(this.error).then(err))
   }
 
   inspect(): Result<T, E> {
@@ -645,7 +645,7 @@ class Err<T, E> implements Result<T, E> {
   }
 
   asyncOrElse<F>(f: ErrFn<E, Promise<Result<T, F>>>): AsyncResult<T, F> {
-    return chain(f(this.error).then(ok))
+    return chain(f(this.error))
   }
 
   unwrapOr(value: T): T {

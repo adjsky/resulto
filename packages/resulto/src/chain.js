@@ -13,16 +13,20 @@ export function chain(chainHead) {
           currentPromise = currentPromise.then((resolvedObject) => {
             currentThis = resolvedObject
 
-            return resolvedObject[property]
+            return resolvedObject?.[property]
           })
 
           return proxy
       }
     },
     apply(_, __, args) {
-      currentPromise = currentPromise.then((resolvedFunction) =>
-        Reflect.apply(resolvedFunction, currentThis, args)
-      )
+      currentPromise = currentPromise.then((resolvedFunction) => {
+        if (typeof resolvedFunction != "function") {
+          throw new Error(`Trying to call ${resolvedFunction}`)
+        }
+
+        return Reflect.apply(resolvedFunction, currentThis, args)
+      })
 
       return proxy
     }
