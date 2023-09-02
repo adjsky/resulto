@@ -15,6 +15,9 @@ Create/modify your `ESLint` configuration file, i.e. `.eslintrc.json`.
   "root": true,
   "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
   "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": true
+  },
   "plugins": ["@typescript-eslint", "resulto"],
   "rules": {
     "resulto/must-use-result": "error"
