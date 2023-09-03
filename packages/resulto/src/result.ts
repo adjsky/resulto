@@ -7,6 +7,13 @@ import {
   ResultError
 } from "./utility"
 
+/**
+ * Result is a type that represents either success `Ok` or failure `Err`.
+ *
+ * Typically it is used for returning and propagating errors. Functions should
+ * return `Result` whenever errors are expected and recoverable instead of
+ * throwing errors.
+ */
 export interface Result<T, E> {
   /**
    * Checks if `Result` is `Ok`.
@@ -680,14 +687,14 @@ export class Err<T, E> implements Result<T, E> {
 }
 
 /**
- * Creates an `Ok` version of `Result`.
+ * Creates an `Ok` variant of `Result`.
  */
 export function ok<T = unknown, E = never>(value: T): Result<T, E> {
   return new Ok<T, E>(value)
 }
 
 /**
- * Creates an `Ok` version of `AsyncResult`.
+ * Creates an `Ok` variant of `AsyncResult`.
  */
 export function okAsync<T = unknown, E = never>(
   value: T | Promise<T>
@@ -696,14 +703,14 @@ export function okAsync<T = unknown, E = never>(
 }
 
 /**
- * Creates an `Err` version of `Result`.
+ * Creates an `Err` variant of `Result`.
  */
 export function err<T = never, E = unknown>(error: E): Result<T, E> {
   return new Err<T, E>(error)
 }
 
 /**
- * Creates an `Err` version of `AsyncResult`.
+ * Creates an `Err` variant of `AsyncResult`.
  */
 export function errAsync<T = unknown, E = never>(
   error: E | Promise<E>

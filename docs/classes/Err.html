@@ -14,7 +14,14 @@
 <ul class="tsd-breadcrumb">
 <li><a href="../modules.html">resulto</a></li>
 <li><a href="Err.html">Err</a></li></ul>
-<h1>Class Err&lt;T, E&gt;</h1></div> 
+<h1>Class Err&lt;T, E&gt;</h1></div>
+<section class="tsd-panel tsd-comment">
+<div class="tsd-comment tsd-typography"><p>Result is a type that represents either success <code>Ok</code> or failure <code>Err</code>.</p>
+<p>Typically it is used for returning and propagating errors. Functions should
+return <code>Result</code> whenever errors are expected and recoverable instead of
+throwing errors.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></section> 
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
@@ -31,7 +38,7 @@
 <ul class="tsd-hierarchy">
 <li><a href="../interfaces/Result.html" class="tsd-signature-type tsd-kind-interface">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">&gt;</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:557</li></ul></aside>
+<li>Defined in packages/resulto/src/result.ts:564</li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -98,14 +105,14 @@
 <h5><span class="tsd-kind-parameter">error</span>: <span class="tsd-signature-type tsd-kind-type-parameter">E</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="Err.html" class="tsd-signature-type tsd-kind-class">Err</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:558</li></ul></aside></li></ul></section></section>
+<li>Defined in packages/resulto/src/result.ts:565</li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member"><a id="error" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagReadonly">Readonly</code> <span>error</span><a href="#error" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">error</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-type-parameter">E</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:558</li></ul></aside></section></section>
+<li>Defined in packages/resulto/src/result.ts:565</li></ul></aside></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
 <section class="tsd-panel tsd-member"><a id="and" class="tsd-anchor"></a>
@@ -124,7 +131,7 @@
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#and">and</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:634</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:641</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="andThen" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>and<wbr/>Then</span><a href="#andThen" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -142,7 +149,7 @@
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#andThen">andThen</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:638</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:645</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="asyncAndThen" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>async<wbr/>And<wbr/>Then</span><a href="#asyncAndThen" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -163,7 +170,7 @@ has to return <code>Promise</code>.</p>
 </div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#asyncAndThen">asyncAndThen</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:642</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:649</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="asyncMap" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>async<wbr/>Map</span><a href="#asyncMap" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -184,7 +191,7 @@ return <code>Promise</code>.</p>
 </div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#asyncMap">asyncMap</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:580</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:587</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="asyncMapErr" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>async<wbr/>Map<wbr/>Err</span><a href="#asyncMapErr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -210,7 +217,7 @@ return <code>Promise</code>.</p>
 </div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#asyncMapErr">asyncMapErr</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:604</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:611</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="asyncMapOr" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>async<wbr/>Map<wbr/>Or</span><a href="#asyncMapOr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -235,7 +242,7 @@ returns <code>Promise</code>, and the function <code>f</code> has to return <cod
 </div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#asyncMapOr">asyncMapOr</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:588</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:595</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="asyncMapOrElse" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>async<wbr/>Map<wbr/>Or<wbr/>Else</span><a href="#asyncMapOrElse" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -261,7 +268,7 @@ method returns <code>Promise</code>, and functions <code>fallbackFn</code> and <
 </div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#asyncMapOrElse">asyncMapOrElse</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:596</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:603</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="asyncMatch" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>async<wbr/>Match</span><a href="#asyncMatch" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -289,7 +296,7 @@ method returns <code>Promise</code>, and functions <code>okFn</code> and <code>e
 </div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#asyncMatch">asyncMatch</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:674</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:681</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="asyncOrElse" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>async<wbr/>Or<wbr/>Else</span><a href="#asyncOrElse" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -315,7 +322,7 @@ has to return <code>Promise</code>.</p>
 </div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#asyncOrElse">asyncOrElse</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:654</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:661</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="asyncUnwrapOrElse" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>async<wbr/>Unwrap<wbr/>Or<wbr/>Else</span><a href="#asyncUnwrapOrElse" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -335,7 +342,7 @@ method returns <code>Promise</code>, and the function <code>f</code> has to retu
 </div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#asyncUnwrapOrElse">asyncUnwrapOrElse</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:666</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:673</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="expect" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>expect</span><a href="#expect" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -353,7 +360,7 @@ method returns <code>Promise</code>, and the function <code>f</code> has to retu
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#expect">expect</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:618</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:625</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="expectErr" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>expect<wbr/>Err</span><a href="#expectErr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -366,7 +373,7 @@ method returns <code>Promise</code>, and the function <code>f</code> has to retu
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#expectErr">expectErr</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:626</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:633</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="inspect" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>inspect</span><a href="#inspect" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -378,7 +385,7 @@ method returns <code>Promise</code>, and the function <code>f</code> has to retu
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#inspect">inspect</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:608</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:615</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="inspectErr" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>inspect<wbr/>Err</span><a href="#inspectErr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -395,7 +402,7 @@ method returns <code>Promise</code>, and the function <code>f</code> has to retu
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#inspectErr">inspectErr</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:612</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:619</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="isErr" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>is<wbr/>Err</span><a href="#isErr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -407,7 +414,7 @@ method returns <code>Promise</code>, and the function <code>f</code> has to retu
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#isErr">isErr</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:568</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:575</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="isErrAnd" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>is<wbr/>Err<wbr/>And</span><a href="#isErrAnd" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -424,7 +431,7 @@ method returns <code>Promise</code>, and the function <code>f</code> has to retu
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#isErrAnd">isErrAnd</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:572</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:579</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="isOk" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>is<wbr/>Ok</span><a href="#isOk" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -436,7 +443,7 @@ method returns <code>Promise</code>, and the function <code>f</code> has to retu
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#isOk">isOk</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:560</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:567</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="isOkAnd" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>is<wbr/>Ok<wbr/>And</span><a href="#isOkAnd" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -448,7 +455,7 @@ method returns <code>Promise</code>, and the function <code>f</code> has to retu
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#isOkAnd">isOkAnd</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:564</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:571</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="map" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>map</span><a href="#map" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -467,7 +474,7 @@ contained <code>Ok</code> value, leaving an <code>Err</code> value untouched.</p
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#map">map</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:576</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:583</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="mapErr" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>map<wbr/>Err</span><a href="#mapErr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -492,7 +499,7 @@ handling an error.</p>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#mapErr">mapErr</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:600</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:607</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="mapOr" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>map<wbr/>Or</span><a href="#mapOr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -515,7 +522,7 @@ contained value (if <code>Ok</code>).</p>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#mapOr">mapOr</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:584</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:591</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="mapOrElse" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>map<wbr/>Or<wbr/>Else</span><a href="#mapOrElse" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -540,7 +547,7 @@ error.</p>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#mapOrElse">mapOrElse</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:592</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:599</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="match" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>match</span><a href="#match" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -565,7 +572,7 @@ error.</p>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#match">match</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:670</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:677</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="or" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>or</span><a href="#or" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -587,7 +594,7 @@ error.</p>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#or">or</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:646</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:653</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="orElse" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>or<wbr/>Else</span><a href="#orElse" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -610,7 +617,7 @@ error.</p>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#orElse">orElse</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:650</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:657</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="unwrap" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>unwrap</span><a href="#unwrap" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -623,7 +630,7 @@ error.</p>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#unwrap">unwrap</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:622</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:629</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="unwrapErr" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>unwrap<wbr/>Err</span><a href="#unwrapErr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -636,7 +643,7 @@ error.</p>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#unwrapErr">unwrapErr</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:630</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:637</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="unwrapOr" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>unwrap<wbr/>Or</span><a href="#unwrapOr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -653,7 +660,7 @@ error.</p>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#unwrapOr">unwrapOr</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:658</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:665</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="unwrapOrElse" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>unwrap<wbr/>Or<wbr/>Else</span><a href="#unwrapOrElse" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -670,7 +677,7 @@ error.</p>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Implementation of <a href="../interfaces/Result.html">Result</a>.<a href="../interfaces/Result.html#unwrapOrElse">unwrapOrElse</a></p>
 <ul>
-<li>Defined in packages/resulto/src/result.ts:662</li></ul></aside></li></ul></section></section></div>
+<li>Defined in packages/resulto/src/result.ts:669</li></ul></aside></li></ul></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
