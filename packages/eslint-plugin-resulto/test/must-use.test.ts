@@ -112,6 +112,17 @@ tester.run("must-use-result", rule, {
         const okAsyncResult = await asyncGetAwaitedOkAsync()
         const errAsyncResult = await asyncGetAwaitedOkAsync()
       `)
+    },
+
+    {
+      code: injectCode(`
+        function doSomething(res: Result<unknown, unknown>) {
+          //
+        }
+
+        doSomething(ok(4))
+        doSomething(err(5))
+      `)
     }
   ],
   invalid: [

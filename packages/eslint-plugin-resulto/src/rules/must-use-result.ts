@@ -102,7 +102,10 @@ function isReturnedOrAssigned(node: TSESTree.Node) {
 
   return (
     (parent?.type == "VariableDeclarator" && parent.init == node) ||
-    (parent?.type == "ReturnStatement" && parent.argument == node)
+    (parent?.type == "ReturnStatement" && parent.argument == node) ||
+    ((node.type == "CallExpression" || node.type == "NewExpression") &&
+      parent?.type == "CallExpression" &&
+      parent.arguments.includes(node))
   )
 }
 
