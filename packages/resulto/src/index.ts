@@ -1,6 +1,7 @@
 export {
   type AsyncResult,
   type Result,
+  type ResultDeclarations,
   Ok,
   Err,
   fromPromise,

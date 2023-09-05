@@ -7,14 +7,7 @@ import {
   ResultError
 } from "./utility"
 
-/**
- * Result is a type that represents either success `Ok` or failure `Err`.
- *
- * Typically it is used for returning and propagating errors. Functions should
- * return `Result` whenever errors are expected and recoverable instead of
- * throwing errors.
- */
-export interface Result<T, E> {
+export interface ResultDeclarations<T, E> {
   /**
    * Checks if `Result` is `Ok`.
    */
@@ -222,6 +215,15 @@ export interface Result<T, E> {
     errFn: ErrFn<E, U | Promise<U>>
   ): Promise<U>
 }
+
+/**
+ * Result is a type that represents either success `Ok` or failure `Err`.
+ *
+ * Typically it is used for returning and propagating errors. Functions should
+ * return `Result` whenever errors are expected and recoverable instead of
+ * throwing errors.
+ */
+export type Result<T, E> = Ok<T, E> | Err<T, E>
 
 /**
  * Async version of `Result`.
@@ -436,7 +438,7 @@ export type AsyncResult<T, E> = {
   ): Promise<U>
 } & Promise<Result<T, E>>
 
-export class Ok<T, E> implements Result<T, E> {
+export class Ok<T, E> implements ResultDeclarations<T, E> {
   constructor(readonly value: T) {}
 
   isOk(): this is Ok<T, E> {
@@ -561,7 +563,7 @@ export class Ok<T, E> implements Result<T, E> {
   }
 }
 
-export class Err<T, E> implements Result<T, E> {
+export class Err<T, E> implements ResultDeclarations<T, E> {
   constructor(readonly error: E) {}
 
   isOk(): this is Ok<T, E> {

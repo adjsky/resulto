@@ -4,7 +4,7 @@
   "scripts": {
     "ts-check": "turbo ts-check",
     "test:watch": "vitest watch",
-    "test:ci": "vitest --coverage",
+    "test:ci": "vitest --coverage --run",
     "generate-docs": "typedoc --out docs packages/resulto/src/index.ts"
   },
   "devDependencies": {
