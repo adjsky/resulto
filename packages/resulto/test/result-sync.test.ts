@@ -294,6 +294,10 @@ describe("Result.orElse", () => {
         .unwrap()
     ).toBe(5)
   })
+
+  test("Different `Result`", () => {
+    ok("asdasd").orElse(() => err<number, "error">("error"))
+  })
 })
 
 describe("Result.unwrapOr", () => {
@@ -304,6 +308,11 @@ describe("Result.unwrapOr", () => {
   test("Err", () => {
     expect(err<number, number>(4).unwrapOr(0)).toBe(0)
   })
+
+  test("Different type", () => {
+    expect(ok<number, number>(4).unwrapOr("str")).toBe(4)
+    expect(err<number, number>(4).unwrapOr("str")).toBe("str")
+  })
 })
 
 describe("Result.unwrapOrElse", () => {
@@ -313,6 +322,11 @@ describe("Result.unwrapOrElse", () => {
 
   test("Err", () => {
     expect(err<number, number>(4).unwrapOrElse((v) => v - 1)).toBe(3)
+  })
+
+  test("Different type", () => {
+    expect(ok<number, number>(4).unwrapOrElse(() => "str")).toBe(4)
+    expect(err<number, number>(4).unwrapOrElse(() => "str")).toBe("str")
   })
 })
 
