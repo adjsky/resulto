@@ -270,14 +270,32 @@ describe("Result.andThen", () => {
           .unwrapErr()
       ).toBe(3)
     })
+
+    test("Err with different type", () => {
+      expect(
+        ok<4, 4>(4)
+          .andThen(() => err("err"))
+          .unwrapErr()
+      ).toBe("err")
+    })
   })
 
-  test("Err", () => {
-    expect(
-      err(4)
-        .andThen(() => ok(0))
-        .unwrapErr()
-    ).toBe(4)
+  describe("Err", () => {
+    test("Err", () => {
+      expect(
+        err(4)
+          .andThen(() => ok(0))
+          .unwrapErr()
+      ).toBe(4)
+    })
+
+    test("Err with different type", () => {
+      expect(
+        err<number, number>(4)
+          .andThen(() => err("qwe"))
+          .unwrapErr()
+      ).toBe(4)
+    })
   })
 })
 

@@ -153,7 +153,7 @@ export interface ResultDeclarations<T, E> {
    *
    * This function can be used for control flow based on `Result` values.
    */
-  andThen<U>(f: Fn<T, Result<U, E>>): Result<U, E>
+  andThen<U, F>(f: Fn<T, Result<U, F>>): Result<U, E | F>
 
   /**
    * Works similar to the {@link Result.andThen} method, except that this
@@ -162,7 +162,7 @@ export interface ResultDeclarations<T, E> {
    *
    * @see {@link Result.andThen} for details.
    */
-  asyncAndThen<U>(f: Fn<T, Promise<Result<U, E>>>): AsyncResult<U, E>
+  asyncAndThen<U, F>(f: Fn<T, Promise<Result<U, F>>>): AsyncResult<U, E | F>
 
   /**
    * Returns `res` if the result is `Err`, otherwise returns the `Ok` value.
@@ -378,14 +378,14 @@ export type AsyncResult<T, E> = {
    *
    * @see {@link Result.andThen} for details.
    */
-  andThen<U>(f: Fn<T, Result<U, E>>): AsyncResult<U, E>
+  andThen<U, F>(f: Fn<T, Result<U, F>>): AsyncResult<U, E | F>
 
   /**
    * Works the same as the {@link Result.asyncAndThen}.
    *
    * @see {@link Result.asyncAndThen} for details.
    */
-  asyncAndThen<U>(f: Fn<T, Promise<Result<U, E>>>): AsyncResult<U, E>
+  asyncAndThen<U, F>(f: Fn<T, Promise<Result<U, F>>>): AsyncResult<U, E | F>
 
   /**
    * Works similar to the {@link Result.or} method, except that this method
@@ -540,11 +540,11 @@ export class Ok<T, E> implements ResultDeclarations<T, E> {
     return res
   }
 
-  andThen<U>(f: Fn<T, Result<U, E>>): Result<U, E> {
+  andThen<U, F>(f: Fn<T, Result<U, F>>): Result<U, E | F> {
     return f(this.value)
   }
 
-  asyncAndThen<U>(f: Fn<T, Promise<Result<U, E>>>): AsyncResult<U, E> {
+  asyncAndThen<U, F>(f: Fn<T, Promise<Result<U, F>>>): AsyncResult<U, E | F> {
     return chain(f(this.value))
   }
 
@@ -666,11 +666,11 @@ export class Err<T, E> implements ResultDeclarations<T, E> {
     return err(this.error)
   }
 
-  andThen<U>(): Result<U, E> {
+  andThen<U, F>(): Result<U, E | F> {
     return err(this.error)
   }
 
-  asyncAndThen<U>(): AsyncResult<U, E> {
+  asyncAndThen<U, F>(): AsyncResult<U, E | F> {
     return chain(err(this.error))
   }
 
