@@ -109,6 +109,13 @@ export interface ResultDeclarations<T, E> {
   inspectErr(f: ErrFn<E, void>): Result<T, E>
 
   /**
+   * Performs a side effect on the contained value (if `Ok`).
+   *
+   * NOTE: `f` is awaited.
+   */
+  tap(f: Fn<T, Promise<void>>): AsyncResult<T, E>
+
+  /**
    * Returns the contained `Ok` value.
    *
    * This function may throw `UnwrapError` (if `Err`).
@@ -319,6 +326,13 @@ export type AsyncResult<T, E> = {
   inspectErr(f: ErrFn<E, void>): AsyncResult<T, E>
 
   /**
+   * Works the same as the {@link Result.tap}.
+   *
+   * @see {@link Result.tap} for details.
+   */
+  tap(f: Fn<T, Promise<void>>): AsyncResult<T, E>
+
+  /**
    * Works similar to the {@link Result.expect} method, except that this method
    * returns `Promise`.
    *
@@ -502,6 +516,10 @@ export class Ok<T, E> implements ResultDeclarations<T, E> {
     return ok(this.value)
   }
 
+  tap(f: Fn<T, Promise<void>>): AsyncResult<T, E> {
+    return chain(f(this.value).then(() => ok(this.value)))
+  }
+
   expect(): T {
     return this.value
   }
@@ -622,6 +640,10 @@ export class Err<T, E> implements ResultDeclarations<T, E> {
     f(this.error)
 
     return err(this.error)
+  }
+
+  tap(): AsyncResult<T, E> {
+    return chain(err(this.error))
   }
 
   expect(msg: string): never {
