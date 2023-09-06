@@ -167,7 +167,7 @@ export interface ResultDeclarations<T, E> {
    *
    * This function can be used for control flow based on result values.
    */
-  orElse<F>(f: ErrFn<E, Result<T, F>>): Result<T, F>
+  orElse<U, F>(f: ErrFn<E, Result<U, F>>): Result<U | T, F>
 
   /**
    * Works similar to the {@link Result.orElse} method, except that this
@@ -176,12 +176,12 @@ export interface ResultDeclarations<T, E> {
    *
    * @see {@link Result.orElse} for details.
    */
-  asyncOrElse<F>(f: ErrFn<E, Promise<Result<T, F>>>): AsyncResult<T, F>
+  asyncOrElse<U, F>(f: ErrFn<E, Promise<Result<U, F>>>): AsyncResult<U | T, F>
 
   /**
    * Returns the contained `Ok` value or a provided `value`.
    */
-  unwrapOr(value: T): T
+  unwrapOr<U>(value: U): U | T
 
   /**
    * Returns the contained `Ok `value or computes it from a `f`.
@@ -387,14 +387,14 @@ export type AsyncResult<T, E> = {
    *
    * @see {@link Result.orElse} for details.
    */
-  orElse<F>(f: ErrFn<E, Result<T, F>>): AsyncResult<T, F>
+  orElse<U, F>(f: ErrFn<E, Result<U, F>>): AsyncResult<U | T, F>
 
   /**
    * Works the same as the {@link Result.asyncOrElse}.
    *
    * @see {@link Result.asyncOrElse} for details.
    */
-  asyncOrElse<F>(f: ErrFn<E, Promise<Result<T, F>>>): AsyncResult<T, F>
+  asyncOrElse<U, F>(f: ErrFn<E, Promise<Result<U, F>>>): AsyncResult<U | T, F>
 
   /**
    * Works similar to the {@link Result.unwrapOr} method, except that this
@@ -402,7 +402,7 @@ export type AsyncResult<T, E> = {
    *
    * @see {@link Result.unwrapOr} for details.
    */
-  unwrapOr(value: T): Promise<T>
+  unwrapOr<U>(value: U): Promise<U | T>
 
   /**
    * Works similar to the {@link Result.unwrapOrElse} method, except that this
@@ -534,15 +534,15 @@ export class Ok<T, E> implements ResultDeclarations<T, E> {
     return ok(this.value)
   }
 
-  orElse<F>(): Result<T, F> {
+  orElse<U, F>(): Result<U | T, F> {
     return ok(this.value)
   }
 
-  asyncOrElse<F>(): AsyncResult<T, F> {
+  asyncOrElse<U, F>(): AsyncResult<U | T, F> {
     return chain(ok(this.value))
   }
 
-  unwrapOr(): T {
+  unwrapOr<U>(): U | T {
     return this.value
   }
 
@@ -656,15 +656,15 @@ export class Err<T, E> implements ResultDeclarations<T, E> {
     return res
   }
 
-  orElse<F>(f: ErrFn<E, Result<T, F>>): Result<T, F> {
+  orElse<U, F>(f: ErrFn<E, Result<U, F>>): Result<U | T, F> {
     return f(this.error)
   }
 
-  asyncOrElse<F>(f: ErrFn<E, Promise<Result<T, F>>>): AsyncResult<T, F> {
+  asyncOrElse<U, F>(f: ErrFn<E, Promise<Result<U, F>>>): AsyncResult<U | T, F> {
     return chain(f(this.error))
   }
 
-  unwrapOr(value: T): T {
+  unwrapOr<U>(value: U): U | T {
     return value
   }
 
