@@ -186,7 +186,7 @@ export interface ResultDeclarations<T, E> {
   /**
    * Returns the contained `Ok `value or computes it from a `f`.
    */
-  unwrapOrElse(f: ErrFn<E, T>): T
+  unwrapOrElse<U>(f: ErrFn<E, U>): U | T
 
   /**
    * Works similar to the {@link Result.unwrapOrElse} method, except that this
@@ -194,7 +194,7 @@ export interface ResultDeclarations<T, E> {
    *
    * @see {@link Result.unwrapOrElse} for details.
    */
-  asyncUnwrapOrElse(f: ErrFn<E, Promise<T>>): Promise<T>
+  asyncUnwrapOrElse<U>(f: ErrFn<E, Promise<U>>): Promise<U | T>
 
   /**
    * Calls `okFn` if the result is `Ok`, otherwise calls `errFn`.
@@ -410,14 +410,14 @@ export type AsyncResult<T, E> = {
    *
    * @see {@link Result.unwrapOrElse} for details.
    */
-  unwrapOrElse(f: ErrFn<E, T>): Promise<T>
+  unwrapOrElse<U>(f: ErrFn<E, U>): Promise<U | T>
 
   /**
    * Works the same as the {@link Result.asyncUnwrapOrElse}.
    *
    * @see {@link Result.asyncUnwrapOrElse} for details.
    */
-  asyncUnwrapOrElse(f: ErrFn<E, Promise<T>>): Promise<T>
+  asyncUnwrapOrElse<U>(f: ErrFn<E, Promise<U>>): Promise<U | T>
 
   /**
    * Works similar to the {@link Result.match} method, except that this method
@@ -546,7 +546,7 @@ export class Ok<T, E> implements ResultDeclarations<T, E> {
     return this.value
   }
 
-  unwrapOrElse(): T {
+  unwrapOrElse<U>(): U | T {
     return this.value
   }
 
@@ -668,11 +668,11 @@ export class Err<T, E> implements ResultDeclarations<T, E> {
     return value
   }
 
-  unwrapOrElse(f: ErrFn<E, T>): T {
+  unwrapOrElse<U>(f: ErrFn<E, U>): U | T {
     return f(this.error)
   }
 
-  asyncUnwrapOrElse(f: ErrFn<E, Promise<T>>): Promise<T> {
+  asyncUnwrapOrElse<U>(f: ErrFn<E, Promise<U>>): Promise<U | T> {
     return f(this.error)
   }
 

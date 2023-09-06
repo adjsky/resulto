@@ -323,6 +323,11 @@ describe("Result.unwrapOrElse", () => {
   test("Err", () => {
     expect(err<number, number>(4).unwrapOrElse((v) => v - 1)).toBe(3)
   })
+
+  test("Different type", () => {
+    expect(ok<number, number>(4).unwrapOrElse(() => "str")).toBe(4)
+    expect(err<number, number>(4).unwrapOrElse(() => "str")).toBe("str")
+  })
 })
 
 describe("Result.match", () => {
