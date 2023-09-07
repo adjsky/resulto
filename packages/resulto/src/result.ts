@@ -4,7 +4,9 @@ import {
   type ErrPredicate,
   type Fn,
   type Predicate,
-  ResultError
+  ResultError,
+  type UnwrapErrs,
+  type UnwrapOks
 } from "./utility"
 
 export interface ResultDeclarations<T, E> {
@@ -772,4 +774,27 @@ export function fromThrowable<T, E>(
   } catch (e) {
     return err(errorFn ? errorFn(e) : (e as E))
   }
+}
+
+/**
+ * Accepts an array of `Results` and returns a `Result`.
+ *
+ * If each `Result` in the provided array is `Ok`, then the returned `Result`
+ * will contain an array of `Ok` values, otherwise the returned `Result` will
+ * contain the first `Err` error.
+ */
+export function combine<T extends Result<unknown, unknown>[]>(
+  results: T
+): Result<UnwrapOks<T>, UnwrapErrs<T>[number]> {
+  const unwrapped = [] as UnwrapOks<T>
+
+  for (const result of results) {
+    if (result.isErr()) {
+      return err(result.error as UnwrapErrs<T>[number])
+    }
+
+    unwrapped.push(result.value)
+  }
+
+  return ok(unwrapped)
 }
