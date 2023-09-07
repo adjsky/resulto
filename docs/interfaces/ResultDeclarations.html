@@ -32,7 +32,7 @@
 <li><a href="../classes/Err.html" class="tsd-signature-type tsd-kind-class">Err</a></li>
 <li><a href="../classes/Ok.html" class="tsd-signature-type tsd-kind-class">Ok</a></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:10</li></ul></aside>
+<li>Defined in packages/resulto/src/result.ts:12</li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -65,6 +65,7 @@
 <a href="ResultDeclarations.html#match" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>match</span></a>
 <a href="ResultDeclarations.html#or" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>or</span></a>
 <a href="ResultDeclarations.html#orElse" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>or<wbr/>Else</span></a>
+<a href="ResultDeclarations.html#tap" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>tap</span></a>
 <a href="ResultDeclarations.html#unwrap" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>unwrap</span></a>
 <a href="ResultDeclarations.html#unwrapErr" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>unwrap<wbr/>Err</span></a>
 <a href="ResultDeclarations.html#unwrapOr" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>unwrap<wbr/>Or</span></a>
@@ -92,11 +93,11 @@
 <h4 class="tsd-returns-title">Returns <a href="../types/Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:142</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:151</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="andThen" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>and<wbr/>Then</span><a href="#andThen" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="andThen.andThen-1"><span class="tsd-kind-call-signature">and<wbr/>Then</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">f</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../types/Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">&gt;</span><a href="#andThen.andThen-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="andThen.andThen-1"><span class="tsd-kind-call-signature">and<wbr/>Then</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">F</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">f</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../types/Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-type-parameter">F</span><span class="tsd-signature-symbol">&gt;</span><a href="#andThen.andThen-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Calls <code>f</code> if the result is <code>Ok</code>, otherwise returns the <code>Err</code> value.</p>
 <p>This function can be used for control flow based on <code>Result</code> values.</p>
@@ -105,20 +106,22 @@
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
 <li>
-<h4><span class="tsd-kind-type-parameter">U</span></h4></li></ul></section>
+<h4><span class="tsd-kind-type-parameter">U</span></h4></li>
+<li>
+<h4><span class="tsd-kind-type-parameter">F</span></h4></li></ul></section>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">f</span>: <a href="../types/Fn.html" class="tsd-signature-type tsd-kind-type-alias">Fn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><a href="../types/Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="../types/Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">&gt;</span></h4>
+<h5><span class="tsd-kind-parameter">f</span>: <a href="../types/Fn.html" class="tsd-signature-type tsd-kind-type-alias">Fn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><a href="../types/Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">F</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="../types/Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-type-parameter">F</span><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:149</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:158</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="asyncAndThen" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>async<wbr/>And<wbr/>Then</span><a href="#asyncAndThen" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="asyncAndThen.asyncAndThen-1"><span class="tsd-kind-call-signature">async<wbr/>And<wbr/>Then</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">f</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../types/AsyncResult.html" class="tsd-signature-type tsd-kind-type-alias">AsyncResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">&gt;</span><a href="#asyncAndThen.asyncAndThen-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="asyncAndThen.asyncAndThen-1"><span class="tsd-kind-call-signature">async<wbr/>And<wbr/>Then</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">F</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">f</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../types/AsyncResult.html" class="tsd-signature-type tsd-kind-type-alias">AsyncResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-type-parameter">F</span><span class="tsd-signature-symbol">&gt;</span><a href="#asyncAndThen.asyncAndThen-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Works similar to the Result.andThen method, except that this
 method returns <code>AsyncResult</code> instead of <code>Result</code>, and the function <code>f</code>
@@ -128,18 +131,20 @@ has to return <code>Promise</code>.</p>
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
 <li>
-<h4><span class="tsd-kind-type-parameter">U</span></h4></li></ul></section>
+<h4><span class="tsd-kind-type-parameter">U</span></h4></li>
+<li>
+<h4><span class="tsd-kind-type-parameter">F</span></h4></li></ul></section>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">f</span>: <a href="../types/Fn.html" class="tsd-signature-type tsd-kind-type-alias">Fn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="../types/AsyncResult.html" class="tsd-signature-type tsd-kind-type-alias">AsyncResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">&gt;</span></h4>
+<h5><span class="tsd-kind-parameter">f</span>: <a href="../types/Fn.html" class="tsd-signature-type tsd-kind-type-alias">Fn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">F</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="../types/AsyncResult.html" class="tsd-signature-type tsd-kind-type-alias">AsyncResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-type-parameter">F</span><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography">
 <h4>See</h4><p>Result.andThen for details.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:158</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:167</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="asyncMap" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>async<wbr/>Map</span><a href="#asyncMap" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -164,7 +169,7 @@ return <code>Promise</code>.</p>
 <h4>See</h4><p>Result.map for details.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:46</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:48</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="asyncMapErr" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>async<wbr/>Map<wbr/>Err</span><a href="#asyncMapErr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -189,7 +194,7 @@ return <code>Promise</code>.</p>
 <h4>See</h4><p>Result.mapErr for details.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:99</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:101</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="asyncMapOr" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>async<wbr/>Map<wbr/>Or</span><a href="#asyncMapOr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -215,7 +220,7 @@ returns <code>Promise</code>, and the function <code>f</code> has to return <cod
 <h4>See</h4><p>Result.mapOr for details.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:60</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:62</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="asyncMapOrElse" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>async<wbr/>Map<wbr/>Or<wbr/>Else</span><a href="#asyncMapOrElse" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -242,7 +247,7 @@ method returns <code>Promise</code>, and functions <code>fallbackFn</code> and <
 <h4>See</h4><p>Result.mapOrElse for details.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:78</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:80</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="asyncMatch" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>async<wbr/>Match</span><a href="#asyncMatch" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -269,11 +274,11 @@ method returns <code>Promise</code>, and functions <code>okFn</code> and <code>e
 <h4>See</h4><p>Result.match for details.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:213</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:222</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="asyncOrElse" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>async<wbr/>Or<wbr/>Else</span><a href="#asyncOrElse" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="asyncOrElse.asyncOrElse-1"><span class="tsd-kind-call-signature">async<wbr/>Or<wbr/>Else</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">F</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">f</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../types/AsyncResult.html" class="tsd-signature-type tsd-kind-type-alias">AsyncResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">F</span><span class="tsd-signature-symbol">&gt;</span><a href="#asyncOrElse.asyncOrElse-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="asyncOrElse.asyncOrElse-1"><span class="tsd-kind-call-signature">async<wbr/>Or<wbr/>Else</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">F</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">f</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../types/AsyncResult.html" class="tsd-signature-type tsd-kind-type-alias">AsyncResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">F</span><span class="tsd-signature-symbol">&gt;</span><a href="#asyncOrElse.asyncOrElse-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Works similar to the Result.orElse method, except that this
 method returns <code>AsyncResult</code> instead of <code>Result</code>, and the function <code>f</code>
@@ -283,37 +288,44 @@ has to return <code>Promise</code>.</p>
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
 <li>
+<h4><span class="tsd-kind-type-parameter">U</span></h4></li>
+<li>
 <h4><span class="tsd-kind-type-parameter">F</span></h4></li></ul></section>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">f</span>: <a href="../types/ErrFn.html" class="tsd-signature-type tsd-kind-type-alias">ErrFn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">F</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="../types/AsyncResult.html" class="tsd-signature-type tsd-kind-type-alias">AsyncResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">F</span><span class="tsd-signature-symbol">&gt;</span></h4>
+<h5><span class="tsd-kind-parameter">f</span>: <a href="../types/ErrFn.html" class="tsd-signature-type tsd-kind-type-alias">ErrFn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">F</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="../types/AsyncResult.html" class="tsd-signature-type tsd-kind-type-alias">AsyncResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">F</span><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography">
 <h4>See</h4><p>Result.orElse for details.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:179</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:188</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="asyncUnwrapOrElse" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>async<wbr/>Unwrap<wbr/>Or<wbr/>Else</span><a href="#asyncUnwrapOrElse" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="asyncUnwrapOrElse.asyncUnwrapOrElse-1"><span class="tsd-kind-call-signature">async<wbr/>Unwrap<wbr/>Or<wbr/>Else</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">f</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><a href="#asyncUnwrapOrElse.asyncUnwrapOrElse-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="asyncUnwrapOrElse.asyncUnwrapOrElse-1"><span class="tsd-kind-call-signature">async<wbr/>Unwrap<wbr/>Or<wbr/>Else</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">f</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">&gt;</span><a href="#asyncUnwrapOrElse.asyncUnwrapOrElse-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Works similar to the Result.unwrapOrElse method, except that this
 method returns <code>Promise</code>, and the function <code>f</code> has to return <code>Promise</code>.</p>
 </div>
+<section class="tsd-panel">
+<h4>Type Parameters</h4>
+<ul class="tsd-type-parameter-list">
+<li>
+<h4><span class="tsd-kind-type-parameter">U</span></h4></li></ul></section>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">f</span>: <a href="../types/ErrFn.html" class="tsd-signature-type tsd-kind-type-alias">ErrFn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+<h5><span class="tsd-kind-parameter">f</span>: <a href="../types/ErrFn.html" class="tsd-signature-type tsd-kind-type-alias">ErrFn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography">
 <h4>See</h4><p>Result.unwrapOrElse for details.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:197</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:206</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="expect" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>expect</span><a href="#expect" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -330,7 +342,7 @@ method returns <code>Promise</code>, and the function <code>f</code> has to retu
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">T</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:116</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:125</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="expectErr" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>expect<wbr/>Err</span><a href="#expectErr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -347,7 +359,7 @@ method returns <code>Promise</code>, and the function <code>f</code> has to retu
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">E</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:130</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:139</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="inspect" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>inspect</span><a href="#inspect" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -363,7 +375,7 @@ method returns <code>Promise</code>, and the function <code>f</code> has to retu
 <h4 class="tsd-returns-title">Returns <a href="../types/Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:104</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:106</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="inspectErr" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>inspect<wbr/>Err</span><a href="#inspectErr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -379,7 +391,7 @@ method returns <code>Promise</code>, and the function <code>f</code> has to retu
 <h4 class="tsd-returns-title">Returns <a href="../types/Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:109</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:111</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="isErr" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>is<wbr/>Err</span><a href="#isErr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -390,7 +402,7 @@ method returns <code>Promise</code>, and the function <code>f</code> has to retu
 <h4 class="tsd-returns-title">Returns <span class="tsd-kind-parameter">this</span><span class="tsd-signature-symbol"> is </span><a href="../classes/Err.html" class="tsd-signature-type tsd-kind-class">Err</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:24</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:26</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="isErrAnd" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>is<wbr/>Err<wbr/>And</span><a href="#isErrAnd" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -406,7 +418,7 @@ method returns <code>Promise</code>, and the function <code>f</code> has to retu
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:29</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:31</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="isOk" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>is<wbr/>Ok</span><a href="#isOk" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -417,7 +429,7 @@ method returns <code>Promise</code>, and the function <code>f</code> has to retu
 <h4 class="tsd-returns-title">Returns <span class="tsd-kind-parameter">this</span><span class="tsd-signature-symbol"> is </span><a href="../classes/Ok.html" class="tsd-signature-type tsd-kind-class">Ok</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:14</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:16</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="isOkAnd" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>is<wbr/>Ok<wbr/>And</span><a href="#isOkAnd" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -433,7 +445,7 @@ method returns <code>Promise</code>, and the function <code>f</code> has to retu
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:19</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:21</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="map" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>map</span><a href="#map" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -456,7 +468,7 @@ contained <code>Ok</code> value, leaving an <code>Err</code> value untouched.</p
 <h4 class="tsd-returns-title">Returns <a href="../types/Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:37</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:39</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="mapErr" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>map<wbr/>Err</span><a href="#mapErr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -480,7 +492,7 @@ handling an error.</p>
 <h4 class="tsd-returns-title">Returns <a href="../types/Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">F</span><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:90</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:92</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="mapOr" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>map<wbr/>Or</span><a href="#mapOr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -504,7 +516,7 @@ contained value (if <code>Ok</code>).</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">U</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:52</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:54</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="mapOrElse" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>map<wbr/>Or<wbr/>Else</span><a href="#mapOrElse" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -530,7 +542,7 @@ error.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">U</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:69</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:71</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="match" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>match</span><a href="#match" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -554,7 +566,7 @@ error.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">U</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:204</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:213</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="or" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>or</span><a href="#or" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -575,11 +587,11 @@ error.</p>
 <h4 class="tsd-returns-title">Returns <a href="../types/Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">F</span><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:163</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:172</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="orElse" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>or<wbr/>Else</span><a href="#orElse" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="orElse.orElse-1"><span class="tsd-kind-call-signature">or<wbr/>Else</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">F</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">f</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../types/Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">F</span><span class="tsd-signature-symbol">&gt;</span><a href="#orElse.orElse-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="orElse.orElse-1"><span class="tsd-kind-call-signature">or<wbr/>Else</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">F</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">f</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../types/Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">F</span><span class="tsd-signature-symbol">&gt;</span><a href="#orElse.orElse-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Calls <code>f</code> if the result is <code>Err</code>, otherwise returns the <code>Ok</code> value.</p>
 <p>This function can be used for control flow based on result values.</p>
@@ -588,16 +600,35 @@ error.</p>
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
 <li>
+<h4><span class="tsd-kind-type-parameter">U</span></h4></li>
+<li>
 <h4><span class="tsd-kind-type-parameter">F</span></h4></li></ul></section>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">f</span>: <a href="../types/ErrFn.html" class="tsd-signature-type tsd-kind-type-alias">ErrFn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">, </span><a href="../types/Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">F</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="../types/Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">F</span><span class="tsd-signature-symbol">&gt;</span></h4>
+<h5><span class="tsd-kind-parameter">f</span>: <a href="../types/ErrFn.html" class="tsd-signature-type tsd-kind-type-alias">ErrFn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">, </span><a href="../types/Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">F</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="../types/Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">F</span><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:170</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:179</li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member"><a id="tap" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>tap</span><a href="#tap" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="tsd-signature tsd-anchor-link" id="tap.tap-1"><span class="tsd-kind-call-signature">tap</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">f</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../types/AsyncResult.html" class="tsd-signature-type tsd-kind-type-alias">AsyncResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">&gt;</span><a href="#tap.tap-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Performs a side effect on the contained value (if <code>Ok</code>).</p>
+<p>NOTE: <code>f</code> is awaited.</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">f</span>: <a href="../types/Fn.html" class="tsd-signature-type tsd-kind-type-alias">Fn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="../types/AsyncResult.html" class="tsd-signature-type tsd-kind-type-alias">AsyncResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">&gt;</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<ul>
+<li>Defined in packages/resulto/src/result.ts:118</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="unwrap" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>unwrap</span><a href="#unwrap" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -609,7 +640,7 @@ error.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">T</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:123</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:132</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="unwrapErr" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>unwrap<wbr/>Err</span><a href="#unwrapErr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -621,39 +652,49 @@ error.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">E</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:137</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:146</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="unwrapOr" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>unwrap<wbr/>Or</span><a href="#unwrapOr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="unwrapOr.unwrapOr-1"><span class="tsd-kind-call-signature">unwrap<wbr/>Or</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><a href="#unwrapOr.unwrapOr-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="unwrapOr.unwrapOr-1"><span class="tsd-kind-call-signature">unwrap<wbr/>Or</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><a href="#unwrapOr.unwrapOr-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Returns the contained <code>Ok</code> value or a provided <code>value</code>.</p>
 </div>
+<section class="tsd-panel">
+<h4>Type Parameters</h4>
+<ul class="tsd-type-parameter-list">
+<li>
+<h4><span class="tsd-kind-type-parameter">U</span></h4></li></ul></section>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type tsd-kind-type-parameter">T</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">T</span></h4>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type tsd-kind-type-parameter">U</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-type-parameter">U</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:184</li></ul></aside></li></ul></section>
+<li>Defined in packages/resulto/src/result.ts:193</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="unwrapOrElse" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>unwrap<wbr/>Or<wbr/>Else</span><a href="#unwrapOrElse" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="unwrapOrElse.unwrapOrElse-1"><span class="tsd-kind-call-signature">unwrap<wbr/>Or<wbr/>Else</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">f</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><a href="#unwrapOrElse.unwrapOrElse-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="unwrapOrElse.unwrapOrElse-1"><span class="tsd-kind-call-signature">unwrap<wbr/>Or<wbr/>Else</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">f</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><a href="#unwrapOrElse.unwrapOrElse-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Returns the contained <code>Ok </code>value or computes it from a <code>f</code>.</p>
 </div>
+<section class="tsd-panel">
+<h4>Type Parameters</h4>
+<ul class="tsd-type-parameter-list">
+<li>
+<h4><span class="tsd-kind-type-parameter">U</span></h4></li></ul></section>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">f</span>: <a href="../types/ErrFn.html" class="tsd-signature-type tsd-kind-type-alias">ErrFn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">T</span></h4>
+<h5><span class="tsd-kind-parameter">f</span>: <a href="../types/ErrFn.html" class="tsd-signature-type tsd-kind-type-alias">ErrFn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-type-parameter">U</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in packages/resulto/src/result.ts:189</li></ul></aside></li></ul></section></section></div>
+<li>Defined in packages/resulto/src/result.ts:198</li></ul></aside></li></ul></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -698,6 +739,7 @@ error.</p>
 <li><a href="#match" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>match</span></a></li>
 <li><a href="#or" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>or</span></a></li>
 <li><a href="#orElse" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>or<wbr/>Else</span></a></li>
+<li><a href="#tap" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>tap</span></a></li>
 <li><a href="#unwrap" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>unwrap</span></a></li>
 <li><a href="#unwrapErr" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>unwrap<wbr/>Err</span></a></li>
 <li><a href="#unwrapOr" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>unwrap<wbr/>Or</span></a></li>
@@ -715,7 +757,10 @@ error.</p>
 <li><a href="../types/Fn.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg><span>Fn</span></a></li>
 <li><a href="../types/Predicate.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg><span>Predicate</span></a></li>
 <li><a href="../types/Result.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg><span>Result</span></a></li>
-<li><a href="../functions/err-1.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-64"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-function)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.39 16V7.24H14.55V8.224H10.446V11.128H14.238V12.112H10.47V16H9.39Z" fill="var(--color-text)"></path></g></svg><span>err</span></a></li>
+<li><a href="../types/UnwrapErrs.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg><span>Unwrap<wbr/>Errs</span></a></li>
+<li><a href="../types/UnwrapOks.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg><span>Unwrap<wbr/>Oks</span></a></li>
+<li><a href="../functions/combine.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-64"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-function)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.39 16V7.24H14.55V8.224H10.446V11.128H14.238V12.112H10.47V16H9.39Z" fill="var(--color-text)"></path></g></svg><span>combine</span></a></li>
+<li><a href="../functions/err-1.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>err</span></a></li>
 <li><a href="../functions/errAsync.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>err<wbr/>Async</span></a></li>
 <li><a href="../functions/fromPromise.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>from<wbr/>Promise</span></a></li>
 <li><a href="../functions/fromThrowable.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>from<wbr/>Throwable</span></a></li>

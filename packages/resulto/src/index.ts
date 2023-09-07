@@ -18,5 +18,7 @@ export {
   type ErrFn,
   type ErrPredicate,
   type Fn,
-  type Predicate
+  type Predicate,
+  type UnwrapErrs,
+  type UnwrapOks
 } from "./utility"
