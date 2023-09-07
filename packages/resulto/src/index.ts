@@ -9,8 +9,10 @@ export {
   okAsync,
   ok,
   err,
-  errAsync
+  errAsync,
+  combine
 } from "./result"
+
 export {
   ResultError,
   type ErrFn,

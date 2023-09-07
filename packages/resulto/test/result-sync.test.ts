@@ -1,7 +1,6 @@
 import { describe, expect, test, vi } from "vitest"
 
-import { ResultError } from "../src"
-import { err, fromThrowable, ok } from "../src"
+import { combine, err, fromThrowable, ok, ResultError } from "../src"
 
 describe("utils", () => {
   describe("ok", () => {
@@ -58,6 +57,28 @@ describe("utils", () => {
           () => "mapped error"
         ).unwrapErr()
       ).toBe("mapped error")
+    })
+  })
+
+  describe("combine", () => {
+    test("single `Ok`", () => {
+      expect(combine([ok(4)]).unwrap()).toEqual([4])
+    })
+
+    test("multiple `Ok`s", () => {
+      expect(combine([ok(4), ok("ook")]).unwrap()).toEqual([4, "ook"])
+    })
+
+    test("single `Err`", () => {
+      expect(combine([err("err")]).unwrapErr()).toBe("err")
+    })
+
+    test("multiple `Err`s", () => {
+      expect(combine([err("1"), err("2")]).unwrapErr()).toBe("1")
+    })
+
+    test("`Ok` + `Err`", () => {
+      expect(combine([ok(1), err(2)]).unwrapErr()).toBe(2)
     })
   })
 })
