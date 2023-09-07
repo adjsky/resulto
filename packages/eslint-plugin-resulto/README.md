@@ -40,7 +40,32 @@ npm install --save-dev eslint typescript @typescript-eslint/parser eslint-plugin
 }
 ```
 
-> See [typescript-eslint docs](https://typescript-eslint.io/getting-started/) for more info.
+> See [typescript-eslint docs](https://typescript-eslint.io/getting-started/)
+> for more info.
+
+### Hint
+
+In Rust it is idiomatic to assign a must-used value to a variable named `_` when
+you want to purposely discard this value.
+
+To make this work in TypeScript without making ESLint or tsc angry you need to:
+
+1. Add this rule to your `ESLint` configuration file, i.e. `.eslintrc.json`
+
+```json
+{
+  "rules": {
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "varsIgnorePattern": "^_"
+      }
+    ]
+  }
+}
+```
+
+2. Make sure you do not have `noUnusedLocals` set to `true` in `tsconfig.json`
 
 ## Available configs
 

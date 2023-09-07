@@ -42,7 +42,8 @@
     "@typescript-eslint/parser": "^6.4.0",
     "@typescript-eslint/rule-tester": "^6.5.0",
     "eslint-doc-generator": "^1.4.3",
-    "pkgroll": "^1.11.0"
+    "pkgroll": "^1.11.0",
+    "typescript": "^5.2.2"
   },
   "dependencies": {
     "@typescript-eslint/utils": "^6.5.0"

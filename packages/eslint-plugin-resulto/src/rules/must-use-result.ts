@@ -36,11 +36,7 @@ const rule = ruleCreator({
           return
         }
 
-        if (
-          isReturnedOrAssigned(node) ||
-          (node.parent.type == "AwaitExpression" &&
-            isReturnedOrAssigned(node.parent))
-        ) {
+        if (isReturnedOrAssigned(node)) {
           return
         }
 
@@ -100,12 +96,40 @@ function isResult(
 function isReturnedOrAssigned(node: TSESTree.Node) {
   const { parent } = node
 
+  if (parent?.type == "AwaitExpression") {
+    return isReturnedOrAssigned(parent)
+  }
+
+  if (
+    parent?.type == "MemberExpression" ||
+    (node.type == "MemberExpression" && parent)
+  ) {
+    return isReturnedOrAssigned(parent)
+  }
+
+  if (
+    parent?.type == "LogicalExpression" ||
+    parent?.type == "ConditionalExpression"
+  ) {
+    return isReturnedOrAssigned(parent)
+  }
+
   return (
     (parent?.type == "VariableDeclarator" && parent.init == node) ||
+    (parent?.type == "AssignmentExpression" && parent.right == node) ||
     (parent?.type == "ReturnStatement" && parent.argument == node) ||
-    ((node.type == "CallExpression" || node.type == "NewExpression") &&
-      parent?.type == "CallExpression" &&
-      parent.arguments.includes(node))
+    (parent?.type == "ArrowFunctionExpression" && parent.body == node) ||
+    isArgument(node)
+  )
+}
+
+function isArgument(node: TSESTree.Node) {
+  const { parent } = node
+
+  return (
+    parent?.type == "CallExpression" ||
+    parent?.type == "ArrayExpression" ||
+    (parent?.type == "Property" && parent.parent.type == "ObjectExpression")
   )
 }
 
