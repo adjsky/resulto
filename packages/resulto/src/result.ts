@@ -42,8 +42,6 @@ export interface ResultDeclarations<T, E> {
    * Works similar to the {@link ResultDeclarations.map|map} method, except
    * that this method returns `AsyncResult` instead of `Result`, and the
    * function `f` has to return `Promise`.
-   *
-   * @see {@link ResultDeclarations.map|map} for details.
    */
   asyncMap<U>(f: Fn<T, Promise<U>>): AsyncResult<U, E>
 
@@ -57,8 +55,6 @@ export interface ResultDeclarations<T, E> {
    * Works similar to the {@link ResultDeclarations.mapOr|mapOr} method, except
    * that this method returns `Promise`, and the function `f` has to return
    * `Promise`.
-   *
-   * @see {@link ResultDeclarations.mapOr|mapOr} for details.
    */
   asyncMapOr<U>(value: U, f: Fn<T, Promise<U>>): Promise<U>
 
@@ -75,8 +71,6 @@ export interface ResultDeclarations<T, E> {
    * Works similar to the {@link ResultDeclarations.mapOrElse|mapOrElse} method,
    * except that this method returns `Promise`, and functions `fallbackFn` and
    * `f` can return `Promise`.
-   *
-   * @see {@link ResultDeclarations.mapOrElse|mapOrElse} for details.
    */
   asyncMapOrElse<U>(
     fallbackFn: ErrFn<E, U | Promise<U>>,
@@ -96,8 +90,6 @@ export interface ResultDeclarations<T, E> {
    * Works similar to the {@link ResultDeclarations.mapErr|mapErr} method,
    * except that this method returns `AsyncResult` instead of `Result`, and the
    * function `f` has to return `Promise`.
-   *
-   * @see {@link ResultDeclarations.mapErr|mapErr} for details.
    */
   asyncMapErr<F>(f: ErrFn<E, Promise<F>>): AsyncResult<T, F>
 
@@ -162,8 +154,6 @@ export interface ResultDeclarations<T, E> {
    * Works similar to the {@link ResultDeclarations.andThen|andThen} method,
    * except that this method returns `AsyncResult` instead of `Result`, and the
    * function `f` has to return `Promise`.
-   *
-   * @see {@link ResultDeclarations.andThen|andThen} for details.
    */
   asyncAndThen<U, F>(f: Fn<T, Promise<Result<U, F>>>): AsyncResult<U, E | F>
 
@@ -183,8 +173,6 @@ export interface ResultDeclarations<T, E> {
    * Works similar to the {@link ResultDeclarations.orElse|orElse} method,
    * except that this method returns `AsyncResult` instead of `Result`, and the
    * function `f` has to return `Promise`.
-   *
-   * @see {@link ResultDeclarations.orElse|orElse} for details.
    */
   asyncOrElse<U, F>(f: ErrFn<E, Promise<Result<U, F>>>): AsyncResult<U | T, F>
 
@@ -202,8 +190,6 @@ export interface ResultDeclarations<T, E> {
    * Works similar to the {@link ResultDeclarations.unwrapOrElse|unwrapOrElse}
    * method, except that this method returns `Promise`, and the function `f`
    * has to return `Promise`.
-   *
-   * @see {@link ResultDeclarations.unwrapOrElse|unwrapOrElse} for details.
    */
   asyncUnwrapOrElse<U>(f: ErrFn<E, Promise<U>>): Promise<U | T>
 
@@ -218,8 +204,6 @@ export interface ResultDeclarations<T, E> {
    * Works similar to the {@link ResultDeclarations.match|match} method, except
    * that this method returns `Promise`, and functions `okFn` and `errFn` can
    * return `Promise`.
-   *
-   * @see {@link ResultDeclarations.match|match} for details.
    */
   asyncMatch<U>(
     okFn: Fn<T, U | Promise<U>>,
