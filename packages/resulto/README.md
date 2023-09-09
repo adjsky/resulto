@@ -16,7 +16,7 @@ npm install resulto
 
 ## API documentation
 
-1. [Result](https://adjsky.github.io/resulto/interfaces/Result.html)
+1. [Result](https://adjsky.github.io/resulto/types/Result.html)
 2. [AsyncResult](https://adjsky.github.io/resulto/types/AsyncResult.html)
 3. [ok](https://adjsky.github.io/resulto/functions/ok-1.html)
 4. [okAsync](https://adjsky.github.io/resulto/functions/okAsync.html)
