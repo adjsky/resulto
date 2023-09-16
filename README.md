@@ -5,8 +5,8 @@ interface to work with async primitives.
 
 > Also check out
 > [eslint-plugin-resulto](https://github.com/adjsky/resulto/tree/master/packages/eslint-plugin-resulto).
-> This `ESLint` plugin ensures that your `Results` are used to prevent leaving
-> `Err` variants unhandled.
+> This ESLint plugin ensures that your Results are used to prevent leaving
+> Err variants unhandled.
 
 ## Installation
 
