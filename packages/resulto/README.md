@@ -2,7 +2,7 @@
 
 [![Build Size](https://img.shields.io/bundlephobia/minzip/resulto?label=bundle%20size&style=flat&colorA=000000&colorB=000000)](https://bundlephobia.com/package/resulto)
 [![Version](https://img.shields.io/npm/v/resulto?style=flat&colorA=000000&colorB=000000)](https://www.npmjs.com/package/resulto)
-[![Maintained](https://img.shields.io/maintenance/yes/2023?style=flat&colorA=000000&colorB=000000)](https://github.com/adjsky/resulto/commits/master)
+[![Maintained](https://img.shields.io/maintenance/yes/2024?style=flat&colorA=000000&colorB=000000)](https://github.com/adjsky/resulto/commits/master)
 [![Issues](https://img.shields.io/github/issues/adjsky/resulto?style=flat&colorA=000000&colorB=000000)](https://github.com/adjsky/resulto/issues)
 
 TypeScript implementation of the `Result` type from `Rust` with a full-fledged
