@@ -820,3 +820,16 @@ export function combine<T extends Result<unknown, unknown>[]>(
 
   return ok(unwrapped)
 }
+
+/**
+ * Accepts an array of `Results` and `AsyncResults` and returns an `AsyncResult`.
+ *
+ * If each `Result` and `AsyncResult` in the provided array is `Ok`, then the
+ * returned `AsyncResult` will contain an array of `Ok` values, otherwise the
+ * returned `AsyncResult` will contain the first `Err` error.
+ */
+export function combineAsync<
+  T extends (Result<unknown, unknown> | AsyncResult<unknown, unknown>)[]
+>(results: T): AsyncResult<UnwrapOks<T>, UnwrapErrs<T>[number]> {
+  return chain(Promise.all(results).then(combine))
+}

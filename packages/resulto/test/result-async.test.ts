@@ -1,6 +1,7 @@
 import { describe, expect, test, vi } from "vitest"
 
 import { err, errAsync, fromPromise, ok, okAsync } from "../src"
+import { combineAsync } from "../src/result"
 
 describe("utils", () => {
   test("okAsync", async () => {
@@ -35,6 +36,33 @@ describe("utils", () => {
           () => "mapped error"
         ).unwrapErr()
       ).toBe("mapped error")
+    })
+  })
+
+  describe("combineAsync", () => {
+    test("single `Ok`", async () => {
+      expect(await combineAsync([ok(4)]).unwrap()).toEqual([4])
+    })
+
+    test("multiple `Ok`s", async () => {
+      expect(await combineAsync([ok(4), okAsync("ook")]).unwrap()).toEqual([
+        4,
+        "ook"
+      ])
+    })
+
+    test("single `Err`", async () => {
+      expect(await combineAsync([err("err")]).unwrapErr()).toBe("err")
+    })
+
+    test("multiple `Err`s", async () => {
+      expect(await combineAsync([err("1"), errAsync("2")]).unwrapErr()).toBe(
+        "1"
+      )
+    })
+
+    test("`Ok` + `Err`", async () => {
+      expect(await combineAsync([okAsync(1), err(2)]).unwrapErr()).toBe(2)
     })
   })
 })
