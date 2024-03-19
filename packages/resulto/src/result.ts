@@ -3,6 +3,7 @@ import {
   type ErrFn,
   type ErrPredicate,
   type Fn,
+  Mutable,
   type Predicate,
   ResultError,
   type UnwrapErrs,
@@ -805,10 +806,10 @@ export function fromThrowable<T, E>(
  * will contain an array of `Ok` values, otherwise the returned `Result` will
  * contain the first `Err` error.
  */
-export function combine<T extends Result<unknown, unknown>[]>(
-  results: T
+export function combine<T extends readonly Result<unknown, unknown>[]>(
+  results: [...T]
 ): Result<UnwrapOks<T>, UnwrapErrs<T>[number]> {
-  const unwrapped = [] as UnwrapOks<T>
+  const unwrapped = [] as Mutable<UnwrapOks<T>>
 
   for (const result of results) {
     if (result.isErr()) {
@@ -829,7 +830,10 @@ export function combine<T extends Result<unknown, unknown>[]>(
  * returned `AsyncResult` will contain the first `Err` error.
  */
 export function combineAsync<
-  T extends (Result<unknown, unknown> | AsyncResult<unknown, unknown>)[]
->(results: T): AsyncResult<UnwrapOks<T>, UnwrapErrs<T>[number]> {
+  T extends readonly (
+    | Result<unknown, unknown>
+    | AsyncResult<unknown, unknown>
+  )[]
+>(results: [...T]): AsyncResult<UnwrapOks<T>, UnwrapErrs<T>[number]> {
   return chain(Promise.all(results).then(combine))
 }
