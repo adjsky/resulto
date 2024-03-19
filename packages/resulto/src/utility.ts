@@ -9,7 +9,10 @@ export type Fn<T, U> = (value: T) => U
 export type ErrFn<E, F> = (error: E) => F
 
 export type UnwrapOks<
-  T extends (Result<unknown, unknown> | AsyncResult<unknown, unknown>)[]
+  T extends readonly (
+    | Result<unknown, unknown>
+    | AsyncResult<unknown, unknown>
+  )[]
 > = {
   [i in keyof T]: T[i] extends Result<infer U, unknown>
     ? U
@@ -19,13 +22,20 @@ export type UnwrapOks<
 }
 
 export type UnwrapErrs<
-  T extends (Result<unknown, unknown> | AsyncResult<unknown, unknown>)[]
+  T extends readonly (
+    | Result<unknown, unknown>
+    | AsyncResult<unknown, unknown>
+  )[]
 > = {
   [i in keyof T]: T[i] extends Result<unknown, infer U>
     ? U
     : T[i] extends AsyncResult<unknown, infer U>
     ? U
     : never
+}
+
+export type Mutable<T> = {
+  -readonly [P in keyof T]: T[P]
 }
 
 export class ResultError extends Error {

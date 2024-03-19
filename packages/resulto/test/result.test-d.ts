@@ -1,6 +1,7 @@
 import { assertType, describe, test } from "vitest"
 
-import { err, ok } from "../src"
+import { combine, err, ok } from "../src"
+import { combineAsync } from "../src/result"
 
 describe(".value, .error", () => {
   const value = 4
@@ -31,5 +32,21 @@ describe(".value, .error", () => {
     }
 
     assertType<string>(errResult.error)
+  })
+})
+
+describe("combine/combineAsync", () => {
+  test("infers Ok values", () => {
+    {
+      const res1 = ok([4])
+      const res2 = ok("")
+
+      assertType<[number[], string]>(combine([res1, res2]).unwrap())
+      assertType<Promise<[number[], string]>>(
+        combineAsync([res1, res2]).unwrap()
+      )
+    }
+
+    assertType<[number, string]>(combine([ok(4), ok("")]).unwrap())
   })
 })
