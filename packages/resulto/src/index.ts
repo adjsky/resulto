@@ -10,7 +10,8 @@ export {
   ok,
   err,
   errAsync,
-  combine
+  combine,
+  combineAsync
 } from "./result"
 
 export {
