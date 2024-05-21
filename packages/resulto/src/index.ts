@@ -5,6 +5,7 @@ export {
   Ok,
   Err,
   fromPromise,
+  fromSafePromise,
   fromThrowable,
   okAsync,
   ok,

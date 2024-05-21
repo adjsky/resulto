@@ -1,7 +1,14 @@
 import { describe, expect, test, vi } from "vitest"
 
-import { err, errAsync, fromPromise, ok, okAsync } from "../src"
-import { combineAsync } from "../src/result"
+import {
+  combineAsync,
+  err,
+  errAsync,
+  fromPromise,
+  fromSafePromise,
+  ok,
+  okAsync
+} from "../src"
 
 describe("utils", () => {
   test("okAsync", async () => {
@@ -36,6 +43,18 @@ describe("utils", () => {
           () => "mapped error"
         ).unwrapErr()
       ).toBe("mapped error")
+    })
+  })
+
+  describe("fromSafePromise", () => {
+    test("non-rejecting fn", async () => {
+      expect(await fromSafePromise(Promise.resolve(1)).unwrap()).toBe(1)
+    })
+
+    test("rejecting fn", async () => {
+      await expect(
+        fromSafePromise(Promise.reject("rejected error"))
+      ).rejects.toThrow("rejected error")
     })
   })
 

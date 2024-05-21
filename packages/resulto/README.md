@@ -23,7 +23,9 @@ npm install resulto
 5. [err](https://adjsky.github.io/resulto/functions/err-1.html)
 6. [errAsync](https://adjsky.github.io/resulto/functions/errAsync.html)
 7. [fromPromise](https://adjsky.github.io/resulto/functions/fromPromise.html)
-8. [fromThrowable](https://adjsky.github.io/resulto/functions/fromThrowable.html)
-9. [combine](https://adjsky.github.io/resulto/functions/combine.html)
+8. [fromSafePromise](https://adjsky.github.io/resulto/functions/fromSafePromise.html)
+9. [fromThrowable](https://adjsky.github.io/resulto/functions/fromThrowable.html)
+10. [combine](https://adjsky.github.io/resulto/functions/combine.html)
+11. [combine](https://adjsky.github.io/resulto/functions/combineAsync.html)
 
 > 👉 Also check out [repository root](https://github.com/adjsky/resulto#readme) for more info.

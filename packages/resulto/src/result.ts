@@ -782,6 +782,17 @@ export function fromPromise<T, E>(
 }
 
 /**
+ * Same as `fromPromise` except that it does not handle the rejection of the
+ * promise.
+ *
+ * **Ensure you know what you're doing, otherwise a thrown exception within this
+ * promise will cause `AsyncResult` to reject.**
+ */
+export function fromSafePromise<T>(promise: Promise<T>): AsyncResult<T, never> {
+  return chain(promise.then(ok))
+}
+
+/**
  * Accepts a function `f` that may throw, and returns `Result` containing
  * either `Ok` with the value returned from `f` or `Err` with the thrown error.
  *
