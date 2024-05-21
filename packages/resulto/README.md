@@ -26,6 +26,6 @@ npm install resulto
 8. [fromSafePromise](https://adjsky.github.io/resulto/functions/fromSafePromise.html)
 9. [fromThrowable](https://adjsky.github.io/resulto/functions/fromThrowable.html)
 10. [combine](https://adjsky.github.io/resulto/functions/combine.html)
-11. [combine](https://adjsky.github.io/resulto/functions/combineAsync.html)
+11. [combineAsync](https://adjsky.github.io/resulto/functions/combineAsync.html)
 
 > 👉 Also check out [repository root](https://github.com/adjsky/resulto#readme) for more info.
