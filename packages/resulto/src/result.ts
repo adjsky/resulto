@@ -129,6 +129,13 @@ export interface ResultDeclarations<T, E> {
   tap(f: Fn<T, Promise<void>>): AsyncResult<T, E>
 
   /**
+   * Performs a side effect on the contained error (if `Err`).
+   *
+   * NOTE: `f` is awaited.
+   */
+  tapErr(f: Fn<E, Promise<void>>): AsyncResult<T, E>
+
+  /**
    * Returns the contained `Ok` value.
    *
    * This function may throw `UnwrapError` (if `Err`).
@@ -362,6 +369,13 @@ export type AsyncResult<T, E> = {
   tap(f: Fn<T, Promise<void>>): AsyncResult<T, E>
 
   /**
+   * Performs a side effect on the contained error (if `Err`).
+   *
+   * NOTE: `f` is awaited.
+   */
+  tapErr(f: Fn<E, Promise<void>>): AsyncResult<T, E>
+
+  /**
    * Returns the contained `Ok` value.
    *
    * This function may throw `UnwrapError` (if `Err`).
@@ -545,6 +559,10 @@ export class Ok<T, E> implements ResultDeclarations<T, E> {
     return chain(f(this.value).then(() => ok(this.value)))
   }
 
+  tapErr(): AsyncResult<T, E> {
+    return okAsync(this.value)
+  }
+
   expect(): T {
     return this.value
   }
@@ -669,6 +687,10 @@ export class Err<T, E> implements ResultDeclarations<T, E> {
 
   tap(): AsyncResult<T, E> {
     return chain(err(this.error))
+  }
+
+  tapErr(f: Fn<E, Promise<void>>): AsyncResult<T, E> {
+    return chain(f(this.error).then(() => errAsync(this.error)))
   }
 
   expect(msg: string): never {

@@ -212,6 +212,33 @@ describe("Result.tap", () => {
   })
 })
 
+describe("Result.tapErr", () => {
+  test("Ok", async () => {
+    const fn = vi.fn()
+
+    const tapped = ok(4).tapErr(fn)
+
+    expect(fn).not.toBeCalledWith()
+    expect(await tapped.unwrap()).toBe(4)
+  })
+
+  test("Err", async () => {
+    let modified = false
+
+    const fn = vi.fn(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 5))
+
+      modified = true
+    })
+
+    const tapped = await err("err").tapErr(fn)
+
+    expect(fn).toBeCalledWith("err")
+    expect(modified).toBe(true)
+    expect(tapped.unwrapErr()).toBe("err")
+  })
+})
+
 describe("Result.expect", () => {
   test("Ok", () => {
     expect(ok(4).expect("error")).toBe(4)
