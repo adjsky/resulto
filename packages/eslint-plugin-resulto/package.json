@@ -1,13 +1,12 @@
 {
   "name": "eslint-plugin-resulto",
-  "version": "1.0.0",
+  "version": "2.0.0-beta.0",
   "description": "ESLint plugin for resulto",
   "scripts": {
     "ts-check": "tsc --noEmit",
     "test:watch": "vitest watch",
     "build": "pkgroll",
-    "prepare": "pnpm build",
-    "update:eslint-docs": "eslint-doc-generator"
+    "prepare": "pnpm build"
   },
   "type": "module",
   "main": "./dist/index.cjs",
@@ -36,16 +35,15 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "@typescript-eslint/parser": "7.x"
+    "@typescript-eslint/parser": "8.x"
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^7.0.1",
-    "@typescript-eslint/rule-tester": "^7.0.1",
-    "eslint-doc-generator": "^1.4.3",
+    "@typescript-eslint/parser": "^8.5.0",
+    "@typescript-eslint/rule-tester": "^8.5.0",
     "pkgroll": "^1.11.0",
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "@typescript-eslint/utils": "^7.0.1"
+    "@typescript-eslint/utils": "^8.5.0"
   }
 }
