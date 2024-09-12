@@ -4,10 +4,11 @@ import rule from "../src/rules/must-use-result"
 import { injectCode } from "./inject-code"
 
 const tester = new RuleTester({
-  parser: "@typescript-eslint/parser",
-  parserOptions: {
-    tsconfigRootDir: `${__dirname}/fixture`,
-    project: "./tsconfig.json"
+  languageOptions: {
+    parserOptions: {
+      tsconfigRootDir: `${__dirname}/fixture`,
+      project: "./tsconfig.json"
+    }
   }
 })
 

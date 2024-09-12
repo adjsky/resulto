@@ -8,7 +8,7 @@
 ## Installation
 
 ```bash
-npm install --save-dev eslint typescript @typescript-eslint/parser eslint-plugin-resulto @typescript-eslint/eslint-plugin
+npm install --save-dev eslint @eslint/js typescript typescript-eslint eslint-plugin-resulto
 ```
 
 ## Configuration
@@ -23,21 +23,18 @@ npm install --save-dev eslint typescript @typescript-eslint/parser eslint-plugin
 }
 ```
 
-2. Create/modify your `ESLint` configuration file, i.e. `.eslintrc.json`.
+2. Create/modify your `ESLint` configuration file, i.e. `eslint.config.mjs`.
 
-```json
-{
-  "root": true,
-  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "project": true
-  },
-  "plugins": ["@typescript-eslint", "resulto"],
-  "rules": {
-    "resulto/must-use-result": "error"
-  }
-}
+```js
+import js from "@eslint/js"
+import resulto from "eslint-plugin-resulto"
+import ts from "typescript-eslint"
+
+export default tseslint.config(
+  js.configs.recommended,
+  ...ts.configs.recommended,
+  resulto.configs.recommended
+)
 ```
 
 > See [typescript-eslint docs](https://typescript-eslint.io/getting-started/)
@@ -50,36 +47,19 @@ you want to purposely discard this value.
 
 To make this work in TypeScript without making ESLint or tsc angry you need to:
 
-1. Add this rule to your `ESLint` configuration file, i.e. `.eslintrc.json`
+1. Add this rule to your `ESLint` configuration file, i.e. `eslint.config.mjs`
 
-```json
-{
-  "rules": {
+```js
+export default tseslint.config({
+  rules: {
     "@typescript-eslint/no-unused-vars": [
       "warn",
       {
-        "varsIgnorePattern": "^_"
+        varsIgnorePattern: "^_"
       }
     ]
   }
-}
+})
 ```
 
 2. Make sure you do not have `noUnusedLocals` set to `true` in `tsconfig.json`
-
-## Available configs
-
-- `resulto/recommended` - recommended rules.
-
-## Rules
-
-<!-- begin auto-generated rules list -->
-
-💼 Configurations enabled in.\
-✅ Set in the `recommended` configuration.
-
-| Name                                             | Description                                          | 💼  |
-| :----------------------------------------------- | :--------------------------------------------------- | :-- |
-| [must-use-result](docs/rules/must-use-result.md) | Result must be used to make sure errors are handled. | ✅  |
-
-<!-- end auto-generated rules list -->
