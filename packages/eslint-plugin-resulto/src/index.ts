@@ -19,7 +19,7 @@ const plugin = {
 } satisfies FlatConfig.Plugin
 
 const recommended: FlatConfig.Config = {
-  name: "resulto:recommended",
+  name: "name/recommended",
   plugins: {
     resulto: plugin
   },
