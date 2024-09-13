@@ -30,7 +30,7 @@ import js from "@eslint/js"
 import resulto from "eslint-plugin-resulto"
 import ts from "typescript-eslint"
 
-export default tseslint.config(
+export default ts.config(
   js.configs.recommended,
   ...ts.configs.recommended,
   resulto.configs.recommended
@@ -50,7 +50,7 @@ To make this work in TypeScript without making ESLint or tsc angry you need to:
 1. Add this rule to your `ESLint` configuration file, i.e. `eslint.config.mjs`
 
 ```js
-export default tseslint.config({
+export default ts.config({
   rules: {
     "@typescript-eslint/no-unused-vars": [
       "warn",
