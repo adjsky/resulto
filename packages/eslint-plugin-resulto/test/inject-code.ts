@@ -1,4 +1,12 @@
-import { trimLeadingIndent } from "../src/utility/trim-leading-indent"
+function trimLeadingIndent(str: string) {
+  const matched = str.match(/^[\r\n]?(\s+)/)
+
+  if (!matched) {
+    return str
+  }
+
+  return str.replace(new RegExp("^" + matched[1], "gm"), "").trim()
+}
 
 export function injectCode(code: string) {
   return `

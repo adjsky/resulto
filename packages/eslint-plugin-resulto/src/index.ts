@@ -1,18 +1,30 @@
-import packageJson from "../package.json"
-import recommended from "./configs/recommended"
+import { FlatConfig } from "@typescript-eslint/utils/ts-eslint"
+
+import { name, version } from "../package.json"
 import mustUseResult from "./rules/must-use-result"
 
-import type { Linter } from "@typescript-eslint/utils/ts-eslint"
-
-export default {
+const plugin = {
   configs: {
-    recommended
+    get recommended() {
+      return recommended
+    }
   },
   meta: {
-    name: packageJson.name,
-    version: packageJson.version
+    name,
+    version
   },
   rules: {
     "must-use-result": mustUseResult
   }
-} satisfies Linter.Plugin
+} satisfies FlatConfig.Plugin
+
+const recommended: FlatConfig.Config = {
+  plugins: {
+    resulto: plugin
+  },
+  rules: {
+    "resulto/must-use-result": "error"
+  }
+}
+
+export default plugin
