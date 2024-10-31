@@ -4,6 +4,9 @@
   "exports": {
     ".": "./mod.ts"
   },
+  "publish": {
+    "exclude": ["build_npm.ts"]
+  },
   "imports": {
     "@typescript-eslint/parser": "npm:@typescript-eslint/parser@^8.12.2",
     "@typescript-eslint/rule-tester": "npm:@typescript-eslint/rule-tester@^8.12.2",
