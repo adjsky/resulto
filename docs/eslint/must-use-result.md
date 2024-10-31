@@ -19,5 +19,5 @@ attribute from `Rust`.
 
 ## Implementation
 
-- [Rule source](https://github.com/adjsky/resulto/blob/master/packages/eslint-plugin-resulto/src/rules/must-use-result.ts)
-- [Tests source](https://github.com/adjsky/resulto/blob/master/packages/eslint-plugin-resulto/test/must-use.test.ts)
+- [Rule source](https://github.com/adjsky/resulto/blob/master/eslint-plugin/rules/must_use_result.ts)
+- [Tests source](https://github.com/adjsky/resulto/blob/master/eslint-plugin/rules/must_use_result_test.ts)

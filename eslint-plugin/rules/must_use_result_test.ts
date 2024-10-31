@@ -1,7 +1,7 @@
-import rule from "../rules/must-use-result.ts";
+import rule from "../rules/must_use_result.ts";
 import { tester, trimLeadingIndent } from "../test/helpers.ts";
 
-export function injectCode(code: string) {
+function injectCode(code: string) {
   return `
 interface Result<T, E> {
   chain(): Result<T, E>

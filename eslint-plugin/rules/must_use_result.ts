@@ -8,7 +8,7 @@ import type { TypeChecker, TypeReference } from "typescript";
 
 const ruleCreator = ESLintUtils.RuleCreator(
   (name) =>
-    `https://github.com/adjsky/resulto/tree/master/packages/eslint-plugin-resulto/docs/rules/${name}.md`,
+    `https://github.com/adjsky/resulto/tree/master/docs/eslint/${name}.md`,
 );
 
 const rule = ruleCreator({

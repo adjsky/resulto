@@ -1,7 +1,7 @@
 import type { FlatConfig } from "@typescript-eslint/utils/ts-eslint";
 
-import { version } from "./deno.json" with { type: "json" };
-import mustUseResult from "./rules/must-use-result.ts";
+import denoJson from "./deno.json" with { type: "json" };
+import mustUseResult from "./rules/must_use_result.ts";
 
 const plugin: FlatConfig.Plugin = {
   configs: {
@@ -11,7 +11,7 @@ const plugin: FlatConfig.Plugin = {
   },
   meta: {
     name: "eslint-plugin-resulto",
-    version,
+    version: denoJson.version,
   },
   rules: {
     "must-use-result": mustUseResult,
