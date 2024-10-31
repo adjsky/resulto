@@ -1,0 +1,7 @@
+{
+	"name": "@resulto/core",
+	"version": "1.4.0",
+	"exports": {
+		".": "./mod.ts"
+	}
+}
