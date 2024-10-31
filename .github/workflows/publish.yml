@@ -30,4 +30,6 @@ jobs:
         run: deno publish
 
       - name: Publish to NPM
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: deno run -A ./publish_npm.ts

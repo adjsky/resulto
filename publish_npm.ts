@@ -3,5 +3,5 @@ import { $ } from "@david/dax";
 
 for (const cwd of denoJson.workspace) {
 	await $`cd ${cwd} && deno run -A ./build_npm.ts`;
-	await $`npm publish ${cwd}/npm`;
+	await $`cd ${cwd}/npm && npm publish`;
 }
