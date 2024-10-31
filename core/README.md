@@ -16,17 +16,17 @@ npm install resulto
 
 ## API documentation
 
-1. [Result](https://adjsky.github.io/resulto/types/Result.html)
-2. [AsyncResult](https://adjsky.github.io/resulto/types/AsyncResult.html)
-3. [ok](https://adjsky.github.io/resulto/functions/ok-1.html)
-4. [okAsync](https://adjsky.github.io/resulto/functions/okAsync.html)
-5. [err](https://adjsky.github.io/resulto/functions/err-1.html)
-6. [errAsync](https://adjsky.github.io/resulto/functions/errAsync.html)
-7. [fromPromise](https://adjsky.github.io/resulto/functions/fromPromise.html)
-8. [fromSafePromise](https://adjsky.github.io/resulto/functions/fromSafePromise.html)
-9. [fromThrowable](https://adjsky.github.io/resulto/functions/fromThrowable.html)
-10. [combine](https://adjsky.github.io/resulto/functions/combine.html)
-11. [combineAsync](https://adjsky.github.io/resulto/functions/combineAsync.html)
+1. [Result](https://jsr.io/@resulto/core/doc/~/Result)
+2. [AsyncResult](https://jsr.io/@resulto/core/doc/~/AsyncResult)
+3. [ok](https://jsr.io/@resulto/core/doc/~/ok)
+4. [okAsync](https://jsr.io/@resulto/core/doc/~/okAsync)
+5. [err](https://jsr.io/@resulto/core/doc/~/err)
+6. [errAsync](https://jsr.io/@resulto/core/doc/~/errAsync)
+7. [fromPromise](https://jsr.io/@resulto/core/doc/~/fromPromise)
+8. [fromSafePromise](https://jsr.io/@resulto/core/doc/~/fromSafePromise)
+9. [fromThrowable](https://jsr.io/@resulto/core/doc/~/fromThrowable)
+10. [combine](https://jsr.io/@resulto/core/doc/~/combine)
+11. [combineAsync](https://jsr.io/@resulto/core/doc/~/combineAsync)
 
 > 👉 Also check out [repository root](https://github.com/adjsky/resulto#readme)
 > for more info.

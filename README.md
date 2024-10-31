@@ -16,7 +16,7 @@ npm install resulto
 
 ## API documentation
 
-https://adjsky.github.io/resulto/
+https://jsr.io/@resulto/core/doc
 
 ## History
 
