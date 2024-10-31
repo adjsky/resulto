@@ -1,7 +1,7 @@
 {
-	"name": "@resulto/core",
-	"version": "1.4.0",
-	"exports": {
-		".": "./mod.ts"
-	}
+  "name": "@resulto/core",
+  "version": "1.4.1",
+  "exports": {
+    ".": "./mod.ts"
+  }
 }
