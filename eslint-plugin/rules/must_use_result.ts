@@ -19,7 +19,8 @@ const rule = ruleCreator({
 		},
 		type: "problem",
 		messages: {
-			mustUse: "`Result` may be an `Err` variant, which should be handled.",
+			mustUse:
+				"`Result` may be an `Err` variant, which should be handled.",
 		},
 		schema: [],
 	},
@@ -76,7 +77,8 @@ function isResult(
 			return false;
 		}
 
-		const resolvedSymbol = typeArgument.getSymbol() ?? typeArgument.aliasSymbol;
+		const resolvedSymbol = typeArgument.getSymbol() ??
+			typeArgument.aliasSymbol;
 
 		if (!resolvedSymbol) {
 			return false;
@@ -137,7 +139,8 @@ function isMatched({ parent }: TSESTree.Node) {
 	if (
 		parent?.type == "MemberExpression" &&
 		parent.property.type == "Identifier" &&
-		(parent.property.name == "match" || parent.property.name == "asyncMatch")
+		(parent.property.name == "match" ||
+			parent.property.name == "asyncMatch")
 	) {
 		return true;
 	}
