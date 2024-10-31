@@ -19,8 +19,7 @@ const rule = ruleCreator({
 		},
 		type: "problem",
 		messages: {
-			mustUse:
-				"`Result` may be an `Err` variant, which should be handled.",
+			mustUse: "`Result` may be an `Err` variant, which should be handled.",
 		},
 		schema: [],
 	},

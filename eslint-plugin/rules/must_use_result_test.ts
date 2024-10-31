@@ -145,8 +145,7 @@ tester.run("must-use-result", rule, {
 		},
 
 		{
-			name:
-				"return a sync result in an async function, await and assign it",
+			name: "return a sync result in an async function, await and assign it",
 			code: injectCode(`
         const okResult = await asyncGetOk()
         const errResult = await asyncGetErr()
@@ -154,8 +153,7 @@ tester.run("must-use-result", rule, {
 		},
 
 		{
-			name:
-				"return an async result in an async function, await and assign it",
+			name: "return an async result in an async function, await and assign it",
 			code: injectCode(`
         const okAsyncResult = await asyncGetAsyncOk()
         const errAsyncResult = await asyncGetAsyncErr()
@@ -174,8 +172,7 @@ tester.run("must-use-result", rule, {
 		},
 
 		{
-			name:
-				"create results in an array expression, assigned to a variable",
+			name: "create results in an array expression, assigned to a variable",
 			code: injectCode(`
         const _ = [ok(1), err(2), okAsync(3), errAsync(4)]
       `),
@@ -222,8 +219,7 @@ tester.run("must-use-result", rule, {
 		},
 
 		{
-			name:
-				"do stuff with results in logical expressions and assign them",
+			name: "do stuff with results in logical expressions and assign them",
 			code: injectCode(`
         let someBool = false
         const _ = someBool ? ok(4) : err(2)
@@ -286,8 +282,7 @@ tester.run("must-use-result", rule, {
 		},
 
 		{
-			name:
-				"create a sync result using class constructor but don't assign it",
+			name: "create a sync result using class constructor but don't assign it",
 			code: injectCode(`
         new Ok(5)
         new Err(5)
