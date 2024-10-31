@@ -1,10 +1,12 @@
 {
   "name": "@resulto/core",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "exports": {
     ".": "./mod.ts"
   },
   "publish": {
-    "exclude": ["build_npm.ts"]
+    "exclude": [
+      "build_npm.ts"
+    ]
   }
 }
