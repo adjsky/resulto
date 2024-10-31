@@ -1,0 +1,25 @@
+name: Bump workspace
+
+on: workflow_dispatch
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Bump
+        run: |
+          git fetch --unshallow origin
+          deno run -A jsr:@deno/bump-workspaces@0.1.21/cli
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIT_USER_NAME: adjsky
+          GIT_USER_EMAIL: igorlfmartins@mail.ru
