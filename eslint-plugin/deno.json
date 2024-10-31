@@ -1,11 +1,13 @@
 {
   "name": "@resulto/eslint-plugin",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "exports": {
     ".": "./mod.ts"
   },
   "publish": {
-    "exclude": ["build_npm.ts"]
+    "exclude": [
+      "build_npm.ts"
+    ]
   },
   "imports": {
     "@typescript-eslint/parser": "npm:@typescript-eslint/parser@^8.12.2",
