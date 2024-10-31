@@ -7,20 +7,20 @@ RuleTester.it = it;
 RuleTester.itOnly = it.only;
 
 export const tester = new RuleTester({
-  languageOptions: {
-    parserOptions: {
-      tsconfigRootDir: `${import.meta.dirname}/fixture`,
-      project: "./tsconfig.json",
-    },
-  },
+	languageOptions: {
+		parserOptions: {
+			tsconfigRootDir: `${import.meta.dirname}/fixture`,
+			project: "./tsconfig.json",
+		},
+	},
 });
 
 export function trimLeadingIndent(str: string) {
-  const matched = str.match(/^[\r\n]?(\s+)/);
+	const matched = str.match(/^[\r\n]?(\s+)/);
 
-  if (!matched) {
-    return str;
-  }
+	if (!matched) {
+		return str;
+	}
 
-  return str.replace(new RegExp("^" + matched[1], "gm"), "").trim();
+	return str.replace(new RegExp("^" + matched[1], "gm"), "").trim();
 }

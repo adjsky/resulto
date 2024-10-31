@@ -17,9 +17,9 @@ npm install --save-dev eslint @eslint/js typescript typescript-eslint eslint-plu
 
 ```json
 {
-  "compilerOptions": {
-    "strict": true
-  }
+	"compilerOptions": {
+		"strict": true
+	}
 }
 ```
 
@@ -31,9 +31,9 @@ import resulto from "eslint-plugin-resulto";
 import ts from "typescript-eslint";
 
 export default ts.config(
-  js.configs.recommended,
-  ...ts.configs.recommended,
-  resulto.configs.recommended,
+	js.configs.recommended,
+	...ts.configs.recommended,
+	resulto.configs.recommended,
 );
 ```
 
@@ -51,14 +51,14 @@ To make this work in TypeScript without making ESLint or tsc angry you need to:
 
 ```js
 export default ts.config({
-  rules: {
-    "@typescript-eslint/no-unused-vars": [
-      "warn",
-      {
-        varsIgnorePattern: "^_",
-      },
-    ],
-  },
+	rules: {
+		"@typescript-eslint/no-unused-vars": [
+			"warn",
+			{
+				varsIgnorePattern: "^_",
+			},
+		],
+	},
 });
 ```
 

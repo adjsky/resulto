@@ -1,7 +1,7 @@
 {
-  "deno.enable": true,
-  "editor.defaultFormatter": "denoland.vscode-deno",
-  "[ignore]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
-  }
+	"deno.enable": true,
+	"editor.defaultFormatter": "denoland.vscode-deno",
+	"[ignore]": {
+		"editor.defaultFormatter": "foxundermoon.shell-format"
+	}
 }
