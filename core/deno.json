@@ -3,5 +3,8 @@
   "version": "1.4.1",
   "exports": {
     ".": "./mod.ts"
+  },
+  "publish": {
+    "exclude": ["build_npm.ts"]
   }
 }
