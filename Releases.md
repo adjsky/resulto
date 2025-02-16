@@ -1,3 +1,9 @@
+### 2025.02.16
+
+#### @resulto/core 1.5.0 (minor)
+
+- feat(core): handle results in fromPromise/fromSafePromise (#45)
+
 ### 2024.10.31
 
 #### @resulto/core 1.4.2 (patch)
