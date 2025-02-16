@@ -834,10 +834,10 @@ export function errAsync<T = unknown, E = never>(
  * You can optionally pass `errorFn` as the second argument to map rejected
  * error from `unknown` to `E`.
  */
-export function fromPromise<T, E1, E2>(
-  promise: Promise<T | Result<T, E1>>,
-  errorFn?: ErrFn<unknown, E2>,
-): AsyncResult<T, E1 | E2> {
+export function fromPromise<T, E>(
+  promise: Promise<T | Result<T, E>>,
+  errorFn?: ErrFn<unknown, E>,
+): AsyncResult<T, E> {
   return chain(
     promise.then((v) => {
       if (v instanceof Ok || v instanceof Err) {
