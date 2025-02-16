@@ -85,6 +85,18 @@ Deno.test("errAsync", async () => {
 
 Deno.test("fromPromise", async () => {
   assertEquals(await fromPromise(Promise.resolve(1)).unwrap(), 1);
+  assertEquals(
+    await fromPromise(Promise.resolve(ok(4))).unwrap(),
+    4,
+  );
+  assertEquals(
+    await fromPromise(Promise.resolve(err("qwe"))).unwrapErr(),
+    "qwe",
+  );
+  assertEquals(
+    await fromPromise(Promise.resolve(okAsync(5))).unwrap(),
+    5,
+  );
 
   assertEquals(
     await fromPromise(Promise.reject("rejected error")).unwrapErr(),
@@ -102,6 +114,18 @@ Deno.test("fromPromise", async () => {
 
 Deno.test("fromSafePromise", async () => {
   assertEquals(await fromSafePromise(Promise.resolve(1)).unwrap(), 1);
+  assertEquals(
+    await fromSafePromise(Promise.resolve(ok(4))).unwrap(),
+    4,
+  );
+  assertEquals(
+    await fromSafePromise(Promise.resolve(err("qwe"))).unwrapErr(),
+    "qwe",
+  );
+  assertEquals(
+    await fromSafePromise(Promise.resolve(okAsync(5))).unwrap(),
+    5,
+  );
 
   await assertRejects(
     async () =>
