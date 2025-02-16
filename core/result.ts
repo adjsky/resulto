@@ -834,11 +834,19 @@ export function errAsync<T = unknown, E = never>(
  * You can optionally pass `errorFn` as the second argument to map rejected
  * error from `unknown` to `E`.
  */
-export function fromPromise<T, E>(
-  promise: Promise<T>,
-  errorFn?: ErrFn<unknown, E>,
-): AsyncResult<T, E> {
-  return chain(promise.then(ok).catch((e) => err(errorFn ? errorFn(e) : e)));
+export function fromPromise<T, E1, E2>(
+  promise: Promise<T | Result<T, E1>>,
+  errorFn?: ErrFn<unknown, E2>,
+): AsyncResult<T, E1 | E2> {
+  return chain(
+    promise.then((v) => {
+      if (v instanceof Ok || v instanceof Err) {
+        return v;
+      }
+
+      return ok(v);
+    }).catch((e) => err(errorFn ? errorFn(e) : e)),
+  );
 }
 
 /**
@@ -848,8 +856,16 @@ export function fromPromise<T, E>(
  * **Ensure you know what you're doing, otherwise a thrown exception within this
  * promise will cause `AsyncResult` to reject.**
  */
-export function fromSafePromise<T>(promise: Promise<T>): AsyncResult<T, never> {
-  return chain(promise.then(ok));
+export function fromSafePromise<T, E = never>(
+  promise: Promise<T | Result<T, E>>,
+): AsyncResult<T, E> {
+  return chain(promise.then((v) => {
+    if (v instanceof Ok || v instanceof Err) {
+      return v;
+    }
+
+    return ok(v);
+  }));
 }
 
 /**
