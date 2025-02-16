@@ -1,5 +1,11 @@
 ### 2025.02.16
 
+#### @resulto/core 1.5.1 (patch)
+
+- fix(core): fromPromise regression
+
+### 2025.02.16
+
 #### @resulto/core 1.5.0 (minor)
 
 - feat(core): handle results in fromPromise/fromSafePromise (#45)
