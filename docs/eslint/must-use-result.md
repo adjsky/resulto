@@ -11,7 +11,7 @@ attribute from `Rust`.
 
 ## Options
 
-```js
+```js ignore
 ...
 "resulto/must-use-result": [<enabled>]
 ...

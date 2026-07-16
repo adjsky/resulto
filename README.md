@@ -1,12 +1,15 @@
 # `resulto`
 
-TypeScript implementation of the `Result` type from `Rust` with a full-fledged
-interface to work with async primitives.
+A Rust-inspired `Result` and `Option` library for writing more correct
+TypeScript, with an ESLint plugin that helps catch ignored results.
+
+Both types have first-class async support. Use `AsyncResult` and `AsyncOption`
+to chain operations without awaiting every step, and methods such as `asyncMap`,
+`asyncAndThen`, and `asyncMatch` for asynchronous callbacks.
 
 > Also check out
 > [eslint-plugin-resulto](https://github.com/adjsky/resulto/tree/master/eslint-plugin).
-> This ESLint plugin ensures that your Results are used to prevent leaving Err
-> variants unhandled.
+> It warns when a `Result` is ignored, helping you handle errors consistently.
 
 ## Installation
 
@@ -14,25 +17,42 @@ interface to work with async primitives.
 npm install resulto
 ```
 
+With Deno:
+
+```bash
+deno add jsr:@resulto/core
+```
+
 ## API documentation
 
 https://jsr.io/@resulto/core/doc
 
-## History
+## Why?
 
-Exceptions are dangerous. Most of the time you do not know some function you use
-could throw, you forget to wrap this function in a `try/catch` block and deploy
-your broken application to production.
+Exceptions are awkward to work with in JavaScript. Any function can throw, its
+signature does not tell you which errors to expect, and the language cannot
+require callers to catch them. It is therefore easy to forget an error path
+until it fails at runtime. Representing errors as `Result` values makes failure
+part of the type and, together with the ESLint plugin, requires callers to use
+the result. `Option` does the same for values that may be absent. This makes
+both cases part of normal, explicit control flow.
 
-Exceptions are ugly. Wraping each function call that may throw in a `try/catch`
-block for regular control flow lead to convoluted and smelly code.
+There are several `Result` implementations for TypeScript, but I couldn't find a
+full-fledged library that combined the three things I wanted:
 
-There are many packages that implement `Result`, but there is no package that
-implements a full-fledged interface to work with async primitives and an
-`ESLint` package to make sure `Results` are handled.
+- **A familiar, complete API.** Resulto closely mirrors Rust's `Result` and
+  `Option` APIs, bringing their well-established patterns to TypeScript instead
+  of offering only a small set of helpers.
+- **Async support throughout.** Real applications perform network requests,
+  database queries, and other asynchronous work. `AsyncResult` and `AsyncOption`
+  let you compose those operations without repeatedly unwrapping values or
+  breaking a chain with intermediate `await` expressions.
+- **Enforcement at development time.** Returning a `Result` only helps when the
+  caller uses it. The ESLint plugin warns about ignored synchronous and
+  asynchronous results, catching mistakes before they become lost errors.
 
-That is why I made this repository: to make my life and the lives of other
-developers easier.
+This library brings these pieces together so explicit error handling remains
+practical across an entire TypeScript codebase, not just in isolated functions.
 
 ## License
 

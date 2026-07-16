@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "test": "deno test --allow-read --allow-env --allow-sys"
+    "test": "deno test --doc --allow-read --allow-env"
   },
   "imports": {
     "@david/dax": "jsr:@david/dax@^0.42.0",
