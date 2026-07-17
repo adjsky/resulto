@@ -70,7 +70,9 @@ export type UnwrapOptions<
  * assertEquals(c, err("error a"));
  * ```
  */
-export function combine<T extends readonly Result<unknown, unknown>[]>(
+export function combine<
+  T extends readonly [Result<unknown, unknown>, ...Result<unknown, unknown>[]],
+>(
   results: [...T],
 ): Result<UnwrapOks<T>, UnwrapErrs<T>[number]>;
 
@@ -94,32 +96,16 @@ export function combine<T extends readonly Result<unknown, unknown>[]>(
  * assertEquals(b, none());
  * ```
  */
-export function combine<T extends readonly Option<unknown>[]>(
+export function combine<
+  T extends readonly [Option<unknown>, ...Option<unknown>[]],
+>(
   options: [...T],
 ): Option<UnwrapOptions<T>>;
 
 export function combine(
   resultsOrOptions: (Result<unknown, unknown> | Option<unknown>)[],
 ): Result<unknown, unknown> | Option<unknown> {
-  const unwrapped = [];
-
-  for (const resultOrOption of resultsOrOptions) {
-    if (resultOrOption instanceof Err) {
-      return err(resultOrOption.error);
-    }
-
-    if (resultOrOption instanceof None) {
-      return none();
-    }
-
-    unwrapped.push(resultOrOption.value);
-  }
-
-  if (resultsOrOptions[0] instanceof Some) {
-    return some(unwrapped);
-  } else {
-    return ok(unwrapped);
-  }
+  return _combine(resultsOrOptions);
 }
 
 /**
@@ -142,10 +128,10 @@ export function combine(
  * ```
  */
 export function combineAsync<
-  T extends readonly (
-    | Result<unknown, unknown>
-    | AsyncResult<unknown, unknown>
-  )[],
+  T extends readonly [
+    Result<unknown, unknown> | AsyncResult<unknown, unknown>,
+    ...(Result<unknown, unknown> | AsyncResult<unknown, unknown>)[],
+  ],
 >(results: [...T]): AsyncResult<UnwrapOks<T>, UnwrapErrs<T>[number]>;
 
 /**
@@ -165,7 +151,10 @@ export function combineAsync<
  * ```
  */
 export function combineAsync<
-  T extends readonly (Option<unknown> | AsyncOption<unknown>)[],
+  T extends readonly [
+    Option<unknown> | AsyncOption<unknown>,
+    ...(Option<unknown> | AsyncOption<unknown>)[],
+  ],
 >(
   options: [...T],
 ): AsyncOption<UnwrapOptions<T>>;
@@ -177,6 +166,30 @@ export function combineAsync(
     | Option<unknown>
     | AsyncOption<unknown>
   )[],
+): AsyncResult<unknown, unknown> | AsyncOption<unknown> {
+  return chain(Promise.all(resultsOrOptions).then(_combine));
+}
+
+function _combine(
+  resultsOrOptions: (Result<unknown, unknown> | Option<unknown>)[],
 ) {
-  return chain(Promise.all(resultsOrOptions).then(combine));
+  const unwrapped = [];
+
+  for (const resultOrOption of resultsOrOptions) {
+    if (resultOrOption instanceof Err) {
+      return err(resultOrOption.error);
+    }
+
+    if (resultOrOption instanceof None) {
+      return none();
+    }
+
+    unwrapped.push(resultOrOption.value);
+  }
+
+  if (resultsOrOptions[0] instanceof Some) {
+    return some(unwrapped);
+  } else {
+    return ok(unwrapped);
+  }
 }
