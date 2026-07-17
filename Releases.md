@@ -1,5 +1,11 @@
 ### 2026.07.17
 
+#### @resulto/core 2.0.5 (patch)
+
+- fix(core): revert "prevent ambiguity in combine"
+
+### 2026.07.17
+
 #### @resulto/core 2.0.4 (patch)
 
 - fix(core): remove broken links
