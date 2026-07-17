@@ -1,5 +1,11 @@
 ### 2026.07.17
 
+#### @resulto/core 2.0.1 (patch)
+
+- fix(core): use interfaces for documentation
+
+### 2026.07.17
+
 #### @resulto/core 2.0.0 (major)
 
 - BREAKING(core): add option support (#48)
