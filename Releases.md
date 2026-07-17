@@ -1,5 +1,13 @@
 ### 2026.07.17
 
+#### @resulto/core 2.0.2 (patch)
+
+- fix(core): union narrowing regression
+- fix(core): update description
+- fix(core): revert use interfaces for documentation
+
+### 2026.07.17
+
 #### @resulto/core 2.0.1 (patch)
 
 - fix(core): use interfaces for documentation
