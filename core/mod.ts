@@ -10,6 +10,7 @@ export {
   ok,
   okAsync,
   type Result,
+  type ResultDeclarations,
 } from "./result.ts";
 
 export {
@@ -18,6 +19,7 @@ export {
   none,
   noneAsync,
   type Option,
+  type OptionDeclarations,
   Some,
   some,
   someAsync,

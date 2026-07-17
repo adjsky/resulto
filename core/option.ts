@@ -6,6 +6,12 @@ type Predicate<T> = (value: T) => boolean;
 type Fn<T, U> = (value: T) => U;
 type NoneFn<U> = () => U;
 
+/**
+ * Declares the methods available on {@link Option}.
+ *
+ * This interface is exported only for API documentation and should not be used
+ * directly. Use {@link Option} instead.
+ */
 export interface OptionDeclarations<T> {
   /**
    * Checks if `Option` is a `Some` value.
@@ -593,6 +599,8 @@ export interface OptionDeclarations<T> {
  * Option is a type that represents either a value `Some` or no value `None`.
  *
  * Typically it is used when the absence of a value is expected and meaningful.
+ *
+ * See {@link OptionDeclarations} for available methods.
  */
 export type Option<T> = Some<T> | None<T>;
 
@@ -601,10 +609,8 @@ export type Option<T> = Some<T> | None<T>;
  *
  * In fact this is just a regular `Option` wrapped in a proxy to allow chaining
  * promises without using `await` on every call.
- *
- * @augments OptionDeclarations
  */
-export type AsyncOption<T> = {
+export interface AsyncOption<T> extends Promise<Option<T>> {
   // We have to duplicate declarations due to the TypeScript limitations.
   // The only thing we do here is using `AsyncOption` instead of `Option` and
   // wrapping other types in `Promise` to allow chaining and make autocompletion
@@ -1112,7 +1118,7 @@ export type AsyncOption<T> = {
     someFn: Fn<T, U | Promise<U>>,
     noneFn: NoneFn<U | Promise<U>>,
   ): Promise<U>;
-} & Promise<Option<T>>;
+}
 
 export class Some<T> implements OptionDeclarations<T> {
   constructor(readonly value: T) {}
