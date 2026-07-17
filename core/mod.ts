@@ -1,5 +1,7 @@
 export {
   type AsyncResult,
+  combineResults,
+  combineResultsAsync,
   Err,
   err,
   errAsync,
@@ -11,10 +13,14 @@ export {
   okAsync,
   type Result,
   type ResultDeclarations,
+  type UnwrapErrs,
+  type UnwrapOks,
 } from "./result.ts";
 
 export {
   type AsyncOption,
+  combineOptions,
+  combineOptionsAsync,
   None,
   none,
   noneAsync,
@@ -23,14 +29,7 @@ export {
   Some,
   some,
   someAsync,
-} from "./option.ts";
-
-export {
-  combine,
-  combineAsync,
-  type UnwrapErrs,
-  type UnwrapOks,
   type UnwrapOptions,
-} from "./combine.ts";
+} from "./option.ts";
 
 export { UnwrapError } from "./errors.ts";
