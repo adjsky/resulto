@@ -1,7 +1,13 @@
 import { chain } from "./chain.js";
-import { type AsyncOption, none, type Option, some } from "./option.ts";
-import { type AsyncResult, err, ok, type Result } from "./result.ts";
-import { Err, None, Some } from "@resulto/core";
+import {
+  type AsyncOption,
+  None,
+  none,
+  type Option,
+  Some,
+  some,
+} from "./option.ts";
+import { type AsyncResult, Err, err, ok, type Result } from "./result.ts";
 
 export type UnwrapOks<
   T extends readonly (
