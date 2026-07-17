@@ -25,7 +25,7 @@ npm install --save-dev eslint @eslint/js typescript typescript-eslint eslint-plu
 
 2. Create/modify your `ESLint` configuration file, i.e. `eslint.config.mjs`.
 
-```js
+```js ignore
 import js from "@eslint/js";
 import resulto from "eslint-plugin-resulto";
 import ts from "typescript-eslint";
@@ -49,7 +49,7 @@ To make this work in TypeScript without making ESLint or tsc angry you need to:
 
 1. Add this rule to your `ESLint` configuration file, i.e. `eslint.config.mjs`
 
-```js
+```js ignore
 export default ts.config({
   rules: {
     "@typescript-eslint/no-unused-vars": [
