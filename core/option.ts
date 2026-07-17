@@ -1,10 +1,19 @@
 import { chain } from "./chain.js";
 import { UnwrapError } from "./errors.ts";
+import type { Mutable } from "./types.ts";
 
 type Predicate<T> = (value: T) => boolean;
 
 type Fn<T, U> = (value: T) => U;
 type NoneFn<U> = () => U;
+
+export type UnwrapOptions<
+  T extends readonly (Option<unknown> | AsyncOption<unknown>)[],
+> = {
+  [i in keyof T]: T[i] extends Option<infer U> ? U
+    : T[i] extends AsyncOption<infer U> ? U
+    : never;
+};
 
 /**
  * Declares the methods available on {@link Option}.
@@ -1374,4 +1383,64 @@ export function none<T = never>(): Option<T> {
  */
 export function noneAsync<T = never>(): AsyncOption<T> {
   return chain(Promise.resolve().then(none));
+}
+
+/**
+ * Accepts an array of {@link Option}s and returns an {@link Option}.
+ *
+ * If each {@link Option} in the provided array is {@link Some}, then the
+ * returned {@link Option} will contain an array of {@link Some} values,
+ * otherwise the returned {@link Option} will contain {@link None}.
+ *
+ * @example
+ *
+ * ```ts
+ * import { assertEquals } from "@std/assert";
+ * import { combineOptions, none, some } from "@resulto/core";
+ *
+ * const a = combineOptions([some(1), some("two")]);
+ * assertEquals(a, some([1, "two"]));
+ *
+ * const b = combineOptions([some(1), none()]);
+ * assertEquals(b, none());
+ * ```
+ */
+export function combineOptions<T extends readonly Option<unknown>[]>(
+  options: [...T],
+): Option<UnwrapOptions<T>> {
+  const unwrapped = [] as Mutable<UnwrapOptions<T>>;
+
+  for (const option of options) {
+    if (option.isNone()) {
+      return none();
+    }
+
+    unwrapped.push(option.value);
+  }
+
+  return some(unwrapped);
+}
+
+/**
+ * Similar to {@link combineOptions} but also accepts {@link AsyncOption}.
+ *
+ * @example
+ *
+ * ```ts
+ * import { assertEquals } from "@std/assert";
+ * import { combineOptionsAsync, none, noneAsync, some, someAsync } from "@resulto/core";
+ *
+ * const a = await combineOptionsAsync([someAsync(1), someAsync("two")]);
+ * assertEquals(a, some([1, "two"]));
+ *
+ * const b = await combineOptionsAsync([someAsync(1), noneAsync()]);
+ * assertEquals(b, none());
+ * ```
+ */
+export function combineOptionsAsync<
+  T extends readonly (Option<unknown> | AsyncOption<unknown>)[],
+>(
+  options: [...T],
+): AsyncOption<UnwrapOptions<T>> {
+  return chain(Promise.all(options).then(combineOptions));
 }

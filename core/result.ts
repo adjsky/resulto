@@ -1,11 +1,34 @@
 import { chain } from "./chain.js";
 import { UnwrapError } from "./errors.ts";
+import type { Mutable } from "./types.ts";
 
 type Predicate<T> = (value: T) => boolean;
 type ErrPredicate<T> = (error: T) => boolean;
 
 type Fn<T, U> = (value: T) => U;
 type ErrFn<E, F> = (error: E) => F;
+
+export type UnwrapOks<
+  T extends readonly (
+    | Result<unknown, unknown>
+    | AsyncResult<unknown, unknown>
+  )[],
+> = {
+  [i in keyof T]: T[i] extends Result<infer U, unknown> ? U
+    : T[i] extends AsyncResult<infer U, unknown> ? U
+    : never;
+};
+
+export type UnwrapErrs<
+  T extends readonly (
+    | Result<unknown, unknown>
+    | AsyncResult<unknown, unknown>
+  )[],
+> = {
+  [i in keyof T]: T[i] extends Result<unknown, infer U> ? U
+    : T[i] extends AsyncResult<unknown, infer U> ? U
+    : never;
+};
 
 /**
  * Declares the methods available on {@link Result}.
@@ -1816,4 +1839,71 @@ export function fromThrowable<T, E>(
   } catch (e) {
     return err(errorFn ? errorFn(e) : (e as E));
   }
+}
+
+/**
+ * Accepts an array of {@link Result}s and returns a {@link Result}.
+ *
+ * If each {@link Result} in the provided array is {@link Ok}, then the returned
+ * {@link Result} will contain an array of {@link Ok} values, otherwise the
+ * returned {@link Result} will contain the first {@link Err} error.
+ *
+ * @example
+ *
+ * ```ts
+ * import { assertEquals } from "@std/assert";
+ * import { combineResults, err, ok } from "@resulto/core";
+ *
+ * const a = combineResults([ok(1), ok("two")]);
+ * assertEquals(a, ok([1, "two"]));
+ *
+ * const b = combineResults([ok(1), err("some error message")]);
+ * assertEquals(b, err("some error message"));
+ *
+ * const c = combineResults([ok(1), err("error a"), err("error b")]);
+ * assertEquals(c, err("error a"));
+ * ```
+ */
+export function combineResults<T extends readonly Result<unknown, unknown>[]>(
+  results: [...T],
+): Result<UnwrapOks<T>, UnwrapErrs<T>[number]> {
+  const unwrapped = [] as Mutable<UnwrapOks<T>>;
+
+  for (const result of results) {
+    if (result.isErr()) {
+      return err(result.error as UnwrapErrs<T>[number]);
+    }
+
+    unwrapped.push(result.value);
+  }
+
+  return ok(unwrapped);
+}
+
+/**
+ * Similar to {@link combineResults} but also accepts {@link AsyncResult}.
+ *
+ * @example
+ *
+ * ```ts
+ * import { assertEquals } from "@std/assert";
+ * import { combineResultsAsync, err, errAsync, ok, okAsync } from "@resulto/core";
+ *
+ * const a = await combineResultsAsync([okAsync(1), okAsync("two")]);
+ * assertEquals(a, ok([1, "two"]));
+ *
+ * const b = await combineResultsAsync([okAsync(1), errAsync("some error message")]);
+ * assertEquals(b, err("some error message"));
+ *
+ * const c = await combineResultsAsync([okAsync(1), errAsync("err a"), errAsync("err b")]);
+ * assertEquals(c, err("err a"));
+ * ```
+ */
+export function combineResultsAsync<
+  T extends readonly (
+    | Result<unknown, unknown>
+    | AsyncResult<unknown, unknown>
+  )[],
+>(results: [...T]): AsyncResult<UnwrapOks<T>, UnwrapErrs<T>[number]> {
+  return chain(Promise.all(results).then(combineResults));
 }

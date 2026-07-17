@@ -41,8 +41,10 @@ deno add jsr:@resulto/core
 - [fromPromise](https://jsr.io/@resulto/core/doc/~/fromPromise)
 - [fromSafePromise](https://jsr.io/@resulto/core/doc/~/fromSafePromise)
 - [fromThrowable](https://jsr.io/@resulto/core/doc/~/fromThrowable)
-- [combine](https://jsr.io/@resulto/core/doc/~/combine) /
-  [combineAsync](https://jsr.io/@resulto/core/doc/~/combineAsync)
+- [combineResults](https://jsr.io/@resulto/core/doc/~/combineResults) /
+  [combineResultsAsync](https://jsr.io/@resulto/core/doc/~/combineResultsAsync)
+- [combineOptions](https://jsr.io/@resulto/core/doc/~/combineOptions) /
+  [combineOptionsAsync](https://jsr.io/@resulto/core/doc/~/combineOptionsAsync)
 
 > 👉 Also check out [repository root](https://github.com/adjsky/resulto#readme)
 > for more info.
