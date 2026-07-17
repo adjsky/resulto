@@ -12,7 +12,7 @@ await build({
     name: "resulto",
     version: denoJson.version,
     description:
-      "TypeScript implementation of the Result type from Rust with async support",
+      "A Rust-inspired Result and Option library for writing more correct TypeScript, with an ESLint plugin that helps catch ignored results.",
     author: "adjsky",
     repository: {
       "type": "git",
