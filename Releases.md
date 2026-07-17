@@ -1,5 +1,12 @@
 ### 2026.07.17
 
+#### @resulto/core 2.0.3 (patch)
+
+- fix(core): prevent ambiguity in combine
+- chore(core): update jsdocs
+
+### 2026.07.17
+
 #### @resulto/core 2.0.2 (patch)
 
 - fix(core): union narrowing regression
