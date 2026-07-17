@@ -1,14 +1,8 @@
 ### 2026.07.17
 
-#### @resulto/core 2.0.4 (patch)
+#### @resulto/core 2.0.5 (patch)
 
 - fix(core): revert "prevent ambiguity in combine"
-- fix(core): remove broken links
-- fix(core): prevent ambiguity in combine
-- fix(core): union narrowing regression
-- fix(core): update description
-- fix(core): revert "use interfaces for documentation"
-- chore(core): update jsdocs
 
 ### 2026.07.17
 
