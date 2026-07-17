@@ -7,6 +7,12 @@ type ErrPredicate<T> = (error: T) => boolean;
 type Fn<T, U> = (value: T) => U;
 type ErrFn<E, F> = (error: E) => F;
 
+/**
+ * Declares the methods available on {@link Result}.
+ *
+ * This interface is exported only for API documentation and should not be used
+ * directly. Use {@link Result} instead.
+ */
 export interface ResultDeclarations<T, E> {
   /**
    * Checks if `Result` is `Ok`.
@@ -723,6 +729,8 @@ export interface ResultDeclarations<T, E> {
  * Typically it is used for returning and propagating errors. Functions should
  * return `Result` whenever errors are expected and recoverable instead of
  * throwing errors.
+ *
+ * See {@link ResultDeclarations} for available methods.
  */
 export type Result<T, E> = Ok<T, E> | Err<T, E>;
 
@@ -731,10 +739,8 @@ export type Result<T, E> = Ok<T, E> | Err<T, E>;
  *
  * In fact this is just a regular `Result` wrapped in a proxy to allow chaining
  * promises without using `await` on every call.
- *
- * @augments ResultDeclarations
  */
-export type AsyncResult<T, E> = {
+export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
   // We have to duplicate declarations due to the TypeScript limitations.
   // The only thing we do here is using `AsyncResult` instead of `Result` and
   // wrapping other types in `Promise` to allow chaining and make autocompletion
@@ -1376,7 +1382,7 @@ export type AsyncResult<T, E> = {
     okFn: Fn<T, U | Promise<U>>,
     errFn: ErrFn<E, U | Promise<U>>,
   ): Promise<U>;
-} & Promise<Result<T, E>>;
+}
 
 export class Ok<T, E> implements ResultDeclarations<T, E> {
   constructor(readonly value: T) {}
