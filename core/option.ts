@@ -14,7 +14,7 @@ type NoneFn<U> = () => U;
  */
 export interface OptionDeclarations<T> {
   /**
-   * Checks if `Option` is a `Some` value.
+   * Checks if {@link Option} is a {@link Some} value.
    *
    * @example
    *
@@ -32,7 +32,8 @@ export interface OptionDeclarations<T> {
   isSome(): this is Some<T>;
 
   /**
-   * Checks if `Option` is a `Some` value and the value inside of it matches a predicate.
+   * Checks if {@link Option} is a {@link Some} value and the value inside of it
+   * matches a predicate.
    *
    * @example
    *
@@ -53,7 +54,7 @@ export interface OptionDeclarations<T> {
   isSomeAnd(f: Predicate<T>): boolean;
 
   /**
-   * Checks if `Option` is a `None` value.
+   * Checks if {@link Option} is a {@link None} value.
    *
    * @example
    *
@@ -71,7 +72,8 @@ export interface OptionDeclarations<T> {
   isNone(): this is None<T>;
 
   /**
-   * Checks if `Option` is a `None` value or the value inside of it matches a predicate.
+   * Checks if {@link Option} is a {@link None} value or the value inside of it
+   * matches a predicate.
    *
    * @example
    *
@@ -93,7 +95,7 @@ export interface OptionDeclarations<T> {
 
   /**
    * Maps an `Option<T>` to `Option<U>` by applying a function `f` to a
-   * contained `Some` value.
+   * contained {@link Some} value.
    *
    * This function can be used to compose the options of two functions.
    *
@@ -111,7 +113,7 @@ export interface OptionDeclarations<T> {
 
   /**
    * Maps an `AsyncOption<T>` to `AsyncOption<U>` by applying a function
-   * `f` to a contained `Some` value.
+   * `f` to a contained {@link Some} value.
    *
    * This function can be used to compose the options of two functions.
    *
@@ -131,8 +133,8 @@ export interface OptionDeclarations<T> {
   asyncMap<U>(f: Fn<T, Promise<U>>): AsyncOption<U>;
 
   /**
-   * Returns the provided default `value` (if `None`), or applies a function to
-   * the contained value (if `Some`).
+   * Returns the provided default `value` (if {@link None}), or applies a
+   * function to the contained value (if {@link Some}).
    *
    * @example
    *
@@ -150,8 +152,8 @@ export interface OptionDeclarations<T> {
   mapOr<U>(value: U, f: Fn<T, U>): U;
 
   /**
-   * Returns the provided default `value` (if `None`), or applies a function to
-   * the contained value (if `Some`).
+   * Returns the provided default `value` (if {@link None}), or applies a
+   * function to the contained value (if {@link Some}).
    *
    * Use this method instead of {@link OptionDeclarations.mapOr} when the
    * provided `f` returns a promise.
@@ -172,8 +174,8 @@ export interface OptionDeclarations<T> {
   asyncMapOr<U>(value: U, f: Fn<T, Promise<U>>): Promise<U>;
 
   /**
-   * Maps an `Option<T>` to `Option<U>` by applying function `fallbackFn` (if `None`),
-   * or function `f` to a contained `Some` value.
+   * Maps an `Option<T>` to `Option<U>` by applying function `fallbackFn`
+   * (if {@link None}), or function `f` to a contained {@link Some} value.
    *
    * This function can be used to unpack a successful option while handling an
    * error.
@@ -197,7 +199,8 @@ export interface OptionDeclarations<T> {
 
   /**
    * Maps an `AsyncOption<T, E>` to `Promise<U>` by applying function
-   * `fallbackFn` (if `None`), or function `f` to a contained `Some` value.
+   * `fallbackFn` (if {@link None}), or function `f` to a contained {@link Some}
+   * value.
    *
    * This function can be used to unpack a successful option while handling an
    * error.
@@ -232,7 +235,7 @@ export interface OptionDeclarations<T> {
   ): Promise<U>;
 
   /**
-   * Calls the provided function `f` with the contained value (if `Some`).
+   * Calls the provided function `f` with the contained value (if {@link Some}).
    *
    * @example
    *
@@ -252,7 +255,7 @@ export interface OptionDeclarations<T> {
   inspect(f: Fn<T, void>): Option<T>;
 
   /**
-   * Performs a side effect on the contained value (if `Some`).
+   * Performs a side effect on the contained value (if {@link Some}).
    *
    * NOTE: `f` is awaited.
    *
@@ -274,9 +277,9 @@ export interface OptionDeclarations<T> {
   tap(f: Fn<T, Promise<void>>): AsyncOption<T>;
 
   /**
-   * Returns the contained `Some` value.
+   * Returns the contained {@link Some} value.
    *
-   * This function may throw {@link UnwrapError} (if `None`).
+   * This function may throw {@link UnwrapError} (if {@link None}).
    *
    * @example
    *
@@ -297,9 +300,9 @@ export interface OptionDeclarations<T> {
   expect(msg: string): T;
 
   /**
-   * Returns the contained `Some` value.
+   * Returns the contained {@link Some} value.
    *
-   * This function may throw {@link UnwrapError} (if `None`).
+   * This function may throw {@link UnwrapError} (if {@link None}).
    *
    * @example
    *
@@ -320,7 +323,7 @@ export interface OptionDeclarations<T> {
   unwrap(): T;
 
   /**
-   * Returns `None` if the option is `None`, otherwise returns `optb`.
+   * Returns {@link None} if the option is None, otherwise returns `optb`.
    *
    * @example
    *
@@ -348,10 +351,10 @@ export interface OptionDeclarations<T> {
   and<U>(optb: Option<U>): Option<U>;
 
   /**
-   * Returns `None` if the option is `None`, otherwise calls `f` with the
+   * Returns {@link None} if the option is None, otherwise calls `f` with the
    * wrapped value and returns the result.
    *
-   * This function can be used for control flow based on `Option` values.
+   * This function can be used for control flow based on {@link Option} values.
    *
    * @example
    *
@@ -374,10 +377,11 @@ export interface OptionDeclarations<T> {
   andThen<U>(f: Fn<T, Option<U>>): Option<U>;
 
   /**
-   * Returns `None` if the option is `None`, otherwise calls `f` with the
+   * Returns {@link None} if the option is None, otherwise calls `f` with the
    * wrapped value and returns the result.
    *
-   * This function can be used for control flow based on `AsyncOption` values.
+   * This function can be used for control flow based on {@link AsyncOption}
+   * values.
    *
    * Use this method instead of {@link OptionDeclarations.andThen} when the
    * provided `f` returns a promise.
@@ -434,7 +438,7 @@ export interface OptionDeclarations<T> {
    * Returns the option if it contains a value, otherwise calls `f` and returns
    * the result.
    *
-   * This function can be used for control flow based on `Option` values.
+   * This function can be used for control flow based on {@link Option} values.
    *
    * @example
    *
@@ -455,7 +459,8 @@ export interface OptionDeclarations<T> {
   /**
    * Calls `f` if the option is `Err`, otherwise returns the `Ok` value.
    *
-   * This function can be used for control flow based on `AsyncOption` values.
+   * This function can be used for control flow based on {@link AsyncOption}
+   * values.
    *
    * Use this method instead of {@link OptionDeclarations.orElse} when the
    * provided `f` returns a promise.
@@ -479,7 +484,7 @@ export interface OptionDeclarations<T> {
   ): AsyncOption<U | T>;
 
   /**
-   * Returns the contained `Some` value or a provided default `value`.
+   * Returns the contained {@link Some} value or a provided default `value`.
    *
    * @example
    *
@@ -494,7 +499,7 @@ export interface OptionDeclarations<T> {
   unwrapOr<U>(value: U): U | T;
 
   /**
-   * Returns the contained `Some` value or computes it from a `f`.
+   * Returns the contained {@link Some} value or computes it from a `f`.
    *
    * @example
    *
@@ -514,7 +519,7 @@ export interface OptionDeclarations<T> {
   unwrapOrElse<U>(f: NoneFn<U>): U | T;
 
   /**
-   * Returns the contained `Some` value or computes it from a `f`.
+   * Returns the contained {@link Some} value or computes it from a `f`.
    *
    * Use this method instead of {@link OptionDeclarations.unwrapOrElse} when the
    * provided `f` returns a promise.
@@ -537,7 +542,7 @@ export interface OptionDeclarations<T> {
   asyncUnwrapOrElse<U>(f: NoneFn<Promise<U>>): Promise<U | T>;
 
   /**
-   * Calls `someFn` if the option is `Some`, otherwise calls `noneFn`.
+   * Calls `someFn` if the option is {@link Some}, otherwise calls `noneFn`.
    *
    * Both `someFn` and `noneFn` must have the same return type.
    *
@@ -596,7 +601,8 @@ export interface OptionDeclarations<T> {
 }
 
 /**
- * Option is a type that represents either a value `Some` or no value `None`.
+ * `Option` is a type that represents either a value {@link Some} or no value
+ * {@link None}.
  *
  * Typically it is used when the absence of a value is expected and meaningful.
  *
@@ -605,10 +611,10 @@ export interface OptionDeclarations<T> {
 export type Option<T> = Some<T> | None<T>;
 
 /**
- * Async version of `Option`.
+ * Async version of {@link Option}.
  *
- * In fact this is just a regular `Option` wrapped in a proxy to allow chaining
- * promises without using `await` on every call.
+ * In fact this is just a regular {@link Option} wrapped in a proxy to allow
+ * chaining promises without using `await` on every call.
  */
 export interface AsyncOption<T> extends Promise<Option<T>> {
   // We have to duplicate declarations due to the TypeScript limitations.
@@ -619,7 +625,7 @@ export interface AsyncOption<T> extends Promise<Option<T>> {
 
   /**
    * Maps an `AsyncOption<T>` to `AsyncOption<U>` by applying a function `f` to
-   * a contained `Some` value.
+   * a contained {@link Some} value.
    *
    * This function can be used to compose the options of two functions.
    *
@@ -637,7 +643,7 @@ export interface AsyncOption<T> extends Promise<Option<T>> {
 
   /**
    * Maps an `AsyncOption<T>` to `AsyncOption<U>` by applying a function
-   * `f` to a contained `Some` value.
+   * `f` to a contained {@link Some} value.
    *
    * This function can be used to compose the options of two functions.
    *
@@ -657,8 +663,8 @@ export interface AsyncOption<T> extends Promise<Option<T>> {
   asyncMap<U>(f: Fn<T, Promise<U>>): AsyncOption<U>;
 
   /**
-   * Returns the provided default `value` (if `None`), or applies a function to
-   * the contained value (if `Some`).
+   * Returns the provided default `value` (if {@link None}), or applies a
+   * function to the contained value (if {@link Some}).
    *
    * @example
    *
@@ -676,8 +682,8 @@ export interface AsyncOption<T> extends Promise<Option<T>> {
   mapOr<U>(value: U, f: Fn<T, U>): Promise<U>;
 
   /**
-   * Returns the provided default `value` (if `None`), or applies a function to
-   * the contained value (if `Some`).
+   * Returns the provided default `value` (if {@link None}), or applies a
+   * function to the contained value (if {@link Some}).
    *
    * Use this method instead of {@link AsyncOption.mapOr} when the
    * provided `f` returns a promise.
@@ -699,7 +705,8 @@ export interface AsyncOption<T> extends Promise<Option<T>> {
 
   /**
    * Maps an `AsyncOption<T>` to `AsyncOption<U>` by applying function
-   * `fallbackFn` (if `None`), or function `f` to a contained `Some` value.
+   * `fallbackFn` (if {@link None}), or function `f` to a contained {@link Some}
+   * value.
    *
    * This function can be used to unpack a successful option while handling an
    * error.
@@ -723,7 +730,8 @@ export interface AsyncOption<T> extends Promise<Option<T>> {
 
   /**
    * Maps an `AsyncOption<T, E>` to `Promise<U>` by applying function
-   * `fallbackFn` (if `None`), or function `f` to a contained `Some` value.
+   * `fallbackFn` (if {@link None}), or function `f` to a contained {@link Some}
+   * value.
    *
    * This function can be used to unpack a successful option while handling an
    * error.
@@ -758,7 +766,7 @@ export interface AsyncOption<T> extends Promise<Option<T>> {
   ): Promise<U>;
 
   /**
-   * Calls the provided function `f` with the contained value (if `Some`).
+   * Calls the provided function `f` with the contained value (if {@link Some}).
    *
    * @example
    *
@@ -778,7 +786,7 @@ export interface AsyncOption<T> extends Promise<Option<T>> {
   inspect(f: Fn<T, void>): Option<T>;
 
   /**
-   * Performs a side effect on the contained value (if `Some`).
+   * Performs a side effect on the contained value (if {@link Some}).
    *
    * NOTE: `f` is awaited.
    *
@@ -799,9 +807,9 @@ export interface AsyncOption<T> extends Promise<Option<T>> {
   tap(f: Fn<T, Promise<void>>): AsyncOption<T>;
 
   /**
-   * Returns the contained `Some` value.
+   * Returns the contained {@link Some} value.
    *
-   * This function may throw {@link UnwrapError} (if `None`).
+   * This function may throw {@link UnwrapError} (if {@link None}).
    *
    * @example
    *
@@ -822,9 +830,9 @@ export interface AsyncOption<T> extends Promise<Option<T>> {
   expect(msg: string): Promise<T>;
 
   /**
-   * Returns the contained `Some` value.
+   * Returns the contained {@link Some} value.
    *
-   * This function may throw {@link UnwrapError} (if `None`).
+   * This function may throw {@link UnwrapError} (if {@link None}).
    *
    * @example
    *
@@ -845,7 +853,7 @@ export interface AsyncOption<T> extends Promise<Option<T>> {
   unwrap(): Promise<T>;
 
   /**
-   * Returns `None` if the option is `None`, otherwise returns `optb`.
+   * Returns {@link None} if the option is None, otherwise returns `optb`.
    *
    * @example
    *
@@ -873,10 +881,10 @@ export interface AsyncOption<T> extends Promise<Option<T>> {
   and<U>(optb: Option<U>): AsyncOption<U>;
 
   /**
-   * Returns `None` if the option is `None`, otherwise calls `f` with the
+   * Returns {@link None} if the option is None, otherwise calls `f` with the
    * wrapped value and returns the result.
    *
-   * This function can be used for control flow based on `Option` values.
+   * This function can be used for control flow based on {@link Option} values.
    *
    * @example
    *
@@ -899,10 +907,11 @@ export interface AsyncOption<T> extends Promise<Option<T>> {
   andThen<U>(f: Fn<T, Option<U>>): Option<U>;
 
   /**
-   * Returns `None` if the option is `None`, otherwise calls `f` with the
+   * Returns {@link None} if the option is None, otherwise calls `f` with the
    * wrapped value and returns the result.
    *
-   * This function can be used for control flow based on `AsyncOption` values.
+   * This function can be used for control flow based on {@link AsyncOption}
+   * values.
    *
    * Use this method instead of {@link AsyncOption.andThen} when the
    * provided `f` returns a promise.
@@ -959,7 +968,7 @@ export interface AsyncOption<T> extends Promise<Option<T>> {
    * Returns the option if it contains a value, otherwise calls `f` and returns
    * the result.
    *
-   * This function can be used for control flow based on `Option` values.
+   * This function can be used for control flow based on {@link Option} values.
    *
    * @example
    *
@@ -980,7 +989,8 @@ export interface AsyncOption<T> extends Promise<Option<T>> {
   /**
    * Calls `f` if the option is `Err`, otherwise returns the `Ok` value.
    *
-   * This function can be used for control flow based on `AsyncOption` values.
+   * This function can be used for control flow based on {@link AsyncOption}
+   * values.
    *
    * Use this method instead of {@link AsyncOption.orElse} when the
    * provided `f` returns a promise.
@@ -1004,7 +1014,7 @@ export interface AsyncOption<T> extends Promise<Option<T>> {
   ): AsyncOption<U | T>;
 
   /**
-   * Returns the contained `Some` value or a provided default `value`.
+   * Returns the contained {@link Some} value or a provided default `value`.
    *
    * @example
    *
@@ -1019,7 +1029,7 @@ export interface AsyncOption<T> extends Promise<Option<T>> {
   unwrapOr<U>(value: U): Promise<U | T>;
 
   /**
-   * Returns the contained `Some` value or computes it from a `f`.
+   * Returns the contained {@link Some} value or computes it from a `f`.
    *
    * @example
    *
@@ -1039,7 +1049,7 @@ export interface AsyncOption<T> extends Promise<Option<T>> {
   unwrapOrElse<U>(f: NoneFn<U>): Promise<U | T>;
 
   /**
-   * Returns the contained `Some` value or computes it from a `f`.
+   * Returns the contained {@link Some} value or computes it from a `f`.
    *
    * Use this method instead of {@link AsyncOption.unwrapOrElse} when the
    * provided `f` returns a promise.
@@ -1062,7 +1072,7 @@ export interface AsyncOption<T> extends Promise<Option<T>> {
   asyncUnwrapOrElse<U>(f: NoneFn<Promise<U>>): Promise<U | T>;
 
   /**
-   * Calls `someFn` if the option is `Some`, otherwise calls `noneFn`.
+   * Calls `someFn` if the option is {@link Some}, otherwise calls `noneFn`.
    *
    * Both `someFn` and `noneFn` must have the same return type.
    *
@@ -1337,14 +1347,14 @@ export class None<T> implements OptionDeclarations<T> {
 }
 
 /**
- * Creates a `Some` variant of `Option`.
+ * Creates a {@link Some} variant of {@link Option}.
  */
 export function some<T>(value: T): Option<T> {
   return new Some(value);
 }
 
 /**
- * Creates a `Some` variant of `AsyncOption`.
+ * Creates a {@link Some} variant of {@link AsyncOption}.
  */
 export function someAsync<T>(
   value: T | Promise<T>,
@@ -1353,14 +1363,14 @@ export function someAsync<T>(
 }
 
 /**
- * Creates a `None` variant of `Option`.
+ * Creates a {@link None} variant of {@link Option}.
  */
 export function none<T = never>(): Option<T> {
   return new None();
 }
 
 /**
- * Creates a `None` variant of `AsyncOption`.
+ * Creates a {@link None} variant of {@link AsyncOption}.
  */
 export function noneAsync<T = never>(): AsyncOption<T> {
   return chain(Promise.resolve().then(none));

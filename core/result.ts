@@ -15,7 +15,7 @@ type ErrFn<E, F> = (error: E) => F;
  */
 export interface ResultDeclarations<T, E> {
   /**
-   * Checks if `Result` is `Ok`.
+   * Checks if {@link Result} is {@link Ok}.
    *
    * @example
    *
@@ -33,7 +33,8 @@ export interface ResultDeclarations<T, E> {
   isOk(): this is Ok<T, E>;
 
   /**
-   * Checks if `Result` is `Ok` and the value inside of it matches a predicate.
+   * Checks if {@link Result} is {@link Ok} and the value inside of it matches
+   * a predicate.
    *
    * @example
    *
@@ -51,7 +52,7 @@ export interface ResultDeclarations<T, E> {
   isOkAnd(f: Predicate<T>): boolean;
 
   /**
-   * Checks if `Result` is `Err`.
+   * Checks if {@link Result} is {@link Err}.
    *
    * @example
    *
@@ -69,7 +70,8 @@ export interface ResultDeclarations<T, E> {
   isErr(): this is Err<T, E>;
 
   /**
-   * Checks if `Result` is `Err` and the value inside of it matches a predicate.
+   * Checks if {@link Result} is {@link Err} and the value inside of it matches
+   * a predicate.
    *
    * @example
    *
@@ -91,7 +93,7 @@ export interface ResultDeclarations<T, E> {
 
   /**
    * Maps a `Result<T, E>` to `Result<U, E>` by applying a function `f` to a
-   * contained `Ok` value, leaving an `Err` value untouched.
+   * contained {@link Ok} value, leaving an {@link Err} value untouched.
    *
    * This function can be used to compose the results of two functions.
    *
@@ -109,7 +111,8 @@ export interface ResultDeclarations<T, E> {
 
   /**
    * Maps an `AsyncResult<T, E>` to `AsyncResult<U, E>` by applying a function
-   * `f` to a contained `Ok` value, leaving an `Err` value untouched.
+   * `f` to a contained {@link Ok} value, leaving an {@link Err} value
+   * untouched.
    *
    * This function can be used to compose the results of two functions.
    *
@@ -129,8 +132,8 @@ export interface ResultDeclarations<T, E> {
   asyncMap<U>(f: Fn<T, Promise<U>>): AsyncResult<U, E>;
 
   /**
-   * Returns the provided default `value` (if `Err`), or applies a function to
-   * the contained value (if `Ok`).
+   * Returns the provided default `value` (if {@link Err}), or applies a
+   * function to the contained value (if {@link Ok}).
    *
    * @example
    *
@@ -148,8 +151,8 @@ export interface ResultDeclarations<T, E> {
   mapOr<U>(value: U, f: Fn<T, U>): U;
 
   /**
-   * Returns the provided default `value` (if `Err`), or applies a function to
-   * the contained value (if `Ok`).
+   * Returns the provided default `value` (if {@link Err}), or applies a
+   * function to the contained value (if {@link Ok}).
    *
    * Use this method instead of {@link ResultDeclarations.mapOr} when the
    * provided `f` returns a promise.
@@ -171,7 +174,8 @@ export interface ResultDeclarations<T, E> {
 
   /**
    * Maps a `Result<T, E>` to `Result<U, E>` by applying function `fallbackFn`
-   * to a contained `Err` value, or function `f` to a contained `Ok` value.
+   * to a contained {@link Err} value, or function `f` to a contained {@link Ok}
+   * value.
    *
    * This function can be used to unpack a successful result while handling an
    * error.
@@ -193,8 +197,8 @@ export interface ResultDeclarations<T, E> {
 
   /**
    * Maps an `AsyncResult<T, E>` to `Promise<U>` by applying function
-   * `fallbackFn` to a contained `Err` value, or function `f` to a contained
-   * `Ok` value.
+   * `fallbackFn` to a contained {@link Err} value, or function `f` to a
+   * contained {@link Ok} value.
    *
    * This function can be used to unpack a successful result while handling an
    * error.
@@ -228,7 +232,7 @@ export interface ResultDeclarations<T, E> {
 
   /**
    * Maps a `Result<T, E>` to `Result<T, F>` by applying a function to a
-   * contained `Err` value, leaving an `Ok` value untouched.
+   * contained {@link Err} value, leaving an {@link Ok} value untouched.
    *
    * This function can be used to pass through a successful result while
    * handling an error.
@@ -250,7 +254,7 @@ export interface ResultDeclarations<T, E> {
 
   /**
    * Maps an `AsyncResult<T, E>` to `AsyncResult<T, F>` by applying a function
-   * to a contained `Err` value, leaving an `Ok` value untouched.
+   * to a contained {@link Err} value, leaving an {@link Ok} value untouched.
    *
    * This function can be used to pass through a successful result while
    * handling an error.
@@ -274,7 +278,7 @@ export interface ResultDeclarations<T, E> {
   asyncMapErr<F>(f: ErrFn<E, Promise<F>>): AsyncResult<T, F>;
 
   /**
-   * Calls the provided function `f` with the contained value (if `Ok`).
+   * Calls the provided function `f` with the contained value (if {@link Ok}).
    *
    * @example
    *
@@ -294,7 +298,7 @@ export interface ResultDeclarations<T, E> {
   inspect(f: Fn<T, void>): Result<T, E>;
 
   /**
-   * Calls the provided function `f` with the contained error (if `Err`).
+   * Calls the provided function `f` with the contained error (if {@link Err}).
    *
    * @example
    *
@@ -314,7 +318,7 @@ export interface ResultDeclarations<T, E> {
   inspectErr(f: ErrFn<E, void>): Result<T, E>;
 
   /**
-   * Performs a side effect on the contained value (if `Ok`).
+   * Performs a side effect on the contained value (if {@link Ok}).
    *
    * NOTE: `f` is awaited.
    *
@@ -336,7 +340,7 @@ export interface ResultDeclarations<T, E> {
   tap(f: Fn<T, Promise<void>>): AsyncResult<T, E>;
 
   /**
-   * Performs a side effect on the contained error (if `Err`).
+   * Performs a side effect on the contained error (if {@link Err}).
    *
    * NOTE: `f` is awaited.
    *
@@ -358,9 +362,9 @@ export interface ResultDeclarations<T, E> {
   tapErr(f: Fn<E, Promise<void>>): AsyncResult<T, E>;
 
   /**
-   * Returns the contained `Ok` value.
+   * Returns the contained {@link Ok} value.
    *
-   * This function may throw {@link UnwrapError} (if `Err`).
+   * This function may throw {@link UnwrapError} (if {@link Err}).
    *
    * @example
    *
@@ -381,9 +385,9 @@ export interface ResultDeclarations<T, E> {
   expect(msg: string): T;
 
   /**
-   * Returns the contained `Ok` value.
+   * Returns the contained {@link Ok} value.
    *
-   * This function may throw {@link UnwrapError} (if `Err`).
+   * This function may throw {@link UnwrapError} (if {@link Err}).
    *
    * @example
    *
@@ -404,9 +408,9 @@ export interface ResultDeclarations<T, E> {
   unwrap(): T;
 
   /**
-   * Returns the contained `Err` value.
+   * Returns the contained {@link Err} value.
    *
-   * This function may throw {@link UnwrapError} (if `Ok`).
+   * This function may throw {@link UnwrapError} (if {@link Ok}).
    *
    * @example
    *
@@ -427,9 +431,9 @@ export interface ResultDeclarations<T, E> {
   expectErr(msg: string): E;
 
   /**
-   * Returns the contained `Err` value.
+   * Returns the contained {@link Err} value.
    *
-   * This function may throw {@link UnwrapError} (if `Ok`).
+   * This function may throw {@link UnwrapError} (if {@link Ok}).
    *
    * @example
    *
@@ -450,7 +454,8 @@ export interface ResultDeclarations<T, E> {
   unwrapErr(): E;
 
   /**
-   * Returns `res` if the result is `Ok`, otherwise returns the `Err` value.
+   * Returns `res` if the result is {@link Ok}, otherwise returns the
+   * {@link Err} value.
    *
    * @example
    *
@@ -478,9 +483,10 @@ export interface ResultDeclarations<T, E> {
   and<U>(res: Result<U, E>): Result<U, E>;
 
   /**
-   * Calls `f` if the result is `Ok`, otherwise returns the `Err` value.
+   * Calls `f` if the result is {@link Ok}, otherwise returns the {@link Err}
+   * value.
    *
-   * This function can be used for control flow based on `Result` values.
+   * This function can be used for control flow based on {@link Result} values.
    *
    * @example
    *
@@ -503,9 +509,11 @@ export interface ResultDeclarations<T, E> {
   andThen<U, F>(f: Fn<T, Result<U, F>>): Result<U, E | F>;
 
   /**
-   * Calls `f` if the result is `Ok`, otherwise returns the `Err` value.
+   * Calls `f` if the result is {@link Ok}, otherwise returns the {@link Err}
+   * value.
    *
-   * This function can be used for control flow based on `AsyncResult` values.
+   * This function can be used for control flow based on {@link AsyncResult}
+   * values.
    *
    * Use this method instead of {@link ResultDeclarations.andThen} when the
    * provided `f` returns a promise.
@@ -531,7 +539,8 @@ export interface ResultDeclarations<T, E> {
   asyncAndThen<U, F>(f: Fn<T, Promise<Result<U, F>>>): AsyncResult<U, E | F>;
 
   /**
-   * Returns `res` if the result is `Err`, otherwise returns the `Ok` value.
+   * Returns `res` if the result is {@link Err}, otherwise returns the
+   * {@link Ok} value.
    *
    * @example
    *
@@ -559,9 +568,10 @@ export interface ResultDeclarations<T, E> {
   or<F>(res: Result<T, F>): Result<T, F>;
 
   /**
-   * Calls `f` if the result is `Err`, otherwise returns the `Ok` value.
+   * Calls `f` if the result is {@link Err}, otherwise returns the {@link Ok}
+   * value.
    *
-   * This function can be used for control flow based on `Result` values.
+   * This function can be used for control flow based on {@link Result} values.
    *
    * @example
    *
@@ -581,9 +591,11 @@ export interface ResultDeclarations<T, E> {
   orElse<U, F>(f: ErrFn<E, Result<U, F>>): Result<U | T, F>;
 
   /**
-   * Calls `f` if the result is `Err`, otherwise returns the `Ok` value.
+   * Calls `f` if the result is {@link Err}, otherwise returns the {@link Ok}
+   * value.
    *
-   * This function can be used for control flow based on `AsyncResult` values.
+   * This function can be used for control flow based on {@link AsyncResult}
+   * values.
    *
    * Use this method instead of {@link ResultDeclarations.orElse} when the
    * provided `f` returns a promise.
@@ -608,7 +620,7 @@ export interface ResultDeclarations<T, E> {
   ): AsyncResult<U | T, F>;
 
   /**
-   * Returns the contained `Ok` value or a provided `value`.
+   * Returns the contained {@link Ok} value or a provided `value`.
    *
    * @example
    *
@@ -626,7 +638,7 @@ export interface ResultDeclarations<T, E> {
   unwrapOr<U>(value: U): U | T;
 
   /**
-   * Returns the contained `Ok `value or computes it from a `f`.
+   * Returns the contained {@link Ok} value or computes it from a `f`.
    *
    * @example
    *
@@ -644,7 +656,7 @@ export interface ResultDeclarations<T, E> {
   unwrapOrElse<U>(f: ErrFn<E, U>): U | T;
 
   /**
-   * Returns the contained `Ok `value or computes it from a `f`.
+   * Returns the contained {@link Ok} value or computes it from a `f`.
    *
    * Use this method instead of {@link ResultDeclarations.unwrapOrElse} when the
    * provided `f` returns a promise.
@@ -665,7 +677,7 @@ export interface ResultDeclarations<T, E> {
   asyncUnwrapOrElse<U>(f: ErrFn<E, Promise<U>>): Promise<U | T>;
 
   /**
-   * Calls `okFn` if the result is `Ok`, otherwise calls `errFn`.
+   * Calls `okFn` if the result is {@link Ok}, otherwise calls `errFn`.
    *
    * Both `okFn` and `errFn` must have the same return type.
    *
@@ -691,7 +703,7 @@ export interface ResultDeclarations<T, E> {
   match<U>(okFn: Fn<T, U>, errFn: ErrFn<E, U>): U;
 
   /**
-   * Calls `okFn` if the result is `Ok`, otherwise calls `errFn`.
+   * Calls `okFn` if the result is {@link Ok}, otherwise calls `errFn`.
    *
    * Both `okFn` and `errFn` must have the same return type.
    *
@@ -724,7 +736,8 @@ export interface ResultDeclarations<T, E> {
 }
 
 /**
- * Result is a type that represents either success `Ok` or failure `Err`.
+ * `Result` is a type that represents either success {@link Ok} or failure
+ * {@link Err}.
  *
  * Typically it is used for returning and propagating errors. Functions should
  * return `Result` whenever errors are expected and recoverable instead of
@@ -735,9 +748,9 @@ export interface ResultDeclarations<T, E> {
 export type Result<T, E> = Ok<T, E> | Err<T, E>;
 
 /**
- * Async version of `Result`.
+ * Async version of {@link Result}.
  *
- * In fact this is just a regular `Result` wrapped in a proxy to allow chaining
+ * In fact this is just a regular {@link Result} wrapped in a proxy to allow chaining
  * promises without using `await` on every call.
  */
 export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
@@ -749,7 +762,8 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
 
   /**
    * Maps an `AsyncResult<T, E>` to `AsyncResult<U, E>` by applying a function
-   * `f` to a contained `Ok` value, leaving an `Err` value untouched.
+   * `f` to a contained {@link Ok} value, leaving an {@link Err} value
+   * untouched.
    *
    * This function can be used to compose the results of two functions.
    *
@@ -767,7 +781,8 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
 
   /**
    * Maps an `AsyncResult<T, E>` to `AsyncResult<U, E>` by applying a function
-   * `f` to a contained `Ok` value, leaving an `Err` value untouched.
+   * `f` to a contained {@link Ok} value, leaving an {@link Err} value
+   * untouched.
    *
    * This function can be used to compose the results of two functions.
    *
@@ -787,8 +802,8 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
   asyncMap<U>(f: Fn<T, Promise<U>>): AsyncResult<U, E>;
 
   /**
-   * Returns the provided default `value` (if `Err`), or applies a function to
-   * the contained value (if `Ok`).
+   * Returns the provided default `value` (if {@link Err}), or applies a
+   * function to the contained value (if {@link Ok}).
    *
    * @example
    *
@@ -806,8 +821,8 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
   mapOr<U>(value: U, f: Fn<T, U>): Promise<U>;
 
   /**
-   * Returns the provided default `value` (if `Err`), or applies a function to
-   * the contained value (if `Ok`).
+   * Returns the provided default `value` (if {@link Err}), or applies a
+   * function to the contained value (if {@link Ok}).
    *
    * Use this method instead of {@link AsyncResult.mapOr} when the provided `f`
    * returns a promise.
@@ -829,8 +844,8 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
 
   /**
    * Maps an `AsyncResult<T, E>` to `Promise<U>` by applying function
-   * `fallbackFn` to a contained `Err` value, or function `f` to a contained
-   * `Ok` value.
+   * `fallbackFn` to a contained {@link Err} value, or function `f` to a
+   * contained {@link Ok} value.
    *
    * This function can be used to unpack a successful result while handling an
    * error.
@@ -852,8 +867,8 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
 
   /**
    * Maps an `AsyncResult<T, E>` to `Promise<U>` by applying function
-   * `fallbackFn` to a contained `Err` value, or function `f` to a contained
-   * `Ok` value.
+   * `fallbackFn` to a contained {@link Err} value, or function `f` to a
+   * contained {@link Ok} value.
    *
    * This function can be used to unpack a successful result while handling an
    * error.
@@ -887,7 +902,7 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
 
   /**
    * Maps an `AsyncResult<T, E>` to `AsyncResult<T, F>` by applying a function
-   * to a contained `Err` value, leaving an `Ok` value untouched.
+   * to a contained {@link Err} value, leaving an {@link Ok} value untouched.
    *
    * This function can be used to pass through a successful result while
    * handling an error.
@@ -909,7 +924,7 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
 
   /**
    * Maps an `AsyncResult<T, E>` to `AsyncResult<T, F>` by applying a function
-   * to a contained `Err` value, leaving an `Ok` value untouched.
+   * to a contained {@link Err} value, leaving an {@link Ok} value untouched.
    *
    * This function can be used to pass through a successful result while
    * handling an error.
@@ -933,7 +948,7 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
   asyncMapErr<F>(f: ErrFn<E, Promise<F>>): AsyncResult<T, F>;
 
   /**
-   * Calls the provided function `f` with the contained value (if `Ok`).
+   * Calls the provided function `f` with the contained value (if {@link Ok}).
    *
    * @example
    *
@@ -953,7 +968,7 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
   inspect(f: Fn<T, void>): AsyncResult<T, E>;
 
   /**
-   * Calls the provided function `f` with the contained error (if `Err`).
+   * Calls the provided function `f` with the contained error (if {@link Err}).
    *
    * @example
    *
@@ -973,7 +988,7 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
   inspectErr(f: ErrFn<E, void>): AsyncResult<T, E>;
 
   /**
-   * Performs a side effect on the contained value (if `Ok`).
+   * Performs a side effect on the contained value (if {@link Ok}).
    *
    * NOTE: `f` is awaited.
    *
@@ -995,7 +1010,7 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
   tap(f: Fn<T, Promise<void>>): AsyncResult<T, E>;
 
   /**
-   * Performs a side effect on the contained error (if `Err`).
+   * Performs a side effect on the contained error (if {@link Err}).
    *
    * NOTE: `f` is awaited.
    *
@@ -1017,9 +1032,9 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
   tapErr(f: Fn<E, Promise<void>>): AsyncResult<T, E>;
 
   /**
-   * Returns the contained `Ok` value.
+   * Returns the contained {@link Ok} value.
    *
-   * This function may throw {@link UnwrapError} (if `Err`).
+   * This function may throw {@link UnwrapError} (if {@link Err}).
    *
    * @example
    *
@@ -1040,9 +1055,9 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
   expect(msg: string): Promise<T>;
 
   /**
-   * Returns the contained `Ok` value.
+   * Returns the contained {@link Ok} value.
    *
-   * This function may throw {@link UnwrapError} (if `Err`).
+   * This function may throw {@link UnwrapError} (if {@link Err}).
    *
    * @example
    *
@@ -1063,9 +1078,9 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
   unwrap(): Promise<T>;
 
   /**
-   * Returns the contained `Err` value.
+   * Returns the contained {@link Err} value.
    *
-   * This function may throw {@link UnwrapError} (if `Ok`).
+   * This function may throw {@link UnwrapError} (if {@link Ok}).
    *
    * @example
    *
@@ -1086,9 +1101,9 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
   expectErr(msg: string): Promise<E>;
 
   /**
-   * Returns the contained `Err` value.
+   * Returns the contained {@link Err} value.
    *
-   * This function may throw {@link UnwrapError} (if `Ok`).
+   * This function may throw {@link UnwrapError} (if {@link Ok}).
    *
    * @example
    *
@@ -1109,7 +1124,8 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
   unwrapErr(): Promise<E>;
 
   /**
-   * Returns `res` if the result is `Ok`, otherwise returns the `Err` value.
+   * Returns `res` if the result is {@link Ok}, otherwise returns the
+   * {@link Err} value.
    *
    * @example
    *
@@ -1137,9 +1153,11 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
   and<U>(res: Result<U, E>): AsyncResult<U, E>;
 
   /**
-   * Calls `f` if the result is `Ok`, otherwise returns the `Err` value.
+   * Calls `f` if the result is {@link Ok}, otherwise returns the {@link Err}
+   * value.
    *
-   * This function can be used for control flow based on `AsyncResult` values.
+   * This function can be used for control flow based on {@link AsyncResult}
+   * values.
    *
    * @example
    *
@@ -1162,9 +1180,11 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
   andThen<U, F>(f: Fn<T, Result<U, F>>): AsyncResult<U, E | F>;
 
   /**
-   * Calls `f` if the result is `Ok`, otherwise returns the `Err` value.
+   * Calls `f` if the result is {@link Ok}, otherwise returns the {@link Err}
+   * value.
    *
-   * This function can be used for control flow based on `AsyncResult` values.
+   * This function can be used for control flow based on {@link AsyncResult}
+   * values.
    *
    * Use this method instead of {@link AsyncResult.andThen} when the provided
    * `f` returns a promise.
@@ -1190,7 +1210,8 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
   asyncAndThen<U, F>(f: Fn<T, Promise<Result<U, F>>>): AsyncResult<U, E | F>;
 
   /**
-   * Returns `res` if the result is `Err`, otherwise returns the `Ok` value.
+   * Returns `res` if the result is {@link Err}, otherwise returns the
+   * {@link Ok} value.
    *
    * @example
    *
@@ -1218,9 +1239,11 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
   or<F>(res: Result<T, F>): AsyncResult<T, F>;
 
   /**
-   * Calls `f` if the result is `Err`, otherwise returns the `Ok` value.
+   * Calls `f` if the result is {@link Err}, otherwise returns the {@link Ok}
+   * value.
    *
-   * This function can be used for control flow based on `AsyncResult` values.
+   * This function can be used for control flow based on {@link AsyncResult}
+   * values.
    *
    * @example
    *
@@ -1240,9 +1263,11 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
   orElse<U, F>(f: ErrFn<E, Result<U, F>>): AsyncResult<U | T, F>;
 
   /**
-   * Calls `f` if the result is `Err`, otherwise returns the `Ok` value.
+   * Calls `f` if the result is {@link Err}, otherwise returns the {@link Ok}
+   * value.
    *
-   * This function can be used for control flow based on `AsyncResult` values.
+   * This function can be used for control flow based on {@link AsyncResult}
+   * values.
    *
    * Use this method instead of {@link AsyncResult.orElse} when the provided `f`
    * returns a promise.
@@ -1267,7 +1292,7 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
   ): AsyncResult<U | T, F>;
 
   /**
-   * Returns the contained `Ok` value or a provided `value`.
+   * Returns the contained {@link Ok} value or a provided `value`.
    *
    * @example
    *
@@ -1285,9 +1310,11 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
   unwrapOr<U>(value: U): Promise<U | T>;
 
   /**
-   * Calls `f` if the result is `Err`, otherwise returns the `Ok` value.
+   * Calls `f` if the result is {@link Err}, otherwise returns the {@link Ok}
+   * value.
    *
-   * This function can be used for control flow based on `AsyncResult` values.
+   * This function can be used for control flow based on {@link AsyncResult}
+   * values.
    *
    * @example
    *
@@ -1305,7 +1332,7 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
   unwrapOrElse<U>(f: ErrFn<E, U>): Promise<U | T>;
 
   /**
-   * Returns the contained `Ok `value or computes it from a `f`.
+   * Returns the contained {@link Ok} value or computes it from a `f`.
    *
    * Use this method instead of {@link AsyncResult.unwrapOrElse} when the
    * provided `f` returns a promise.
@@ -1326,7 +1353,7 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
   asyncUnwrapOrElse<U>(f: ErrFn<E, Promise<U>>): Promise<U | T>;
 
   /**
-   * Calls `okFn` if the result is `Ok`, otherwise calls `errFn`.
+   * Calls `okFn` if the result is {@link Ok}, otherwise calls `errFn`.
    *
    * Both `okFn` and `errFn` must have the same return type.
    *
@@ -1352,7 +1379,7 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
   match<U>(okFn: Fn<T, U>, errFn: ErrFn<E, U>): Promise<U>;
 
   /**
-   * Calls `okFn` if the result is `Ok`, otherwise calls `errFn`.
+   * Calls `okFn` if the result is {@link Ok}, otherwise calls `errFn`.
    *
    * Both `okFn` and `errFn` must have the same return type.
    *
@@ -1653,14 +1680,14 @@ export class Err<T, E> implements ResultDeclarations<T, E> {
 }
 
 /**
- * Creates an `Ok` variant of `Result`.
+ * Creates an {@link Ok} variant of {@link Result}.
  */
 export function ok<T = unknown, E = never>(value: T): Result<T, E> {
   return new Ok<T, E>(value);
 }
 
 /**
- * Creates an `Ok` variant of `AsyncResult`.
+ * Creates an {@link Ok} variant of {@link AsyncResult}.
  */
 export function okAsync<T = unknown, E = never>(
   value: T | Promise<T>,
@@ -1669,14 +1696,14 @@ export function okAsync<T = unknown, E = never>(
 }
 
 /**
- * Creates an `Err` variant of `Result`.
+ * Creates an {@link Err} variant of {@link Result}.
  */
 export function err<T = never, E = unknown>(error: E): Result<T, E> {
   return new Err<T, E>(error);
 }
 
 /**
- * Creates an `Err` variant of `AsyncResult`.
+ * Creates an {@link Err} variant of {@link AsyncResult}.
  */
 export function errAsync<T = never, E = unknown>(
   error: E | Promise<E>,
@@ -1685,8 +1712,8 @@ export function errAsync<T = never, E = unknown>(
 }
 
 /**
- * Accepts a promise and returns an `AsyncResult` containing either `Ok` with
- * the resolved value or `Err` with the rejected error.
+ * Accepts a promise and returns an {@link AsyncResult} containing either
+ * {@link Ok} with the resolved value or {@link Err} with the rejected error.
  *
  * You can optionally pass `errorFn` as the second argument to map rejected
  * error from `unknown` to `E`.
@@ -1736,11 +1763,11 @@ export function fromPromise<T, E>(
 }
 
 /**
- * Same as {@link fromPromise} except that it does not handle the rejection of the
- * promise.
+ * Same as {@link fromPromise} except that it does not handle the rejection of
+ * the promise.
  *
  * **Ensure you know what you're doing, otherwise a thrown exception within this
- * promise will cause `AsyncResult` to reject.**
+ * promise will cause {@link AsyncResult} to reject.**
  */
 export function fromSafePromise<T, E = never>(
   promise: Promise<T | Result<T, E>>,
@@ -1755,8 +1782,8 @@ export function fromSafePromise<T, E = never>(
 }
 
 /**
- * Accepts a function `f` that may throw, and returns `Result` containing
- * either `Ok` with the value returned from `f` or `Err` with the thrown error.
+ * Accepts a function `f` that may throw, and returns {@link Result} containing
+ * either {@link Ok} with the value returned from `f` or {@link Err} with the thrown error.
  *
  * You can optionally pass `errorFn` as the second argument to map the thrown
  * error from `unknown` to `E`.

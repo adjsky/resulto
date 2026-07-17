@@ -7,7 +7,15 @@ import {
   Some,
   some,
 } from "./option.ts";
-import { type AsyncResult, Err, err, ok, type Result } from "./result.ts";
+import {
+  type AsyncResult,
+  Err,
+  err,
+  // deno-lint-ignore no-unused-vars -- used in jsdoc
+  type Ok,
+  ok,
+  type Result,
+} from "./result.ts";
 
 export type UnwrapOks<
   T extends readonly (
@@ -40,11 +48,11 @@ export type UnwrapOptions<
 };
 
 /**
- * Accepts an array of `Results` and returns a `Result`.
+ * Accepts an array of {@link Result}s and returns a Result.
  *
- * If each `Result` in the provided array is `Ok`, then the returned `Result`
- * will contain an array of `Ok` values, otherwise the returned `Result` will
- * contain the first `Err` error.
+ * If each Result in the provided array is {@link Ok}, then the returned
+ * Result will contain an array of Ok values, otherwise the
+ * returned Result will contain the first {@link Err} error.
  *
  * @example
  *
@@ -67,11 +75,11 @@ export function combine<T extends readonly Result<unknown, unknown>[]>(
 ): Result<UnwrapOks<T>, UnwrapErrs<T>[number]>;
 
 /**
- * Accepts an array of `Options` and returns an `Option`.
+ * Accepts an array of {@link Option}s and returns an Option.
  *
- * If each `Option` in the provided array is `Some`, then the returned `Option`
- * will contain an array of `Some` values, otherwise the returned `Option` will
- * contain `None`.
+ * If each Option in the provided array is {@link Some}, then the returned
+ * Option will contain an array of Some values, otherwise the returned Option
+ * will contain {@link None}.
  *
  * @example
  *
@@ -115,7 +123,7 @@ export function combine(
 }
 
 /**
- * Similar to {@link combine} but also accepts `AsyncResult`.
+ * Similar to {@link combine} but also accepts {@link AsyncResult}.
  *
  * @example
  *
@@ -141,7 +149,7 @@ export function combineAsync<
 >(results: [...T]): AsyncResult<UnwrapOks<T>, UnwrapErrs<T>[number]>;
 
 /**
- * Similar to {@link combine} but also accepts `AsyncOptions`.
+ * Similar to {@link combine} but also accepts {@link AsyncOption}.
  *
  * @example
  *
