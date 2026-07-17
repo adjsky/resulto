@@ -6,7 +6,12 @@ type Predicate<T> = (value: T) => boolean;
 type Fn<T, U> = (value: T) => U;
 type NoneFn<U> = () => U;
 
-export interface OptionDeclarations<T> {
+/**
+ * Option is a type that represents either a value `Some` or no value `None`.
+ *
+ * Typically it is used when the absence of a value is expected and meaningful.
+ */
+export interface Option<T> {
   /**
    * Checks if `Option` is a `Some` value.
    *
@@ -109,7 +114,7 @@ export interface OptionDeclarations<T> {
    *
    * This function can be used to compose the options of two functions.
    *
-   * Use this method instead of {@link OptionDeclarations.map} when the provided
+   * Use this method instead of {@link Option.map} when the provided
    * `f` returns a promise.
    *
    * @example
@@ -147,7 +152,7 @@ export interface OptionDeclarations<T> {
    * Returns the provided default `value` (if `None`), or applies a function to
    * the contained value (if `Some`).
    *
-   * Use this method instead of {@link OptionDeclarations.mapOr} when the
+   * Use this method instead of {@link Option.mapOr} when the
    * provided `f` returns a promise.
    *
    * @example
@@ -196,7 +201,7 @@ export interface OptionDeclarations<T> {
    * This function can be used to unpack a successful option while handling an
    * error.
    *
-   * Use this method instead of {@link OptionDeclarations.mapOrElse} when the
+   * Use this method instead of {@link Option.mapOrElse} when the
    * provided `fallbackFn` or `f` return promise.
    *
    * @example
@@ -373,7 +378,7 @@ export interface OptionDeclarations<T> {
    *
    * This function can be used for control flow based on `AsyncOption` values.
    *
-   * Use this method instead of {@link OptionDeclarations.andThen} when the
+   * Use this method instead of {@link Option.andThen} when the
    * provided `f` returns a promise.
    *
    * @example
@@ -451,7 +456,7 @@ export interface OptionDeclarations<T> {
    *
    * This function can be used for control flow based on `AsyncOption` values.
    *
-   * Use this method instead of {@link OptionDeclarations.orElse} when the
+   * Use this method instead of {@link Option.orElse} when the
    * provided `f` returns a promise.
    *
    * @example
@@ -510,7 +515,7 @@ export interface OptionDeclarations<T> {
   /**
    * Returns the contained `Some` value or computes it from a `f`.
    *
-   * Use this method instead of {@link OptionDeclarations.unwrapOrElse} when the
+   * Use this method instead of {@link Option.unwrapOrElse} when the
    * provided `f` returns a promise.
    *
    * @example
@@ -561,7 +566,7 @@ export interface OptionDeclarations<T> {
    *
    * Both `someFn` and `noneFn` must have the same return type.
    *
-   * Use this method instead of {@link OptionDeclarations.match} when the
+   * Use this method instead of {@link Option.match} when the
    * provided `someFn` or `noneFn` return a promise.
    *
    * @example
@@ -590,21 +595,12 @@ export interface OptionDeclarations<T> {
 }
 
 /**
- * Option is a type that represents either a value `Some` or no value `None`.
- *
- * Typically it is used when the absence of a value is expected and meaningful.
- */
-export type Option<T> = Some<T> | None<T>;
-
-/**
  * Async version of `Option`.
  *
  * In fact this is just a regular `Option` wrapped in a proxy to allow chaining
  * promises without using `await` on every call.
- *
- * @augments OptionDeclarations
  */
-export type AsyncOption<T> = {
+export interface AsyncOption<T> extends Promise<Option<T>> {
   // We have to duplicate declarations due to the TypeScript limitations.
   // The only thing we do here is using `AsyncOption` instead of `Option` and
   // wrapping other types in `Promise` to allow chaining and make autocompletion
@@ -1112,9 +1108,9 @@ export type AsyncOption<T> = {
     someFn: Fn<T, U | Promise<U>>,
     noneFn: NoneFn<U | Promise<U>>,
   ): Promise<U>;
-} & Promise<Option<T>>;
+}
 
-export class Some<T> implements OptionDeclarations<T> {
+export class Some<T> implements Option<T> {
   constructor(readonly value: T) {}
 
   isSome(): this is Some<T> {
@@ -1223,7 +1219,7 @@ export class Some<T> implements OptionDeclarations<T> {
   }
 }
 
-export class None<T> implements OptionDeclarations<T> {
+export class None<T> implements Option<T> {
   isSome(): this is Some<T> {
     return false;
   }

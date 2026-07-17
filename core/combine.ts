@@ -7,7 +7,7 @@ import {
   Some,
   some,
 } from "./option.ts";
-import { type AsyncResult, Err, err, ok, type Result } from "./result.ts";
+import { type AsyncResult, Err, err, Ok, ok, type Result } from "./result.ts";
 
 export type UnwrapOks<
   T extends readonly (
@@ -104,7 +104,9 @@ export function combine(
       return none();
     }
 
-    unwrapped.push(resultOrOption.value);
+    if (resultOrOption instanceof Ok || resultOrOption instanceof Some) {
+      unwrapped.push(resultOrOption.value);
+    }
   }
 
   if (resultsOrOptions[0] instanceof Some) {
