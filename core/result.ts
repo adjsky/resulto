@@ -7,14 +7,7 @@ type ErrPredicate<T> = (error: T) => boolean;
 type Fn<T, U> = (value: T) => U;
 type ErrFn<E, F> = (error: E) => F;
 
-/**
- * Result is a type that represents either success `Ok` or failure `Err`.
- *
- * Typically it is used for returning and propagating errors. Functions should
- * return `Result` whenever errors are expected and recoverable instead of
- * throwing errors.
- */
-export interface Result<T, E> {
+export interface ResultDeclarations<T, E> {
   /**
    * Checks if `Result` is `Ok`.
    *
@@ -114,7 +107,7 @@ export interface Result<T, E> {
    *
    * This function can be used to compose the results of two functions.
    *
-   * Use this method instead of {@link Result.map} when the provided
+   * Use this method instead of {@link ResultDeclarations.map} when the provided
    * `f` returns a promise.
    *
    * @example
@@ -152,7 +145,7 @@ export interface Result<T, E> {
    * Returns the provided default `value` (if `Err`), or applies a function to
    * the contained value (if `Ok`).
    *
-   * Use this method instead of {@link Result.mapOr} when the
+   * Use this method instead of {@link ResultDeclarations.mapOr} when the
    * provided `f` returns a promise.
    *
    * @example
@@ -200,7 +193,7 @@ export interface Result<T, E> {
    * This function can be used to unpack a successful result while handling an
    * error.
    *
-   * Use this method instead of {@link Result.mapOrElse} when the
+   * Use this method instead of {@link ResultDeclarations.mapOrElse} when the
    * provided `fallbackFn` or `f` return a promise.
    *
    * @example
@@ -256,7 +249,7 @@ export interface Result<T, E> {
    * This function can be used to pass through a successful result while
    * handling an error.
    *
-   * Use this method instead of {@link Result.mapErr} when the
+   * Use this method instead of {@link ResultDeclarations.mapErr} when the
    * provided `f` returns a promise.
    *
    * @example
@@ -508,7 +501,7 @@ export interface Result<T, E> {
    *
    * This function can be used for control flow based on `AsyncResult` values.
    *
-   * Use this method instead of {@link Result.andThen} when the
+   * Use this method instead of {@link ResultDeclarations.andThen} when the
    * provided `f` returns a promise.
    *
    * @example
@@ -586,7 +579,7 @@ export interface Result<T, E> {
    *
    * This function can be used for control flow based on `AsyncResult` values.
    *
-   * Use this method instead of {@link Result.orElse} when the
+   * Use this method instead of {@link ResultDeclarations.orElse} when the
    * provided `f` returns a promise.
    *
    * @example
@@ -647,7 +640,7 @@ export interface Result<T, E> {
   /**
    * Returns the contained `Ok `value or computes it from a `f`.
    *
-   * Use this method instead of {@link Result.unwrapOrElse} when the
+   * Use this method instead of {@link ResultDeclarations.unwrapOrElse} when the
    * provided `f` returns a promise.
    *
    * @example
@@ -696,7 +689,7 @@ export interface Result<T, E> {
    *
    * Both `okFn` and `errFn` must have the same return type.
    *
-   * Use this method instead of {@link Result.match} when the
+   * Use this method instead of {@link ResultDeclarations.match} when the
    * provided `okFn` or `errFn` return promise.
    *
    * @example
@@ -725,12 +718,23 @@ export interface Result<T, E> {
 }
 
 /**
+ * Result is a type that represents either success `Ok` or failure `Err`.
+ *
+ * Typically it is used for returning and propagating errors. Functions should
+ * return `Result` whenever errors are expected and recoverable instead of
+ * throwing errors.
+ */
+export type Result<T, E> = Ok<T, E> | Err<T, E>;
+
+/**
  * Async version of `Result`.
  *
  * In fact this is just a regular `Result` wrapped in a proxy to allow chaining
  * promises without using `await` on every call.
+ *
+ * @augments ResultDeclarations
  */
-export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
+export type AsyncResult<T, E> = {
   // We have to duplicate declarations due to the TypeScript limitations.
   // The only thing we do here is using `AsyncResult` instead of `Result` and
   // wrapping other types in `Promise` to allow chaining and make autocompletion
@@ -1372,9 +1376,9 @@ export interface AsyncResult<T, E> extends Promise<Result<T, E>> {
     okFn: Fn<T, U | Promise<U>>,
     errFn: ErrFn<E, U | Promise<U>>,
   ): Promise<U>;
-}
+} & Promise<Result<T, E>>;
 
-export class Ok<T, E> implements Result<T, E> {
+export class Ok<T, E> implements ResultDeclarations<T, E> {
   constructor(readonly value: T) {}
 
   isOk(): this is Ok<T, E> {
@@ -1507,7 +1511,7 @@ export class Ok<T, E> implements Result<T, E> {
   }
 }
 
-export class Err<T, E> implements Result<T, E> {
+export class Err<T, E> implements ResultDeclarations<T, E> {
   constructor(readonly error: E) {}
 
   isOk(): this is Ok<T, E> {
