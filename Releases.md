@@ -1,3 +1,9 @@
+### 2026.07.17
+
+#### @resulto/core 2.0.0 (major)
+
+- BREAKING(core): add option support (#48)
+
 ### 2025.02.16
 
 #### @resulto/core 1.5.1 (patch)
