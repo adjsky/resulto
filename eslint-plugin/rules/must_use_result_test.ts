@@ -111,6 +111,7 @@ tester.run(
           function doSomething(res: Result<unknown, unknown>) {
             //
           }
+
           doSomething(ok(4));
           doSomething(err(5));
         `,
@@ -125,8 +126,8 @@ tester.run(
       {
         name: "create results in an array expression",
         code: `
-        [ok(3), err(5), okAsync(2), errAsync(0)];
-      `,
+          [ok(3), err(5), okAsync(2), errAsync(0)];
+        `,
       },
 
       {
