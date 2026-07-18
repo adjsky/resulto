@@ -9,18 +9,10 @@ RuleTester.itOnly = it.only;
 export const tester = new RuleTester({
   languageOptions: {
     parserOptions: {
-      tsconfigRootDir: `${import.meta.dirname}/fixture`,
-      project: "./tsconfig.json",
+      projectService: {
+        allowDefaultProject: ["*.ts"],
+      },
+      tsconfigRootDir: import.meta.dirname,
     },
   },
 });
-
-export function trimLeadingIndent(str: string) {
-  const matched = str.match(/^[\r\n]?(\s+)/);
-
-  if (!matched) {
-    return str;
-  }
-
-  return str.replace(new RegExp("^" + matched[1], "gm"), "").trim();
-}
