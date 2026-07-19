@@ -9,6 +9,5 @@
     "@std/testing": "jsr:@std/testing@^1.0.3"
   },
   "workspace": ["./eslint-plugin", "./core"],
-  "lock": false,
-  "nodeModulesDir": "auto"
+  "lock": false
 }
