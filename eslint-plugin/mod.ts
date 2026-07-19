@@ -3,7 +3,13 @@ import type { FlatConfig } from "@typescript-eslint/utils/ts-eslint";
 import denoJson from "./deno.json" with { type: "json" };
 import mustUseResult from "./rules/must_use_result.ts";
 
-const plugin: FlatConfig.Plugin = {
+type Plugin = Omit<FlatConfig.Plugin, "configs"> & {
+  configs: {
+    recommended: FlatConfig.Config;
+  };
+};
+
+const plugin: Plugin = {
   configs: {
     get recommended() {
       return recommended;
