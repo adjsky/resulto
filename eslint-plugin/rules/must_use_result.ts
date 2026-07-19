@@ -32,11 +32,11 @@ const rule = ruleCreator({
       "CallExpression,NewExpression"(
         node: TSESTree.CallExpression | TSESTree.NewExpression,
       ) {
-        if (!isResult(node, parserServices, typeChecker)) {
+        if (isReturnedOrAssigned(node)) {
           return;
         }
 
-        if (isReturnedOrAssigned(node)) {
+        if (!isResult(node, parserServices, typeChecker)) {
           return;
         }
 
