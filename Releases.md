@@ -1,3 +1,9 @@
+### 2026.07.20
+
+#### @resulto/eslint-plugin 2.1.3 (patch)
+
+- perf(eslint-plugin): optimize must_use rule (#57)
+
 ### 2026.07.17
 
 #### @resulto/core 3.0.0 (major)

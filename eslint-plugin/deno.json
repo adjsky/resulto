@@ -1,6 +1,6 @@
 {
   "name": "@resulto/eslint-plugin",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "exports": {
     ".": "./mod.ts"
   },
